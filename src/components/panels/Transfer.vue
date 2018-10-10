@@ -11,7 +11,7 @@
 
                 <section>
                     <sel :selected="account"
-                         :options="eosAccounts"
+                         :options="rsnAccounts"
                          :parser="x => `${x.network().name} - ${x.formatted()}`"
                          v-on:changed="selectAccount"></sel>
                 </section>
@@ -101,7 +101,7 @@
         }},
         computed:{
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'networks',
@@ -110,12 +110,12 @@
             network(){
                 return this.networks.find(x => x.unique() === this.account.networkUnique);
             },
-            eosAccounts(){
-                return this.accounts.filter(x => x.blockchain() === Blockchains.EOSIO);
+            rsnAccounts(){
+                return this.accounts.filter(x => x.blockchain() === Blockchains.ARISEN);
             }
         },
         mounted(){
-            this.account = this.eosAccounts[0];
+            this.account = this.rsnAccounts[0];
             this.initTokens();
         },
         methods: {
@@ -130,7 +130,7 @@
                 this.token = null;
                 await PluginRepository.plugin(this.account.blockchain()).fetchTokens(this.tokens);
                 switch(this.account.blockchain()){
-                    case Blockchains.EOSIO: this.token = this.tokens.find(x => x.symbol === 'EOS'); break;
+                    case Blockchains.ARISEN: this.token = this.tokens.find(x => x.symbol === 'RSN'); break;
                     case Blockchains.ETH: this.token = this.tokens.find(x => x.symbol === 'ETH'); break;
                 }
                 if(!this.token) this.token = this.tokens[0];
@@ -151,10 +151,10 @@
                 if(!this.to.trim().length) return PopupService.push(Popup.prompt("Invalid Recipient", "You must enter a valid recipient", "ban", "Okay"));
 
                 this.sending = true;
-                if(this.account.blockchain() === Blockchains.EOSIO) this.sendEosTokens();
+                if(this.account.blockchain() === Blockchains.ARISEN) this.sendRsnTokens();
             },
 
-            async sendEosTokens(){
+            async sendRsnTokens(){
                 const decimals = this.tokenBalance.toString().split('.')[1].length || 4;
                 const amount = parseFloat(this.amount).toFixed(decimals);
                 this.amount = amount;
@@ -173,7 +173,7 @@
 
                 if(transfer !== null) {
                     if (transfer.hasOwnProperty('error')) PopupService.push(Popup.prompt("Transfer Error", transfer.error, "ban", "Okay"));
-                    else PopupService.push(Popup.transactionSuccess(Blockchains.EOSIO, transfer.transaction_id))
+                    else PopupService.push(Popup.transactionSuccess(Blockchains.ARISEN, transfer.transaction_id))
                 }
 
                 this.sending = false;
@@ -181,7 +181,7 @@
             },
 
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         },
         watch:{

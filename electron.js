@@ -85,7 +85,7 @@ app.on('ready', function () {
         }},
         {label: 'Exit', type: 'normal', click:() => app.quit()}
     ]);
-    tray.setToolTip('Scatter Desktop Companion');
+    tray.setToolTip('ArisenID Desktop Companion');
     tray.setContextMenu(contextMenu);
 
     setupMenu();

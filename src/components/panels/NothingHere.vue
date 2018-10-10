@@ -35,7 +35,7 @@
         }},
         computed:{
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
 
@@ -46,7 +46,7 @@
         },
         methods: {
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         },
         props:['title', 'description', 'buttonText', 'buttonFn'],

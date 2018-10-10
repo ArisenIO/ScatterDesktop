@@ -20,16 +20,16 @@ export default class Account {
     }
 
     formattedWithNetwork(){
-        const networkName = store.state.scatter.settings.networks.find(x => x.unique() === this.networkUnique).name;
+        const networkName = store.state.arkid.settings.networks.find(x => x.unique() === this.networkUnique).name;
         return `${networkName} - ${this.formatted()}`;
     }
 
     network(){
-        return store.state.scatter.settings.networks.find(x => x.unique() === this.networkUnique);
+        return store.state.arkid.settings.networks.find(x => x.unique() === this.networkUnique);
     }
 
     keypair(){
-        return store.state.scatter.keychain.keypairs.find(x => x.unique() === this.keypairUnique);
+        return store.state.arkid.keychain.keypairs.find(x => x.unique() === this.keypairUnique);
     }
 
     blockchain(){

@@ -71,7 +71,7 @@
         }},
         computed: {
             ...mapState([
-                'scatter',
+                'arkid',
                 'searchTerms'
             ]),
             ...mapGetters([

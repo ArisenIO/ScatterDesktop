@@ -10,7 +10,7 @@
 
                 <!--<figure class="name">Repute an Entity</figure>-->
                 <!--<figure class="description">-->
-                    <!--Reputing entities helps every single Scatter user.-->
+                    <!--Reputing entities helps every single ArisenID user.-->
                 <!--</figure>-->
 
 
@@ -137,7 +137,7 @@
         }},
         computed:{
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'networks',
@@ -150,8 +150,8 @@
             entityPlaceholder(){
                 switch(this.entityType){
                     case 'contract': return 'Enter a Blockchain Account ( example: someaccount1 or 0x741b197eaa7b7e7a2f1e1d7dc2d1d73bf693cffe )'
-                    case 'identity': return 'Enter an Identity Name ( example: Scatter )'
-                    case 'application': return 'Enter an Application Name ( example: Overwatch or get-scatter.com )'
+                    case 'identity': return 'Enter an Identity Name ( example: ArisenID )'
+                    case 'application': return 'Enter an Application Name ( example: Overwatch or arkid.io )'
                 }
             },
             totalRIDLUsed(){
@@ -228,14 +228,14 @@
                 const entity = RIDLService.buildEntityName(this.entityType, this.entityName, this.appUsername);
                 const reputed = await RIDLService.repute(this.selectedIdentity, entity, this.fragments);
                 if(!!reputed) {
-                    PopupService.push(Popup.transactionSuccess(Blockchains.EOSIO, reputed));
+                    PopupService.push(Popup.transactionSuccess(Blockchains.ARISEN, reputed));
                     this.fetchRidlIdData();
                 }
                 else PopupService.push(Popup.prompt('Error sending Repute', 'Looks like something went wrong, please try again', 'ban', 'Okay'));
 
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         },
     }

@@ -40,7 +40,7 @@ const socketHandler = (socket) => {
     // TODO: Testing the event system.
     // Events are sent to the applications to notify them of changes
     // such as identity changes, key removals, account un-linking
-    // and scatter being locked.
+    // and arkid being locked.
     // setInterval(() => {
     //     if(authenticated)
     //         socket.emit('event', 'evented');
@@ -56,19 +56,19 @@ const socketHandler = (socket) => {
 
         // 2 way authentication
         if(request.data.hasOwnProperty('appkey')){
-            const existingApp = store.state.scatter.keychain.findApp(request.data.payload.origin);
+            const existingApp = store.state.arkid.keychain.findApp(request.data.payload.origin);
 
             const updateNonce = async () => {
-                const clone = store.state.scatter.clone();
+                const clone = store.state.arkid.clone();
                 existingApp.nextNonce = request.data.nextNonce;
                 clone.keychain.updateOrPushApp(existingApp);
-                return store.dispatch(Actions.SET_SCATTER, clone);
+                return store.dispatch(Actions.SET_ARKID, clone);
             };
 
             const removeAppPermissions = async () => {
-                const clone = store.state.scatter.clone();
+                const clone = store.state.arkid.clone();
                 clone.keychain.removeApp(existingApp);
-                return store.dispatch(Actions.SET_SCATTER, clone);
+                return store.dispatch(Actions.SET_ARKID, clone);
             };
 
 
@@ -86,8 +86,8 @@ const socketHandler = (socket) => {
     });
 
     socket.on('pair', async request => {
-        const scatter = store.state.scatter;
-        const existingApp = scatter.keychain.findApp(request.data.origin);
+        const arkid = store.state.arkid;
+        const existingApp = arkid.keychain.findApp(request.data.origin);
         const linkApp = {
             type:'linkApp',
             payload:request.data
@@ -95,9 +95,9 @@ const socketHandler = (socket) => {
 
         const addAuthorizedApp = (newKey = null) => {
             const authedApp = new AuthorizedApp(request.data.origin, newKey ? newKey : request.data.appkey);
-            const clone = scatter.clone();
+            const clone = arkid.clone();
             clone.keychain.updateOrPushApp(authedApp);
-            store.dispatch(Actions.SET_SCATTER, clone);
+            store.dispatch(Actions.SET_ARKID, clone);
             socket.emit('paired', true);
         };
 
@@ -145,13 +145,13 @@ export default class SocketService {
     }
 
     static open(){
-        const namespace = io.of(`/scatter`);
+        const namespace = io.of(`/arkid`);
         namespace.on('connection', socket => socketHandler(socket))
     }
 
     static close(){
         // Getting namespace
-        const socket = io.of(`/scatter`);
+        const socket = io.of(`/arkid`);
 
         // Disconnecting all active connections to this namespace
         Object.keys(socket.connected).map(socketId => {
@@ -163,7 +163,7 @@ export default class SocketService {
 
         // Deleting the namespace from the array of
         // available namespaces for connections
-        delete io.nsps[`/scatter`];
+        delete io.nsps[`/arkid`];
     }
 
 }

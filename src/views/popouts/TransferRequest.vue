@@ -103,7 +103,7 @@
         computed:{
             ...mapState([
                 'state',
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'identities',

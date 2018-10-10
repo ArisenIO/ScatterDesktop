@@ -1,15 +1,15 @@
-# Scatter Desktop
+# ArisenID Desktop
 
 ## Installation
 
-**None of these package are signed yet.** Make sure you only download 
-Scatter Desktop from this GitHub, and **NOWHERE ELSE**.
+**None of these package are signed yet.** Make sure you only download
+ArisenID Desktop from this GitHub, and **NOWHERE ELSE**.
 
-### [CLICK HERE AND GRAB THE LATEST RELEASE](https://github.com/GetScatter/ScatterDesktop/releases)
+### [CLICK HERE AND GRAB THE LATEST RELEASE](https://github.com/arisenio/ark-desktop/releases)
 
 ## Setup
 
-Scatter now has internal help / wizards to help you set up every step of the way.
+ArisenID now has internal help / wizards to help you set up every step of the way.
 Click the "Help" menu from the sidebar to get started.
 
 ## Running in development mode
@@ -19,9 +19,5 @@ Click the "Help" menu from the sidebar to get started.
 - run `npm start` to start the local server with hot-reloading
 - run `electron .` or `./node_modules/bin/electron .` from the directory to start electron.
 
-## Creating Apps for Scatter 
-### Check out the [Documentation](https://get-scatter.com/docs/dev/examples-interaction-flow)
-
-
-
-
+## Creating Apps for ArisenID
+### Check out the [Documentation](https://development.arisen.io/arisenid/dapps/)

@@ -5,7 +5,7 @@ import {mutations} from './mutations';
 import {actions} from './actions';
 
 import {PopupDisplayTypes} from '../models/popups/Popup'
-import Scatter from '../models/Scatter';
+import ArkId from '../models/ArkId';
 import PluginRepository from '../plugins/PluginRepository'
 
 import * as HARDWARE_STATES from '../models/hardware/constants';
@@ -18,7 +18,7 @@ const state = {
     seed:'',
     mnemonic:'',
 
-    scatter:null,
+    arkid:null,
 
     popups:[],
 
@@ -27,22 +27,22 @@ const state = {
 
 const getters = {
     // App State
-    unlocked:state =>       state.scatter !== null && typeof state.scatter !== 'string' && state.scatter instanceof Scatter && !state.scatter.isEncrypted(),
+    unlocked:state =>       state.arkid !== null && typeof state.arkid !== 'string' && state.arkid instanceof ArkId && !state.arkid.isEncrypted(),
 
     // Keychain centric
-    identities:state =>     state.scatter.keychain.identities || [],
-    keypairs:state =>       state.scatter.keychain.keypairs || [],
-    accounts:state =>       state.scatter.keychain.accounts || [],
-    permissions:state =>    state.scatter.keychain.permissions || [],
-    apps:state =>           state.scatter.keychain.apps || [],
-    linkedApps:state =>     state.scatter.keychain.linkedApps || [],
+    identities:state =>     state.arkid.keychain.identities || [],
+    keypairs:state =>       state.arkid.keychain.keypairs || [],
+    accounts:state =>       state.arkid.keychain.accounts || [],
+    permissions:state =>    state.arkid.keychain.permissions || [],
+    apps:state =>           state.arkid.keychain.apps || [],
+    linkedApps:state =>     state.arkid.keychain.linkedApps || [],
 
     // Settings
-    networks:state =>       state.scatter.settings.networks || [],
-    language:state =>       state.scatter.settings.language || [],
-    autoBackup:state =>     state.scatter.settings.autoBackup || null,
-    backupLocation:state => state.scatter.settings.backupLocation || null,
-    explorers:state =>      state.scatter.settings.explorers || PluginRepository.defaultExplorers(),
+    networks:state =>       state.arkid.settings.networks || [],
+    language:state =>       state.arkid.settings.language || [],
+    autoBackup:state =>     state.arkid.settings.autoBackup || null,
+    backupLocation:state => state.arkid.settings.backupLocation || null,
+    explorers:state =>      state.arkid.settings.explorers || PluginRepository.defaultExplorers(),
 
     // Popups
     nextPopIn:state =>      state.popups.filter(x => x.displayType === PopupDisplayTypes.POP_IN)[0] || null,

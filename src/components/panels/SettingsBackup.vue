@@ -7,10 +7,10 @@
             </section>
 
             <section class="selected-item scrollable">
-                <figure class="name">Scatter Backup Settings</figure>
+                <figure class="name">ArisenID Backup Settings</figure>
                 <figure class="description">
-                    Configure auto backup or manually backup your Scatter.<br>
-                    <b>If using automatic backup your Scatter will be backed up with every change.</b>
+                    Configure auto backup or manually backup your ArisenID.<br>
+                    <b>If using automatic backup your ArisenID will be backed up with every change.</b>
                 </figure>
 
                 <section class="split-panels left">
@@ -49,7 +49,7 @@
         }},
         computed:{
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'autoBackup',
@@ -68,7 +68,7 @@
                 await BackupService.createBackup();
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         },
     }

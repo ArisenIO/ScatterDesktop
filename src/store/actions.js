@@ -9,7 +9,7 @@ import IdGenerator from '../util/IdGenerator'
 import Mnemonic from '../util/Mnemonic'
 
 import Identity from '../models/Identity';
-import Scatter from '../models/Scatter';
+import ArkId from '../models/ArkId';
 
 import AES from 'aes-oop';
 import PopupService from "../services/PopupService";
@@ -17,7 +17,7 @@ import {Popup} from '../models/popups/Popup'
 
 export const actions = {
     [Actions.SET_SEARCH_TERMS]:({commit}, terms) => commit(Actions.SET_SEARCH_TERMS, terms),
-    [Actions.HOLD_SCATTER]:({commit}, scatter) => commit(Actions.SET_SCATTER, scatter),
+    [Actions.HOLD_ARKID]:({commit}, arkid) => commit(Actions.SET_ARKID, arkid),
     [Actions.SET_SEED]:({commit}, password) => {
         return new Promise(async (resolve, reject) => {
             const [mnemonic, seed] = await PasswordService.seedPassword(password);
@@ -25,32 +25,32 @@ export const actions = {
         })
     },
 
-    [Actions.LOAD_SCATTER]:async ({commit, state}) => {
+    [Actions.LOAD_ARKID]:async ({commit, state}) => {
 
-        if(!state.scatter) {
-            let scatter = StorageService.getScatter();
-            if (!scatter) return null;
-            return commit(Actions.SET_SCATTER, scatter);
+        if(!state.arkid) {
+            let arkid = StorageService.getArkId();
+            if (!arkid) return null;
+            return commit(Actions.SET_ARKID, arkid);
         }
 
         await PasswordService.verifyPassword();
     },
 
-    [Actions.CREATE_SCATTER]:({state, commit, dispatch}, password) => {
+    [Actions.CREATE_ARKID]:({state, commit, dispatch}, password) => {
         return new Promise(async (resolve, reject) => {
-            const scatter = Scatter.placeholder();
+            const arkid = ArkId.placeholder();
 
             await Promise.all(PluginRepository.signatureProviders().map(async plugin => {
                 const network = await plugin.getEndorsedNetwork();
-                scatter.settings.networks.push(network);
+                arkid.settings.networks.push(network);
             }));
 
             const firstIdentity = Identity.placeholder();
-            await firstIdentity.initialize(scatter.hash);
+            await firstIdentity.initialize(arkid.hash);
 
             //TODO: Testing
             firstIdentity.name = 'MyFirstIdentity';
-            scatter.keychain.updateOrPushIdentity(firstIdentity);
+            arkid.keychain.updateOrPushIdentity(firstIdentity);
 
             SocketService.initialize();
             SocketService.open();
@@ -58,7 +58,7 @@ export const actions = {
             await StorageService.setSalt(Hasher.insecureHash(IdGenerator.text(32)));
 
             dispatch(Actions.SET_SEED, password).then(mnemonic => {
-                dispatch(Actions.SET_SCATTER, scatter).then(_scatter => {
+                dispatch(Actions.SET_ARKID, arkid).then(_arkid => {
 
                     PopupService.push(Popup.mnemonic(mnemonic));
                     resolve();
@@ -67,19 +67,19 @@ export const actions = {
         })
     },
 
-    [Actions.SET_SCATTER]:({commit, state}, scatter) => {
+    [Actions.SET_ARKID]:({commit, state}, arkid) => {
         return new Promise(async resolve => {
 
-            await StorageService.setScatter(
+            await StorageService.setArkId(
                 AES.encrypt(
-                    scatter.savable(state.seed), state.seed
+                    arkid.savable(state.seed), state.seed
                 )
             );
 
             await BackupService.createAutoBackup();
 
-            commit(Actions.SET_SCATTER, scatter);
-            resolve(scatter);
+            commit(Actions.SET_ARKID, arkid);
+            resolve(arkid);
         })
     },
 

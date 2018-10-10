@@ -42,7 +42,7 @@
         }},
         computed:{
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'explorers',
@@ -53,13 +53,13 @@
         },
         methods: {
             changedExplorer(blockchain, explorer){
-                const scatter = this.scatter.clone();
-                scatter.settings.explorers[blockchain] = explorer;
-                this[Actions.SET_SCATTER](scatter);
+                const arkid = this.arkid.clone();
+                arkid.settings.explorers[blockchain] = explorer;
+                this[Actions.SET_ARKID](arkid);
             },
             blockchainName(x){ return blockchainName(x); },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         },
     }

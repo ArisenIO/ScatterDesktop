@@ -94,7 +94,7 @@
         }},
         computed:{
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'networks',
@@ -107,8 +107,8 @@
             entityPlaceholder(){
                 switch(this.entityType){
                     case 'contract': return 'Enter a Blockchain Account ( example: someaccount1 or 0x741b197eaa7b7e7a2f1e1d7dc2d1d73bf693cffe )'
-                    case 'identity': return 'Enter an Identity Name ( example: Scatter )'
-                    case 'application': return 'Enter an Application Name ( example: Overwatch or get-scatter.com )'
+                    case 'identity': return 'Enter an Identity Name ( example: ArisenID )'
+                    case 'application': return 'Enter an Application Name ( example: Overwatch or arkid.io )'
                 }
             },
             totalRIDLUsed(){
@@ -125,7 +125,7 @@
             }
         },
         mounted(){
-            this.entityName = 'get-scatter.com'
+            this.entityName = 'arkid.io'
         },
         methods: {
             switchedEntityType(type){
@@ -148,7 +148,7 @@
 
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         },
         watch:{

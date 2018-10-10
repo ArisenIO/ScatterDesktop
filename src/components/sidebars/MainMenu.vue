@@ -4,9 +4,9 @@
 
             <section class="head">
                 <section class="logo">
-                    <figure class="grand-hotel">{{collapsed ? 'S' : 'Scatter'}}</figure>
-                    <figure class="version" v-if="!collapsed && scatter && scatter.hasOwnProperty('meta') && typeof scatter.meta.getVersion !== 'undefined'">
-                        {{scatter.meta.getVersion()}}
+                    <figure class="grand-hotel">{{collapsed ? 'S' : 'ArisenID'}}</figure>
+                    <figure class="version" v-if="!collapsed && arkid && arkid.hasOwnProperty('meta') && typeof arkid.meta.getVersion !== 'undefined'">
+                        {{arkid.meta.getVersion()}}
                     </figure>
                 </section>
                 <section class="window-actions">
@@ -50,7 +50,7 @@
     import { mapActions, mapGetters, mapState } from 'vuex'
     import * as Actions from '../../store/constants';
     import {RouteNames} from '../../vue/Routing'
-    import Scatter from '../../models/Scatter'
+    import ArisenID from '../../models/ArisenID'
 
     import WindowService from '../../services/WindowService'
     import RIDLService from '../../services/RIDLService'
@@ -75,16 +75,16 @@
         }},
         computed:{
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'accounts',
             ]),
             isEncrypted(){
-                if(!this.scatter) return true;
-                if(typeof this.scatter === 'string') return true;
-                if(typeof this.scatter.isEncrypted !== 'function') return true;
-                return this.scatter.isEncrypted();
+                if(!this.arkid) return true;
+                if(typeof this.arkid === 'string') return true;
+                if(typeof this.arkid.isEncrypted !== 'function') return true;
+                return this.arkid.isEncrypted();
             },
             hasAccounts(){
                 if(this.isEncrypted) return false;
@@ -109,8 +109,8 @@
             ])
         },
         watch:{
-            scatter(){
-                if(!loaded && this.scatter instanceof Scatter){
+            arkid(){
+                if(!loaded && this.arkid instanceof ArisenID){
                     loaded = true;
 
 

@@ -1,25 +1,25 @@
 import {store} from '../store/store';
 import * as Actions from '../store/constants';
 const Store = window.require('electron-store');
-const scatterStorage = new Store({name:'scatter'});
+const arkidStorage = new Store({name:'arkid'});
 const abiStorage = new Store({name:'abi'});
 
 export default class StorageService {
 
     constructor(){}
 
-    static setScatter(scatter){
-        return scatterStorage.set('scatter', scatter);
+    static setArkId(arkid){
+        return arkidStorage.set('arkid', arkid);
     };
 
-    static getScatter() {
-        return scatterStorage.get('scatter');
+    static getArkId() {
+        return arkidStorage.get('arkid');
     }
 
-    static removeScatter(){
-        scatterStorage.clear();
+    static removeArkId(){
+        arkidStorage.clear();
         abiStorage.clear();
-        store.commit(Actions.SET_SCATTER, null);
+        store.commit(Actions.SET_ARKID, null);
         store.commit(Actions.SET_SEED, '');
         return true;
     }
@@ -33,10 +33,10 @@ export default class StorageService {
     }
 
     static getSalt(){
-        return scatterStorage.get('salt') || 'SALT_ME';
+        return arkidStorage.get('salt') || 'SALT_ME';
     }
 
     static setSalt(salt){
-        return scatterStorage.set('salt', salt);
+        return arkidStorage.set('salt', salt);
     }
 }

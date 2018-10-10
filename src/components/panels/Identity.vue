@@ -116,7 +116,7 @@
         }},
         computed:{
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'networks',
@@ -130,7 +130,7 @@
                 return this.permissions.filter(x => x.isIdentity && x.identity === this.identity.publicKey).length
             },
             isNew(){
-                return !this.scatter.keychain.findIdentity(this.identity.publicKey);
+                return !this.arkid.keychain.findIdentity(this.identity.publicKey);
             }
         },
         mounted(){
@@ -175,31 +175,31 @@
 
                     // TODO: Remove Origin Permissions
 
-                    const scatter = this.scatter.clone();
-                    scatter.keychain.removeIdentity(this.identity);
-                    this[Actions.SET_SCATTER](scatter);
+                    const arkid = this.arkid.clone();
+                    arkid.keychain.removeIdentity(this.identity);
+                    this[Actions.SET_ARKID](arkid);
                     this.$emit('deleted');
                     PopupService.push(Popup.snackbar("Identity Removed!", "check"));
                 });
 
             },
             save(){
-                const oldIdentity = this.scatter.keychain.findIdentity(this.identity.publicKey);
+                const oldIdentity = this.arkid.keychain.findIdentity(this.identity.publicKey);
                 if (oldIdentity && !JSON.stringify(oldIdentity) === JSON.stringify(this.identity))
                     return;
 
-                if(this.scatter.keychain.identities.find(id => id.publicKey !== this.identity.publicKey && id.name.toLowerCase() === this.identity.name.toLowerCase()))
+                if(this.arkid.keychain.identities.find(id => id.publicKey !== this.identity.publicKey && id.name.toLowerCase() === this.identity.name.toLowerCase()))
                     return;
 
                 if(!this.isValidName) return PopupService.push(Popup.invalidIdentityName());
 
-                const scatter = this.scatter.clone();
-                scatter.keychain.updateOrPushIdentity(this.identity);
-                this[Actions.SET_SCATTER](scatter);
+                const arkid = this.arkid.clone();
+                arkid.keychain.updateOrPushIdentity(this.identity);
+                this[Actions.SET_ARKID](arkid);
                 PopupService.push(Popup.snackbar("Identity Saved!", "check"));
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         },
         props:['id'],

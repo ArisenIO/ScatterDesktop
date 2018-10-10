@@ -1,5 +1,5 @@
 {
-  "name": "scatter-fonts",
+  "name": "arkid-fonts",
   "css_prefix_text": "icon-",
   "css_use_suffix": false,
   "hinting": true,
@@ -22,7 +22,7 @@
     },
     {
       "uid": "d83bf8c3e8776d84f9288c45abd62dbc",
-      "css": "scatter",
+      "css": "arkid",
       "code": 59393,
       "src": "custom_icons",
       "selected": true,
@@ -31,7 +31,7 @@
         "width": 1007
       },
       "search": [
-        "scatter"
+        "arkid"
       ]
     }
   ]

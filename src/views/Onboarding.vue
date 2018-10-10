@@ -3,7 +3,7 @@
 
         <section>
 
-            <figure class="logo">Scatter</figure>
+            <figure class="logo">ArisenID</figure>
 
             <section class="onboarder" v-if="step === steps.IDENTITY">
                 <h1>What should your name for applications be?</h1>
@@ -33,10 +33,10 @@
             <section class="onboarder" v-if="step === steps.BACKUP">
                 <h1>Set your Backup Location</h1>
                 <p>
-                    <b class="red">Scatter doesn't create keypairs using a mnemonic</b>. You should make a habit of keeping an encrypted backup of your Scatter
+                    <b class="red">ArisenID doesn't create keypairs using a mnemonic</b>. You should make a habit of keeping an encrypted backup of your ArisenID
                     just in case you lose access, but we won't force you to.
                     <br><br>
-                    <b>You can also have Scatter create automatic backups for you which is advised.</b>
+                    <b>You can also have ArisenID create automatic backups for you which is advised.</b>
                 </p>
 
                 <section v-if="!hasBackupLocation">
@@ -63,7 +63,7 @@
                 <h1>Need a Blockchain Account?</h1>
                 <p>
                     Blockchain Accounts let you interact with the blockchain. If you know that you need one,
-                    enter your Private Key below and Scatter will set up everything for you.
+                    enter your Private Key below and ArisenID will set up everything for you.
                 </p>
 
                 <section class="input-container">
@@ -118,7 +118,7 @@
         }},
         computed: {
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'linkedApps',
@@ -146,11 +146,11 @@
             setIdentityName(){
                 if(!Identity.nameIsValid(this.identityName)) return PopupService.push(Popup.invalidIdentityName());
 
-                const scatter = this.scatter.clone();
-                const identity = scatter.keychain.identities[0];
+                const arkid = this.arkid.clone();
+                const identity = arkid.keychain.identities[0];
                 identity.name = this.identityName;
-                scatter.keychain.updateOrPushIdentity(identity);
-                this[Actions.SET_SCATTER](scatter);
+                arkid.keychain.updateOrPushIdentity(identity);
+                this[Actions.SET_ARKID](arkid);
                 this.nextStep();
             },
             async makePublicKey(){
@@ -206,7 +206,7 @@
                 this.$router.push({name:RouteNames.IDENTITIES});
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         }
     }

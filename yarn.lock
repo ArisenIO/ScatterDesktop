@@ -2950,20 +2950,20 @@ env-paths@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/env-paths/-/env-paths-1.0.0.tgz#4168133b42bb05c38a35b1ae4397c8298ab369e0"
 
-eos-rc-parser@^1.0.4:
+arisen-rc-parser@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/eos-rc-parser/-/eos-rc-parser-1.0.4.tgz#92e4736cb6505e30af00a62ed20010daee8589b2"
 
-eosjs-api@7.0.4:
+arisenjs-api@7.0.4:
   version "7.0.4"
-  resolved "https://registry.yarnpkg.com/eosjs-api/-/eosjs-api-7.0.4.tgz#dc3a7206d4ac3e6818f0a950b8d24333175ac7c9"
+  resolved "https://registry.yarnpkg.com/arisenjs-api/-/arisenjs-api-7.0.4.tgz#dc3a7206d4ac3e6818f0a950b8d24333175ac7c9"
   dependencies:
     camel-case "^3.0.0"
     isomorphic-fetch "^2.2.1"
 
-eosjs-ecc@4.0.4, eosjs-ecc@^4.0.2, eosjs-ecc@^4.0.3:
+arisenjs-ecc@4.0.4, arisenjs-ecc@^4.0.2, arisenjs-ecc@^4.0.3:
   version "4.0.4"
-  resolved "https://registry.yarnpkg.com/eosjs-ecc/-/eosjs-ecc-4.0.4.tgz#431450f30a6f73088ff5d7ba1ebdfe967a5ca4ab"
+  resolved "https://registry.yarnpkg.com/arisenjs-ecc/-/arisenjs-ecc-4.0.4.tgz#431450f30a6f73088ff5d7ba1ebdfe967a5ca4ab"
   dependencies:
     bigi "^1.4.2"
     browserify-aes "^1.0.6"
@@ -2974,15 +2974,15 @@ eosjs-ecc@4.0.4, eosjs-ecc@^4.0.2, eosjs-ecc@^4.0.3:
     ecurve "^1.0.5"
     randombytes "^2.0.5"
 
-eosjs@^16.0.0, eosjs@^16.0.2:
+arisenjs@^16.0.0, arisenjs@^16.0.2:
   version "16.0.7"
-  resolved "https://registry.yarnpkg.com/eosjs/-/eosjs-16.0.7.tgz#9771d10f9ca1665b25750cbd9d9543db61dae78b"
+  resolved "https://registry.yarnpkg.com/arisenjs/-/arisenjs-16.0.7.tgz#9771d10f9ca1665b25750cbd9d9543db61dae78b"
   dependencies:
     babel-runtime "6.26.0"
     binaryen "^37.0.0"
     create-hash "^1.1.3"
-    eosjs-api "7.0.4"
-    eosjs-ecc "4.0.4"
+    arisenjs-api "7.0.4"
+    arisenjs-ecc "4.0.4"
     fcbuffer "2.2.1"
 
 errno@^0.1.3, errno@~0.1.1, errno@~0.1.7:
@@ -7840,8 +7840,8 @@ ridl@^1.1.1:
   resolved "https://registry.yarnpkg.com/ridl/-/ridl-1.1.1.tgz#17c2e90dc72f7265678c50febabfd6a9ee4131e7"
   dependencies:
     aes-oop "^1.0.4"
-    eosjs "^16.0.0"
-    eosjs-ecc "^4.0.2"
+    arisenjs "^16.0.0"
+    arisenjs-ecc "^4.0.2"
     murmurhash "0.0.2"
 
 right-align@^0.1.1:

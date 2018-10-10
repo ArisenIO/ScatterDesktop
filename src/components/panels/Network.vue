@@ -11,12 +11,12 @@
 
                 <figure class="name" :class="{'bad-name':badNetworkName()}">{{network.name.length ? network.name : 'Network Name Required'}}</figure>
                 <section v-if="isEndorsed" class="description">
-                    <b><u>This is a Scatter endorsed network which makes it easier to use Scatter. It can not be modified.</u></b>
+                    <b><u>This is a ArisenID endorsed network which makes it easier to use ArisenID. It can not be modified.</u></b>
                     <br><br>
                 </section>
                 <figure class="description" v-if="isNew">
                     Networks allow you to define where your blockchain keys and accounts exist. Some websites use testing networks or non-standard networks
-                    to interact with proprietary blockchains. You do not have to fear them as Scatter still protects you and they will never be able to
+                    to interact with proprietary blockchains. You do not have to fear them as ArisenID still protects you and they will never be able to
                     get your private keys.
                 </figure>
 
@@ -86,7 +86,7 @@
         }},
         computed:{
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'networks',
@@ -136,9 +136,9 @@
                 if(otherNetworks.find(x => x.chainId === this.network.chainId))
                     return PopupService.push(Popup.snackbar("A network with this chain id already exists", "ban"));
 
-                const scatter = this.scatter.clone();
-                scatter.settings.updateOrPushNetwork(this.network);
-                this[Actions.SET_SCATTER](scatter);
+                const arkid = this.arkid.clone();
+                arkid.settings.updateOrPushNetwork(this.network);
+                this[Actions.SET_ARKID](arkid);
                 PopupService.push(Popup.snackbar("Network Saved!", "check"));
                 PluginRepository.plugin(this.network.blockchain).isEndorsedNetwork(this.network).then(x => this.isEndorsed = x);
                 this.$emit('selected', this.network);
@@ -150,11 +150,11 @@
                 ), async accepted => {
                     if(accepted) {
                         //TODO: Remove accounts, and permissions.
-                        const scatter = this.scatter.clone();
-                        const accounts = scatter.keychain.accounts.filter(x => x.networkUnique === this.network.unique());
-                        accounts.map(account => scatter.keychain.removeAccount(account));
-                        scatter.settings.removeNetwork(this.network);
-                        await this[Actions.SET_SCATTER](scatter);
+                        const arkid = this.arkid.clone();
+                        const accounts = arkid.keychain.accounts.filter(x => x.networkUnique === this.network.unique());
+                        accounts.map(account => arkid.keychain.removeAccount(account));
+                        arkid.settings.removeNetwork(this.network);
+                        await this[Actions.SET_ARKID](arkid);
                         this.network = Network.placeholder();
                         PopupService.push(Popup.snackbar("Network Deleted!", "check"));
                         this.$emit('selected', this.network);
@@ -162,7 +162,7 @@
                 });
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         },
         props:['net'],

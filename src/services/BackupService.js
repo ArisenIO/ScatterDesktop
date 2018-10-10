@@ -7,18 +7,18 @@ const fs = window.require('fs');
 
 export const getFileLocation = () => remote.dialog.showOpenDialog();
 export const getFolderLocation = () => remote.dialog.showOpenDialog({properties: ['openDirectory']});
-const getLatestScatter = () => StorageService.getScatter();
+const getLatestArkId = () => StorageService.getArkId();
 
 const saveFile = (filepath) => {
     return new Promise(resolve => {
-        const scatter = getLatestScatter();
+        const arkid = getLatestArkId();
         const date = new Date();
         const month = date.getUTCMonth();
         const year = date.getUTCFullYear();
         const salt = StorageService.getSalt();
-        const file = scatter + '|SLT|' + salt;
+        const file = arkid + '|SLT|' + salt;
         try {
-            fs.writeFileSync(`${filepath}/scatter_${month}-${year}.txt`, file, 'utf-8');
+            fs.writeFileSync(`${filepath}/arkid_${month}-${year}.txt`, file, 'utf-8');
             resolve(true);
         }
         catch(e) {
@@ -31,9 +31,9 @@ const saveFile = (filepath) => {
 export default class BackupService {
 
     static async setBackupStrategy(strategy){
-        const scatter = store.state.scatter.clone();
-        scatter.settings.autoBackup = strategy;
-        return store.dispatch(Actions.SET_SCATTER, scatter);
+        const arkid = store.state.arkid.clone();
+        arkid.settings.autoBackup = strategy;
+        return store.dispatch(Actions.SET_ARKID, arkid);
     }
 
     static async createBackup(){
@@ -46,17 +46,17 @@ export default class BackupService {
     static async setBackupLocation(){
         const location = getFolderLocation();
         if(!location) return false;
-        const scatter = store.state.scatter.clone();
-        scatter.settings.backupLocation = location[0];
-        return store.dispatch(Actions.SET_SCATTER, scatter);
+        const arkid = store.state.arkid.clone();
+        arkid.settings.backupLocation = location[0];
+        return store.dispatch(Actions.SET_ARKID, arkid);
     }
 
     static async createAutoBackup(){
-        if(!store.state.scatter || store.state.scatter.settings) return;
-        const strategy = store.state.scatter.settings.autoBackup;
+        if(!store.state.arkid || store.state.arkid.settings) return;
+        const strategy = store.state.arkid.settings.autoBackup;
         if(!strategy || !strategy.length || strategy === BACKUP_STRATEGIES.MANUAL) return;
 
-        const backupLocation = store.state.scatter.settings.backupLocation;
+        const backupLocation = store.state.arkid.settings.backupLocation;
         if(!backupLocation || !backupLocation.length) return false;
 
         await saveFile(backupLocation);

@@ -1,29 +1,29 @@
 {
-  "name": "scatter",
+  "name": "arkid",
   "version": "8.9.0",
-  "description": "Scatter Desktop Companion",
+  "description": "Arisen Blockchain Identity For Desktop",
   "private": true,
   "main": "electron.js",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GetScatter/ScatterDesktop.git"
+    "url": "git+https://github.com/arisenio/ark-desktop.git"
   },
   "bugs": {
-    "url": "https://github.com/GetScatter/ScatterDesktop/issues"
+    "url": "https://github.com/arisenio/ark-desktop/issues"
   },
   "keywords": [
-    "scatter",
+    "arkid",
     "blockchain",
     "signatures",
-    "eos",
+    "arisen",
     "ethereum"
   ],
-  "homepage": "https://get-scatter.com",
+  "homepage": "https://arkid.io",
   "author": {
-    "name": "GetScatter",
-    "email": "support@get-scatter.com",
-    "url": "https://get-scatter.com/"
+    "name": "Arisen Community",
+    "email": "jared@benchx.io",
+    "url": "https://arkid.io/"
   },
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -43,14 +43,14 @@
   "dependencies": {
     "@ledgerhq/hw-transport": "^4.21.0",
     "@ledgerhq/hw-transport-node-hid": "^4.22.0",
+    "arisen-rc-parser": "~1.0.0",
+    "arisenjsv1": "~1.0.2",
+    "arisenjs-ecc": "~1.0.0",
     "aes-oop": "^1.0.4",
     "asn1-ber": "^1.0.9",
     "bip32-path": "^0.4.2",
     "bip39": "^2.5.0",
     "electron-store": "^2.0.0",
-    "eos-rc-parser": "^1.0.4",
-    "eosjs": "^16.0.2",
-    "eosjs-ecc": "^4.0.3",
     "ethereumjs-abi": "^0.6.5",
     "ethereumjs-tx": "^1.3.7",
     "ethereumjs-util": "^5.2.0",
@@ -146,8 +146,8 @@
     "not ie <= 8"
   ],
   "build": {
-    "productName": "scatter",
-    "appId": "com.get-scatter.server",
+    "productName": "ArisenID",
+    "appId": "com.arisenid.server",
     "artifactName": "${os}-${productName}-${version}-${arch}.${ext}",
     "asar": true,
     "files": [
@@ -165,7 +165,7 @@
       "oneClick": false,
       "createDesktopShortcut": "always",
       "createStartMenuShortcut": true,
-      "shortcutName": "Scatter"
+      "shortcutName": "ArisenID"
     },
     "directories": {
       "buildResources": "build",
@@ -201,10 +201,10 @@
     "linux": {
       "category": "Network",
       "desktop": {
-        "Name": "Scatter",
-        "GenericName": "Scatter Desktop",
-        "X-GNOME-FullName": "scatter",
-        "Comment": "Scatter desktop signature server.",
+        "Name": "ArisenID",
+        "GenericName": "ArisenID Desktop",
+        "X-GNOME-FullName": "ArisenID",
+        "Comment": "ArisenID desktop signature server.",
         "Type": "Application",
         "Terminal": "false",
         "StartupNotify": "false",

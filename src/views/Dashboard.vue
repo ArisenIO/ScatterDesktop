@@ -137,18 +137,18 @@
         }},
         computed: {
             ...mapState([
-                'scatter',
+                'arkid',
                 'searchTerms',
             ]),
             ...mapGetters([
                 'accounts',
                 'explorers',
             ]),
-            eosAccounts(){
-                return this.accounts.filter(x => x.blockchain() === 'eos');
+            rsnAccounts(){
+                return this.accounts.filter(x => x.blockchain() === 'rsn');
             },
-            eosPlugin(){
-                return PluginRepository.plugin(Blockchains.EOSIO);
+            rsnPlugin(){
+                return PluginRepository.plugin(Blockchains.ARISEN);
             },
         },
         mounted(){
@@ -184,19 +184,19 @@
                 this.totalBalance = parseFloat(total).toFixed(2);
             },
             async getPrices(){
-                this.prices['EOS'] = await PriceService.getPriceFor('EOS');
+                this.prices['RSN'] = await PriceService.getPriceFor('RSN');
                 this.setTotalBalance();
             },
             getRecentActivity(){
-                this.eosAccounts.map(async account => {
-                    const history = await this.eosPlugin.historyFor(account, account.network());
+                this.rsnAccounts.map(async account => {
+                    const history = await this.rsnPlugin.historyFor(account, account.network());
                     this.histories = this.histories.concat(history).sort((a,b) => b.timestamp - a.timestamp)
                 })
             },
             async getBalances(){
                 const tokens = [];
-                await this.eosPlugin.fetchTokens(tokens);
-                await Promise.all(this.eosAccounts.map(async account => {
+                await this.rsnPlugin.fetchTokens(tokens);
+                await Promise.all(this.rsnAccounts.map(async account => {
 
                     // Only get from endorsed networks
                     if(!await PluginRepository.plugin(account.blockchain()).isEndorsedNetwork(account.network())) return false;
@@ -204,7 +204,7 @@
                     this.balances[account.unique()] = [];
 
                     return await Promise.all(tokens.map(async token => {
-                        const balance = await this.eosPlugin.balanceFor(account, account.network(), token.account, token.symbol);
+                        const balance = await this.rsnPlugin.balanceFor(account, account.network(), token.account, token.symbol);
                         if(parseFloat(balance) > 0){
                             this.balances[account.unique()].push({symbol:token.symbol, balance});
                         }

@@ -79,14 +79,14 @@ export default class ApiService {
             const identity = PermissionService.identityFromPermissions(request.payload.origin);
             if(!identity) return resolve({id:request.id, result:Error.identityMissing()});
 
-            const plugin = PluginRepository.plugin(Blockchains.EOSIO);
+            const plugin = PluginRepository.plugin(Blockchains.ARISEN);
             const signed = await plugin.signer({data:request.payload.origin}, identity.publicKey, true);
             resolve({id:request.id, result:signed});
         })
     }
 
     /***
-     * Removes the identity permission for an origin from the user's Scatter,
+     * Removes the identity permission for an origin from the user's ArkId,
      * effectively logging them out.
      * @param request
      * @returns {Promise.<*>}
@@ -131,20 +131,20 @@ export default class ApiService {
             PopupService.push(Popup.popout(request, async ({result}) => {
                 if(!result) return resolve({id:request.id, result:null});
 
-                const scatter = store.state.scatter;
+                const arkid = store.state.arkid;
                 let {publicKey, account, network, origin} = request.payload;
 
                 network = Network.fromJson(Object.assign(network, {name:origin}));
                 if(!network.isValid()) return resolve({id:request.id, result:Error.badNetwork()});
 
-                const keypair = scatter.keychain.keypairs.find(x => x.publicKey === publicKey);
+                const keypair = arkid.keychain.keypairs.find(x => x.publicKey === publicKey);
                 if(!keypair) return resolve({id:request.id, result:Error.noKeypair()});
 
-                let existingNetwork = scatter.settings.networks.find(x => x.unique() === network.unique());
+                let existingNetwork = arkid.settings.networks.find(x => x.unique() === network.unique());
                 if(!existingNetwork){
-                    const clone = scatter.clone();
+                    const clone = arkid.clone();
                     clone.settings.updateOrPushNetwork(network);
-                    await store.dispatch(StoreActions.SET_SCATTER, clone);
+                    await store.dispatch(StoreActions.SET_ARKID, clone);
                     existingNetwork = network;
                 }
 
@@ -163,7 +163,7 @@ export default class ApiService {
     }
 
     /***
-     * Prompts the user to add a new network to their Scatter.
+     * Prompts the user to add a new network to their ArkId.
      * @param request
      * @returns {Promise.<void>}
      */
@@ -176,16 +176,16 @@ export default class ApiService {
             if(!request.payload.network.isValid())
                 return resolve({id:request.id, result:new Error("bad_network", "The network being suggested is invalid")});
 
-            if(store.state.scatter.settings.networks.find(x => x.unique() === request.payload.network.unique()))
+            if(store.state.arkid.settings.networks.find(x => x.unique() === request.payload.network.unique()))
                 return resolve({id:request.id, result:true});
 
             PopupService.push(Popup.popout(request, async ({result}) => {
                 if(!result) return resolve({id:request.id, result:false});
 
 
-                const scatter = store.state.scatter.clone();
-                scatter.settings.networks.push(request.payload.network);
-                store.dispatch(StoreActions.SET_SCATTER, scatter);
+                const arkid = store.state.arkid.clone();
+                arkid.settings.networks.push(request.payload.network);
+                store.dispatch(StoreActions.SET_ARKID, arkid);
 
                 resolve({id:request.id, result:true});
             }));
@@ -202,9 +202,9 @@ export default class ApiService {
         return new Promise(resolve => {
             request.payload.network = Network.fromJson(request.payload.network);
             if(!request.payload.network.isValid()) return resolve({id:request.id, result:new Error("bad_network", "The network provided is invalid")});
-            const existingNetwork = store.state.scatter.settings.networks.find(x => x.unique() === request.payload.network.unique());
-            if(!existingNetwork) return resolve({id:request.id, result:new Error("no_network", "The user doesn't have this network in their Scatter.")});
-            resolve({id:request.id, result:!!store.state.scatter.keychain.accounts.find(x => x.networkUnique === existingNetwork.unique())});
+            const existingNetwork = store.state.arkid.settings.networks.find(x => x.unique() === request.payload.network.unique());
+            if(!existingNetwork) return resolve({id:request.id, result:new Error("no_network", "The user doesn't have this network in their ArkId.")});
+            resolve({id:request.id, result:!!store.state.arkid.keychain.accounts.find(x => x.networkUnique === existingNetwork.unique())});
         })
     }
 
@@ -221,7 +221,7 @@ export default class ApiService {
             else {
                 // TODO: Support fork chains
                 switch(network.blockchain){
-                    case Blockchains.EOSIO: symbol = 'EOS';
+                    case Blockchains.ARISEN: symbol = 'RSN';
                 }
             }
 
@@ -230,11 +230,11 @@ export default class ApiService {
             else {
                 // TODO: Support fork chains
                 switch(network.blockchain){
-                    case Blockchains.EOSIO: contract = 'eosio.token';
+                    case Blockchains.ARISEN: contract = 'arisen.token';
                 }
             }
 
-            request.payload.memo = network.blockchain === 'eos'
+            request.payload.memo = network.blockchain === 'rsn'
                 ? options.hasOwnProperty('memo') ? options.memo : ''
                 : '';
 
@@ -275,7 +275,7 @@ export default class ApiService {
 
             // Convert buf and abi to messages
             switch(blockchain){
-                case Blockchains.EOSIO: payload.messages = await plugin.requestParser(payload, network); break;
+                case Blockchains.ARISEN: payload.messages = await plugin.requestParser(payload, network); break;
                 case Blockchains.ETH: payload.messages = await plugin.requestParser(payload, payload.hasOwnProperty('abi') ? payload.abi : null); break;
             }
 
@@ -291,7 +291,7 @@ export default class ApiService {
 
 
             // Getting the identity for this transaction
-            const identity = store.state.scatter.keychain.identities.find(x => x.publicKey === possibleId.publicKey);
+            const identity = store.state.arkid.keychain.identities.find(x => x.publicKey === possibleId.publicKey);
 
 
             const signAndReturn = async (selectedLocation) => {
@@ -312,7 +312,7 @@ export default class ApiService {
             };
 
             // Only allowing whitelist permissions for origin authed apps
-            const existingApp = store.state.scatter.keychain.findApp(origin);
+            const existingApp = store.state.arkid.keychain.findApp(origin);
 
             const hasHardwareKeys = participants.some(x => KeyPairService.isHardware(x.publicKey));
             const needToSelectLocation = requiredFields.hasOwnProperty('location') && requiredFields.location.length && identity.locations.length > 1;
@@ -391,7 +391,7 @@ export default class ApiService {
     }
 
     /***
-     * Tells the user that they need to update their Scatter in order to
+     * Tells the user that they need to update their ArkId in order to
      * use the origin.
      * @param request
      * @returns {Promise.<void>}
@@ -401,13 +401,13 @@ export default class ApiService {
     }
 
     /***
-     * Gets the Scatter version
+     * Gets the ArkId version
      * @param request
      * @returns {Promise.<void>}
      */
     static async [Actions.GET_VERSION](request){
         return new Promise(resolve => {
-            resolve({id:request.id, result:store.state.scatter.meta.version});
+            resolve({id:request.id, result:store.state.arkid.meta.version});
         })
     }
 

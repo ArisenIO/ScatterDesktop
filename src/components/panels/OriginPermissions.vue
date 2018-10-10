@@ -140,7 +140,7 @@
         }},
         computed:{
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'permissions',
@@ -167,10 +167,10 @@
         },
         methods: {
             async deleteAllPermissions(){
-                const scatter = this.scatter.clone();
-                scatter.keychain.removeApp(this.app);
-                scatter.keychain.permissions = scatter.keychain.permissions.filter(x => x.origin !== this.origin);
-                await this[Actions.SET_SCATTER](scatter);
+                const arkid = this.arkid.clone();
+                arkid.keychain.removeApp(this.app);
+                arkid.keychain.permissions = arkid.keychain.permissions.filter(x => x.origin !== this.origin);
+                await this[Actions.SET_ARKID](arkid);
                 this.backToMenu();
                 PopupService.push(Popup.snackbar("All Origin Permissions Removed!", "check"));
             },
@@ -189,9 +189,9 @@
             async removePermission(permission){
                 PopupService.push(Popup.prompt("Removing Permission", "Are you sure?", "trash-o", "Yes", async accepted => {
                     if(!accepted) return;
-                    const scatter = this.scatter.clone();
-                    scatter.keychain.permissions = scatter.keychain.permissions.filter(x => x.checksum() !== permission.checksum());
-                    await this[Actions.SET_SCATTER](scatter);
+                    const arkid = this.arkid.clone();
+                    arkid.keychain.permissions = arkid.keychain.permissions.filter(x => x.checksum() !== permission.checksum());
+                    await this[Actions.SET_ARKID](arkid);
                     PopupService.push(Popup.snackbar("Permission Removed!", "check"));
                 }, "Cancel"))
             },
@@ -199,7 +199,7 @@
                 if(!this.perms.length) this.$emit('emptied');
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         },
         props:['origin']

@@ -18,7 +18,7 @@
             </section>
 
             <section class="transaction-details" ref="transactions" v-on:scroll="checkScroll" v-if="identity">
-                
+
                 <section class="below-fold" v-if="belowFold && !seenAllActions">
                     <figure class="alert">
                         {{belowFold}} more actions below.
@@ -182,7 +182,7 @@
         }},
         computed:{
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'identities',
@@ -208,7 +208,7 @@
             this.checkWarning();
             this.checkResources();
 
-            let id = this.scatter.keychain.identities.find(x => x.publicKey === this.payload.identityKey);
+            let id = this.arkid.keychain.identities.find(x => x.publicKey === this.payload.identityKey);
             if(!id) return this.returnResult(Error.identityMissing());
             this.identity = Identity.fromJson(id);
 
@@ -317,7 +317,7 @@
                 const accounts = this.payload.participants;
                 const plugin = PluginRepository.plugin(this.payload.blockchain);
 
-                if(this.payload.blockchain === Blockchains.EOSIO){
+                if(this.payload.blockchain === Blockchains.ARISEN){
 
                     await Promise.all(accounts.map(account => {
                         account = Account.fromJson(account);

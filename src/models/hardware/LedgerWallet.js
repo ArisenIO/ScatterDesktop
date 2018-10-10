@@ -13,7 +13,7 @@ import {Popup} from '../popups/Popup';
 const fcbuffer = require('fcbuffer');
 const assert = require('assert');
 const asn1 = require('asn1-ber');
-import Eos from 'eosjs';
+import Rsn from 'arisenjs';
 
 const throwErr = () => PopupService.push(Popup.prompt(
     'No Hardware Available',
@@ -23,7 +23,7 @@ const throwErr = () => PopupService.push(Popup.prompt(
 ));
 
 export const LEDGER_PATHS = {
-    [Blockchains.EOSIO]:"44'/194'/0'/0/0",
+    [Blockchains.ARISEN]:"44'/194'/0'/0/0",
 }
 
 const cache = {};
@@ -174,7 +174,7 @@ class LedgerAPI {
         const paths = bippath.fromString(path).toPathArray();
         let offset = 0;
 
-        const { fc } = Eos({httpEndpoint:network.fullhost(), chainId:network.chainId});
+        const { fc } = Rsn({httpEndpoint:network.fullhost(), chainId:network.chainId});
         let b;
         try {
             b = serialize(network.chainId, rawTxHex.transaction, fc.types).toString('hex');
@@ -236,7 +236,7 @@ class LedgerAPI {
         }).catch(err => {
             PopupService.push(Popup.prompt(
                 `Open ${this.blockchain.toUpperCase()} Ledger App`,
-                'You must open the Ledger App in order to use it with Scatter',
+                'You must open the Ledger App in order to use it with ArisenID',
                 'exclamation-triangle',
                 'Okay'
             ));

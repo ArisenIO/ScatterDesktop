@@ -29,7 +29,7 @@ export default class PopupService {
 
     static openPopOut(popup){
         let responded = false;
-        const scatter = store.state.scatter;
+        const arkid = store.state.arkid;
         const {width, height} = popup.dimensions();
 
         const respond = result => {
@@ -44,7 +44,7 @@ export default class PopupService {
         popouts.push(popup);
 
         WindowService.openPopOut(
-            readyWindow => WindowService.sendAndWait(readyWindow.id, WindowMessageTypes.POPUP, {scatter, popup}).then(result => {
+            readyWindow => WindowService.sendAndWait(readyWindow.id, WindowMessageTypes.POPUP, {arkid, popup}).then(result => {
                 responded = true;
                 respond(result);
             }),

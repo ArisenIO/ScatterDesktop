@@ -39,7 +39,7 @@
                 <section :ref="steps.BLOCKCHAIN.ref" class="info-box">
                     <figure class="name">Selecting a Blockchain</figure>
                     <section class="description">
-                        Scatter has multi-blockchain support and it needs to know which networks belong to which blockchain so that it knows what libraries it needs to use to interact with those
+                        ArisenID has multi-blockchain support and it needs to know which networks belong to which blockchain so that it knows what libraries it needs to use to interact with those
                         networks and which keypairs are linkable to which networks.
                     </section>
                     <br>
@@ -53,7 +53,7 @@
                 <section :ref="steps.HOST.ref" class="info-box">
                     <figure class="name">Setting the Host</figure>
                     <section class="description">
-                        Hosts can be either domain names or IPs; for instance <u>nodes.get-scatter.com</u> or <u>127.0.0.1</u>.
+                        Hosts can be either domain names or IPs; for instance <u>greatchain.arisennodes.io</u> or <u>127.0.0.1</u>.
                     </section>
 
                     <cin placeholder="Host ( domain.com or IP )" :text="network.host" v-on:changed="changed => bind(changed, 'network.host')"></cin>
@@ -64,7 +64,7 @@
                     <section class="description">
                         Hosts have many ports available ( around 65,000 actually ) but generally only one of them will be open to exposing the blockchain to you.
                         Most of the times the ports will be default ( 80 for HTTP, and 443 for HTTPS ) unless otherwise specified specifically. If someone gives you a node URL like
-                        <u>https://nodes.get-scatter.com</u> then the implied port is 443. However if someone gives you the URL <u>https://nodes.get-scatter.com:8883</u> then the port is 8883.
+                        <u>https://greatchain.arisennodes.io</u> then the implied port is 443. However if someone gives you the URL <u>https://greatchain.arisennodes.io:8883</u> then the port is 8883.
                         <br><br>
                         <b class="red">Ports are always numbers.</b>
                     </section>
@@ -85,7 +85,7 @@
                 <section :ref="steps.CHAIN_ID.ref" class="info-box">
                     <figure class="name">Getting and Setting the Chain ID</figure>
                     <section class="description">
-                        Chain IDs are used to group networks together in Scatter. You really only want one network per Chain ID, and all your accounts on that network should be linked to that network.
+                        Chain IDs are used to group networks together in ArisenID. You really only want one network per Chain ID, and all your accounts on that network should be linked to that network.
                         If the network you have linked a blockchain account or keypair to does not have a Chain ID and an application is looking for a network with that Chain ID it will not be available,
                         even if the network's host and port are the same.
                     </section>
@@ -127,11 +127,11 @@
 
     const WizardSteps = {
         NAME:{ref:'name', title:'Name this Network', description:'Names are purely organizational, but good to have.'},
-        BLOCKCHAIN:{ref:'blockchain', title:'Selecting a Blockchain', description:'Scatter needs to know what blockchain this network supports.'},
+        BLOCKCHAIN:{ref:'blockchain', title:'Selecting a Blockchain', description:'ArisenID needs to know what blockchain this network supports.'},
         HOST:{ref:'host', title:'Setting the Host', description:'Hosts are what connect us all.'},
         PORT:{ref:'port', title:'Setting the Port', description:'Hosts can have many ports, but probably only one that you need.'},
         PROTOCOL:{ref:'protocol', title:'Selecting the Protocol', description:'HTTP and HTTPS are not the same thing.'},
-        CHAIN_ID:{ref:'chainid', title:'Getting the Chain ID', description:'Chain IDs help Scatter group networks together.'},
+        CHAIN_ID:{ref:'chainid', title:'Getting the Chain ID', description:'Chain IDs help ArisenID group networks together.'},
         SAVE:{ref:'save', title:'Save this Network', description:'You don\'t normally do this.'},
     };
 
@@ -144,7 +144,7 @@
         }},
         computed: {
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'networks',
@@ -176,14 +176,14 @@
                 if(otherNetworks.find(x => x.chainId === this.network.chainId))
                     return PopupService.push(Popup.snackbar("A network with this chain id already exists", "ban"));
 
-                const scatter = this.scatter.clone();
-                scatter.settings.updateOrPushNetwork(this.network);
-                this[Actions.SET_SCATTER](scatter);
+                const arkid = this.arkid.clone();
+                arkid.settings.updateOrPushNetwork(this.network);
+                this[Actions.SET_ARKID](arkid);
                 PopupService.push(Popup.snackbar("Network Saved!", "check"));
                 this.$router.push({name:RouteNames.BLOCKCHAINS});
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         }
     }

@@ -65,8 +65,8 @@
 
                 <section v-if="inputsOnly">
                     <br>
-                    <cin :forced="parseFloat(cpu) > 0" :placeholder="`EOS to ${delegating ? 'stake' : 'unstake'} in CPU`" :text="cpu === 0 ? '' : cpu" type="number" v-on:changed="x => cpu = Math.abs(x)"></cin>
-                    <cin :forced="parseFloat(net) > 0" :placeholder="`EOS to ${delegating ? 'stake' : 'unstake'} in NET`" :text="net === 0 ? '' : net" type="number" v-on:changed="x => net = Math.abs(x)"></cin>
+                    <cin :forced="parseFloat(cpu) > 0" :placeholder="`RSN to ${delegating ? 'stake' : 'unstake'} in CPU`" :text="cpu === 0 ? '' : cpu" type="number" v-on:changed="x => cpu = Math.abs(x)"></cin>
+                    <cin :forced="parseFloat(net) > 0" :placeholder="`RSN to ${delegating ? 'stake' : 'unstake'} in NET`" :text="net === 0 ? '' : net" type="number" v-on:changed="x => net = Math.abs(x)"></cin>
                 </section>
 
 
@@ -90,15 +90,15 @@
     import PopupService from '../../services/PopupService';
     import {Popup} from '../../models/popups/Popup';
 
-    import Eos from 'eosjs';
+    import Rsn from 'arisenjs';
 
     let keyTimer = null;
 
     export default {
         data(){ return {
-            eos:null,
+            rsn:null,
             fetchedBalance:false,
-            balance:'0.0000 EOS',
+            balance:'0.0000 RSN',
             accountData:null,
             delegating:true,
             cpu:0,
@@ -107,7 +107,7 @@
             submitting:false,
         }},
         mounted(){
-            this.eos = Eos({httpEndpoint:this.account.network().fullhost(), chainId:this.account.network().chainId});
+            this.rsn = Rsn({httpEndpoint:this.account.network().fullhost(), chainId:this.account.network().chainId});
             this.init();
         },
         computed:{
@@ -142,7 +142,7 @@
             },
             async init(){
 
-                PluginRepository.plugin(Blockchains.EOSIO).accountData(this.account, this.account.network()).then(data => {
+                PluginRepository.plugin(Blockchains.ARISEN).accountData(this.account, this.account.network()).then(data => {
                     this.fetchedBalance = true;
 
                     if(!data || !data.hasOwnProperty('core_liquid_balance')) {
@@ -175,12 +175,12 @@
 
                 this.submitting = true;
 
-                const symbol = this.balance ? this.balance.split(' ')[1] : 'EOS';
+                const symbol = this.balance ? this.balance.split(' ')[1] : 'RSN';
 
                 const cpu = `${parseFloat(this.cpu).toFixed(4)} ${symbol}`;
                 const net = `${parseFloat(this.net).toFixed(4)} ${symbol}`;
 
-                PluginRepository.plugin(Blockchains.EOSIO).stakeOrUnstake(this.account, cpu, net, this.account.network(), this.delegating).then(res => {
+                PluginRepository.plugin(Blockchains.ARISEN).stakeOrUnstake(this.account, cpu, net, this.account.network(), this.delegating).then(res => {
                     if(!res || !res.hasOwnProperty('transaction_id')) {
                         this.submitting = false;
                         return false;

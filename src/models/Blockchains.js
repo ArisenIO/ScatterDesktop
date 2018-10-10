@@ -1,6 +1,6 @@
 
 export const Blockchains = {
-    EOSIO:'eos',
+    ARISEN:'rsn',
     ETH:'eth'
 };
 
@@ -9,7 +9,7 @@ export const BlockchainsArray =
 
 export const blockchainName = x => {
     switch(x){
-        case Blockchains.EOSIO: return 'EOS';
+        case Blockchains.ARISEN: return 'RSN';
         case Blockchains.ETH: return 'Ethereum';
     }
 }

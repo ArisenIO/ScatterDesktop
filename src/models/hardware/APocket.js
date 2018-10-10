@@ -3,7 +3,7 @@ import * as Http from '../../util/Http'
 import PopupService from '../../services/PopupService';
 import {Popup} from '../popups/Popup';
 
-export default class LiquidEOS {
+export default class APocket {
 
     constructor(){
 

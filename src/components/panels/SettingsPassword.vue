@@ -10,7 +10,7 @@
                 <figure class="name">Change your Password</figure>
                 <figure class="description">
                     Every time you change your password you will get a new Mnemonic ( Seed Phrase ).<br>
-                    <b>Mnemonics are not used to generate keys on Scatter, they simply serve as a backup for your password.</b>
+                    <b>Mnemonics are not used to generate keys on ArisenID, they simply serve as a backup for your password.</b>
                 </figure>
 
                 <section class="info-box">
@@ -44,7 +44,7 @@
         }},
         computed:{
             ...mapState([
-                'scatter'
+                'arkid'
             ])
         },
         mounted(){
@@ -60,7 +60,7 @@
                 this.confirmPassword = '';
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         },
     }

@@ -34,10 +34,10 @@ export const AccountFields = {
 
 /*
 //EXAMPLE
-scatter.getIdentity({
+arkid.getIdentity({
     personal:['email'],
     accounts:[
-        {blockchain:Blockchains.EOSIO,network:{chainId:1}},
+        {blockchain:Blockchains.ARISEN,network:{chainId:1}},
         {blockchain:Blockchains.ETH,network:{chainId:1}}
     ],
     location:['country']
@@ -133,7 +133,7 @@ export class LocationInformation {
 /*                 Identity                 */
 /********************************************/
 
-let {PrivateKey} = require('eosjs-ecc');
+let {PrivateKey} = require('arisenjs-ecc');
 
 export default class Identity {
 

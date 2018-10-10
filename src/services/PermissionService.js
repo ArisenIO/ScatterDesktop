@@ -10,7 +10,7 @@ export default class PermissionService {
 
     static identityFromPermissions(origin, formatForResult = true){
 
-        const permissions = store.state.scatter.keychain.permissions;
+        const permissions = store.state.arkid.keychain.permissions;
         const possibleId = permissions.find(x => x.isIdentityPermissionFor(origin));
         if(possibleId){
             let identityRequirements = IdentityRequiredFields.fromPermission(possibleId.identityRequirements);
@@ -26,26 +26,26 @@ export default class PermissionService {
         identityRequirements = IdentityRequiredFields.fromJson(identityRequirements);
         identityRequirements = identityRequirements.forPermission();
 
-        const scatter = store.state.scatter.clone();
+        const arkid = store.state.arkid.clone();
 
         // Permission already exists
-        if(scatter.keychain.permissions.find(x => x.isIdentity && x.origin === origin && x.identity === identity.publicKey)) return;
+        if(arkid.keychain.permissions.find(x => x.isIdentity && x.origin === origin && x.identity === identity.publicKey)) return;
 
         const permission = Permission.fromAction(origin, identity, accounts, {
             identityRequirements,
             isIdentity:true
         });
 
-        scatter.keychain.permissions.push(permission);
-        store.dispatch(Actions.SET_SCATTER, scatter);
+        arkid.keychain.permissions.push(permission);
+        store.dispatch(Actions.SET_ARKID, arkid);
     }
 
     static removeIdentityPermission(origin){
-        const scatter = store.state.scatter.clone();
-        const idPermissions = scatter.keychain.permissions.find(x => x.isIdentity && x.origin === origin);
+        const arkid = store.state.arkid.clone();
+        const idPermissions = arkid.keychain.permissions.find(x => x.isIdentity && x.origin === origin);
         if(!idPermissions) return new Error('already_forgotten', "This identity does not have a permission for "+origin);
-        scatter.keychain.permissions = scatter.keychain.permissions.filter(x => x.id !== idPermissions.id);
-        return store.dispatch(Actions.SET_SCATTER, scatter);
+        arkid.keychain.permissions = arkid.keychain.permissions.filter(x => x.id !== idPermissions.id);
+        return store.dispatch(Actions.SET_ARKID, arkid);
     }
 
     static async addIdentityRequirementsPermission(origin, identity, identityRequirements){
@@ -57,17 +57,17 @@ export default class PermissionService {
         identityRequirements = identityRequirements.forPermission();
 
 
-        const scatter = store.state.scatter.clone();
+        const arkid = store.state.arkid.clone();
 
         const permission = Permission.fromJson({
             origin, identity:identity.publicKey, identityRequirements, isIdentityRequirements:true
         });
 
         // Don't duplicate requirements.
-        if(scatter.keychain.permissions.find(x => x.checksum() === permission.checksum())) return;
+        if(arkid.keychain.permissions.find(x => x.checksum() === permission.checksum())) return;
 
-        scatter.keychain.permissions.push(permission);
-        return store.dispatch(Actions.SET_SCATTER, scatter);
+        arkid.keychain.permissions.push(permission);
+        return store.dispatch(Actions.SET_ARKID, arkid);
     }
 
     static hasIdentityRequirementsPermission(origin, identity, identityRequirements){
@@ -78,7 +78,7 @@ export default class PermissionService {
             origin, identity:identity.publicKey, identityRequirements, isIdentityRequirements:true
         });
 
-        return store.state.scatter.keychain.permissions.find(x => x.checksum() === permission.checksum());
+        return store.state.arkid.keychain.permissions.find(x => x.checksum() === permission.checksum());
     }
 
     static createActionPermission(origin, identity, accounts, whitelistData){
@@ -96,9 +96,9 @@ export default class PermissionService {
         });
 
 
-        const scatter = store.state.scatter.clone();
+        const arkid = store.state.arkid.clone();
 
-        if(scatter.keychain.permissions.find(x => x.checksum() === permission.checksum())) return;
+        if(arkid.keychain.permissions.find(x => x.checksum() === permission.checksum())) return;
         return permission;
     }
 
@@ -110,9 +110,9 @@ export default class PermissionService {
         ).filter(x => x);
 
         if(permissions.length){
-            const scatter = store.state.scatter.clone();
-            permissions.map(x => scatter.keychain.permissions.push(x));
-            await store.dispatch(Actions.SET_SCATTER, scatter);
+            const arkid = store.state.arkid.clone();
+            permissions.map(x => arkid.keychain.permissions.push(x));
+            await store.dispatch(Actions.SET_ARKID, arkid);
         }
     }
 
@@ -129,7 +129,7 @@ export default class PermissionService {
             isContractAction:true
         });
 
-        const matchingPermissions = store.state.scatter.keychain.permissions.filter(x => x.checksum() === permission.checksum());
+        const matchingPermissions = store.state.arkid.keychain.permissions.filter(x => x.checksum() === permission.checksum());
 
         if(!matchingPermissions.length) return false;
 

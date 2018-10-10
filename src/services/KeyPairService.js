@@ -70,43 +70,43 @@ export default class KeyPairService {
     }
 
     static saveKeyPair(keypair, callback){
-        const scatter = store.state.scatter.clone();
+        const arkid = store.state.arkid.clone();
 
         if(!keypair.name.length)
             return PopupService.push(Popup.prompt('Invalid Keypair Name', 'The keypair name you have entered is invalid', 'ban', 'Okay'));
-        if(scatter.keychain.getKeyPair(keypair))
+        if(arkid.keychain.getKeyPair(keypair))
             return PopupService.push(Popup.prompt('Keypair Exists', 'There is already a keypair with the key', 'ban', 'Okay'));
-        if(scatter.keychain.getKeyPairByName(keypair.name))
+        if(arkid.keychain.getKeyPairByName(keypair.name))
             return PopupService.push(Popup.prompt('Keypair Exists', 'There is already a keypair with the key', 'ban', 'Okay'));
 
-        scatter.keychain.keypairs.push(Keypair.fromJson(keypair));
-        store.dispatch(Actions.SET_SCATTER, scatter).then(() => callback());
+        arkid.keychain.keypairs.push(Keypair.fromJson(keypair));
+        store.dispatch(Actions.SET_ARKID, arkid).then(() => callback());
     }
 
     static updateKeyPair(keypair, callback){
-        const scatter = store.state.scatter.clone();
+        const arkid = store.state.arkid.clone();
 
         if(!keypair.name.length)
             return PopupService.push(Popup.prompt('Invalid Keypair Name', 'The keypair name you have entered is invalid', 'ban', 'Okay'));
 
-        scatter.keychain.keypairs.find(x => x.unique() === keypair.unique()).name = keypair.name;
-        store.dispatch(Actions.SET_SCATTER, scatter).then(() => callback());
+        arkid.keychain.keypairs.find(x => x.unique() === keypair.unique()).name = keypair.name;
+        store.dispatch(Actions.SET_ARKID, arkid).then(() => callback());
     }
 
     static removeKeyPair(keypair, callback){
-        const scatter = store.state.scatter.clone();
-        scatter.keychain.removeKeyPair(keypair);
-        store.dispatch(Actions.SET_SCATTER, scatter).then(() => callback());
+        const arkid = store.state.arkid.clone();
+        arkid.keychain.removeKeyPair(keypair);
+        store.dispatch(Actions.SET_ARKID, arkid).then(() => callback());
     }
 
     static getKeyPairFromPublicKey(publicKey, decrypt = false){
-        const keypair = store.state.scatter.keychain.keypairs.find(x => x.publicKey === publicKey);
+        const keypair = store.state.arkid.keychain.keypairs.find(x => x.publicKey === publicKey);
         if(keypair) {
             if(decrypt) keypair.decrypt(store.state.seed);
             return keypair;
         }
 
-        const identity = store.state.scatter.keychain.identities.find(x => x.publicKey === publicKey);
+        const identity = store.state.arkid.keychain.identities.find(x => x.publicKey === publicKey);
         if(identity) {
             if(decrypt) identity.decrypt(store.state.seed);
             return Keypair.fromJson({
@@ -131,5 +131,5 @@ export default class KeyPairService {
         if(keypair) return keypair.privateKey;
         return null;
     }
-    
+
 }

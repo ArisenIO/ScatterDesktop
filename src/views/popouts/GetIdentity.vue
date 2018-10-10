@@ -8,7 +8,7 @@
                 <section class="head">
                     <figure class="logo">S</figure>
                     <figure class="info">
-                        <figure>Login with Scatter</figure>
+                        <figure>Login with ArisenID</figure>
                         <figure>{{pluginOrigin}} - {{payload.origin}}</figure>
                     </figure>
                     <figure class="close" @click="returnResult(null)">
@@ -118,7 +118,7 @@
         computed:{
             ...mapState([
                 'state',
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'identities',

@@ -79,7 +79,7 @@ export default class ETH extends Plugin {
         return privateKey;
     }
     convertsTo(){
-        return [Blockchains.EOSIO];
+        return [Blockchains.ARISEN];
     }
 
     async balanceFor(account, network, tokenAccount, symbol){
@@ -105,7 +105,7 @@ export default class ETH extends Plugin {
     }
 
     async transfer(account, to, amount, network, tokenAccount, symbol, memo){
-        PopupService.push(Popup.prompt("Ethereum transfers not enabled yet", "Sorry, but only EOS transfers are currently enabled", "ban", "Okay"))
+        PopupService.push(Popup.prompt("Ethereum transfers not enabled yet", "Sorry, but only RSN transfers are currently enabled", "ban", "Okay"))
         return null;
     }
 

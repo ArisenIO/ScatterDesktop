@@ -9,8 +9,8 @@
             <section class="selected-item scrollable">
                 <figure class="name">Popup Nonce</figure>
                 <figure class="description">
-                    The popup nonce helps you verify that popups actually came from Scatter.
-                    It's best to set a nonce prefix yourself, so that you know a popup was really created by <b>your Scatter</b> and not some
+                    The popup nonce helps you verify that popups actually came from ArisenID.
+                    It's best to set a nonce prefix yourself, so that you know a popup was really created by <b>your ArisenID</b> and not some
                     other application trying to steal your data.
                 </figure>
 
@@ -43,30 +43,30 @@
         }},
         computed:{
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'autoBackup',
             ]),
             nonce(){
-                return this.scatter.nonce;
+                return this.arkid.nonce;
             }
         },
         mounted(){
-          this.noncePrefix = this.scatter.noncePrefix;
+          this.noncePrefix = this.arkid.noncePrefix;
         },
         methods: {
             applyPrefix(){
                 if(!this.noncePrefix.length)
                     return PopupService.push(Popup.prompt('Bad Prefix', 'The nonce prefix must not be empty.', 'exclamation-triangle', 'Okay'))
 
-                const clone = this.scatter.clone();
+                const clone = this.arkid.clone();
                 clone.noncePrefix = this.noncePrefix;
-                this[Actions.SET_SCATTER](clone);
+                this[Actions.SET_ARKID](clone);
                 PopupService.push(Popup.snackbar('Nonce Prefix Updated', 'check'));
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         },
     }

@@ -8,7 +8,7 @@
 
             <section class="selected-item scrollable">
                 <figure class="name">Select your Language</figure>
-                <figure class="description">Scatter is available in multiple languages, because blockchain is all about communities from all around the world.</figure>
+                <figure class="description">ArisenID is available in multiple languages, because blockchain is all about communities from all around the world.</figure>
 
                 <section class="info-box">
 
@@ -38,7 +38,7 @@
         }},
         computed:{
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'networks',
@@ -54,7 +54,7 @@
 
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         },
     }

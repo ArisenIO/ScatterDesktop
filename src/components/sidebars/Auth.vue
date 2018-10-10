@@ -3,20 +3,20 @@
         <section class="panel">
 
             <section class="logo-container">
-                <figure class="grand-hotel logo">Scatter</figure>
+                <figure class="grand-hotel logo">ArisenID</figure>
                 <figure class="tagline">Discovering infinite possibilities</figure>
             </section>
 
-            <section class="inputs" v-if="isNewScatter">
+            <section class="inputs" v-if="isNewArisenID">
                 <cin placeholder="Password" type="password" v-on:enter="create" :text="password" v-on:changed="changed => bind(changed, 'password')"></cin>
                 <cin placeholder="Confirm Password" type="password" v-on:enter="create" :text="confirmPassword" v-on:changed="changed => bind(changed, 'confirmPassword')"></cin>
-                <btn class="dropped" v-on:clicked="create" text="Create new Scatter" full="true" large="true"></btn>
+                <btn class="dropped" v-on:clicked="create" text="Create new ArisenID" full="true" large="true"></btn>
                 <btn text="Import from Backup" v-on:clicked="importBackup" full="true"></btn>
             </section>
 
             <section class="inputs" v-else>
                 <cin placeholder="Password" type="password" :text="password" v-on:enter="unlock" v-on:changed="changed => bind(changed, 'password')"></cin>
-                <btn v-on:clicked="unlock" text="Unlock Scatter" full="true" large="true"></btn>
+                <btn v-on:clicked="unlock" text="Unlock ArisenID" full="true" large="true"></btn>
             </section>
 
 
@@ -44,11 +44,11 @@
             confirmPassword:'',
         }},
         computed: {
-            isNewScatter(){
-                return this.scatter === null;
+            isNewArisenID(){
+                return this.arkid === null;
             },
             ...mapState([
-                'scatter'
+                'arkid'
             ])
         },
         mounted(){
@@ -58,19 +58,19 @@
         methods:{
             async create(){
                 if(!PasswordService.isValidPassword(this.password, this.confirmPassword)) return false;
-                await this[Actions.CREATE_SCATTER](this.password);
+                await this[Actions.CREATE_ARKID](this.password);
                 this.$router.push({name:RouteNames.ONBOARDING});
             },
             async unlock(){
                 await this[Actions.SET_SEED](this.password);
-                await this[Actions.LOAD_SCATTER]();
+                await this[Actions.LOAD_ARKID]();
 
                 const failed = () => {
                     console.log('failed');
                     PopupService.push(Popup.snackbar("Bad Password", "ban"))
                 };
 
-                if(typeof this.scatter === 'object' && !this.scatter.isEncrypted()){
+                if(typeof this.arkid === 'object' && !this.arkid.isEncrypted()){
                     SocketService.initialize();
                     SocketService.open();
                     this.$router.push({name:RouteNames.IDENTITIES});
@@ -89,14 +89,14 @@
                     if(!obj || !salt) return alert("Error parsing backup");
 
                     StorageService.setSalt(salt);
-                    StorageService.setScatter(obj);
+                    StorageService.setArisenID(obj);
                     location.reload();
                 });
             },
             ...mapActions([
                 Actions.SET_SEED,
-                Actions.CREATE_SCATTER,
-                Actions.LOAD_SCATTER
+                Actions.CREATE_ARKID,
+                Actions.LOAD_ARKID
             ])
         }
     }

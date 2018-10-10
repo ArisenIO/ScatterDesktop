@@ -37,7 +37,7 @@
         }},
         computed: {
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'identities',
@@ -50,7 +50,7 @@
         methods: {
             async newIdentity(){
                 const id = Identity.placeholder();
-                await id.initialize(this.scatter.hash);
+                await id.initialize(this.arkid.hash);
                 this.selectedIdentity = id;
             },
             async nextIdentity(){

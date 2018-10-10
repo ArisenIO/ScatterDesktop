@@ -26,10 +26,10 @@
             <section ref="scroller" class="selected-item scrollable" v-if="identity">
 
                 <section :ref="steps.WHAT.ref">
-                    <figure class="name">What is a Scatter Identity?</figure>
+                    <figure class="name">What is a ArisenID Identity?</figure>
                     <section class="description">
-                        Scatter makes applications <u>Request an Identity</u> before they can retrieve any information from you. This sets up a sort of permission for them
-                        to interact with you and blacklists all non-permissioned applications from interacting with your Scatter.
+                        ArisenID makes applications <u>Request an Identity</u> before they can retrieve any information from you. This sets up a sort of permission for them
+                        to interact with you and blacklists all non-permissioned applications from interacting with your ArisenID.
                         <br><br>
                         In comparison, MetaMask ( for instance ) gives away your public Ethereum key to every website you visit; whether they are on the blockchain on or not, and allows them to
                         aggregate data about your funds and activity on the blockchain.
@@ -52,7 +52,7 @@
                     <section class="description">
                         <b class="red">Personal information is <u>NOT</u> mandatory!</b><br><br>
                         Some applications need personal information from you to complete certain transactions, such as a shopping website that needs your full name to send you
-                        physical goods. They can get this information directly from Scatter without you having to type it in to forms on their website.
+                        physical goods. They can get this information directly from ArisenID without you having to type it in to forms on their website.
                     </section>
 
                     <cin placeholder="First Name" :text="identity.personal.firstname" v-on:changed="changed => bind(changed, 'identity.personal.firstname')"></cin>
@@ -66,7 +66,7 @@
                     <section class="description">
                         <b class="red">Location information is <u>NOT</u> mandatory!</b><br><br>
                         Some applications need personal information from you to complete certain transactions, such as a shopping website that needs your full name to send you
-                        physical goods. They can get this information directly from Scatter without you having to type it in to forms on their website.
+                        physical goods. They can get this information directly from ArisenID without you having to type it in to forms on their website.
                     </section>
 
                     <cin placeholder="Location Name" :text="selectedLocation.name" v-on:changed="changed => bind(changed, 'selectedLocation.name')"></cin>
@@ -113,7 +113,7 @@
     import {Popup} from '../../models/popups/Popup'
 
     const WizardSteps = {
-        WHAT:{ref:'what', title:'Identities?', description:'Let\'s learn about Scatter\'s Identities.'},
+        WHAT:{ref:'what', title:'Identities?', description:'Let\'s learn about ArisenID\'s Identities.'},
         NAME:{ref:'name', title:'Name your Identity', description:'What are Identity names?'},
         PERSONAL:{ref:'personal', title:'Personal Information', description:'This is not mandatory.'},
         LOCATION:{ref:'location', title:'Location Information', description:'This is not mandatory.'},
@@ -130,7 +130,7 @@
         }},
         computed: {
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'linkedApps'
@@ -141,7 +141,7 @@
         },
         mounted(){
             this.identity = Identity.placeholder();
-            this.identity.initialize(this.scatter.hash);
+            this.identity.initialize(this.arkid.hash);
             this.selectedLocation = this.identity.locations[0];
         },
         methods: {
@@ -150,18 +150,18 @@
                 if(!this.isValidName) PopupService.push(Popup.invalidIdentityName())
             },
             save(){
-                if(this.scatter.keychain.identities.find(id => id.publicKey !== this.identity.publicKey && id.name.toLowerCase() === this.identity.name.toLowerCase()))
+                if(this.arkid.keychain.identities.find(id => id.publicKey !== this.identity.publicKey && id.name.toLowerCase() === this.identity.name.toLowerCase()))
                     return PopupService.push(Popup.snackbar("You already have an Identity with this name", "ban"));
 
                 if(!this.isValidName) return this.checkName();
 
-                const scatter = this.scatter.clone();
-                scatter.keychain.updateOrPushIdentity(this.identity);
-                this[Actions.SET_SCATTER](scatter);
+                const arkid = this.arkid.clone();
+                arkid.keychain.updateOrPushIdentity(this.identity);
+                this[Actions.SET_ARKID](arkid);
                 this.$router.push({name:RouteNames.IDENTITIES})
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         }
     }

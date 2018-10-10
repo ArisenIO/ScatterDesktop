@@ -22,7 +22,7 @@
                 <swch first="Buy" second="Sell" :selected="buying ? 'Sell' : 'Buy'" v-on:switched="toggleBuySell"></swch>
 
                 <figure v-if="buying" class="description">Buying RAM for {{account.formatted()}} will let that account hold more data.</figure>
-                <figure v-else class="description">Selling RAM for {{account.formatted()}} return EOS to that account at the current price of RAM.</figure>
+                <figure v-else class="description">Selling RAM for {{account.formatted()}} return RSN to that account at the current price of RAM.</figure>
 
 
 
@@ -63,8 +63,8 @@
     import PopupService from '../../services/PopupService';
     import {Popup} from '../../models/popups/Popup';
 
-    import Eos from 'eosjs';
-    const {format} = Eos.modules;
+    import Rsn from 'arisenjs';
+    const {format} = Rsn.modules;
 
     const denom = {
         BYTES:'Bytes',
@@ -75,9 +75,9 @@
     export default {
         data(){ return {
             inputsOnly:false,
-            eos:null,
+            rsn:null,
             pricePerByte:0,
-            balance:'0.0000 EOS',
+            balance:'0.0000 RSN',
             fetchedBalance:false,
             accountData:null,
             buying:true,
@@ -89,7 +89,7 @@
             submitting:false,
         }},
         mounted(){
-            this.eos = Eos({httpEndpoint:this.account.network().fullhost(), chainId:this.account.network().chainId});
+            this.rsn = Rsn({httpEndpoint:this.account.network().fullhost(), chainId:this.account.network().chainId});
             this.init();
         },
         computed:{
@@ -131,10 +131,10 @@
             },
             async init(){
                 const parseAsset = asset => asset.split(' ')[0];
-                const ramInfo = await this.eos.getTableRows({
+                const ramInfo = await this.rsn.getTableRows({
                     json:true,
-                    code:'eosio',
-                    scope:'eosio',
+                    code:'arisen',
+                    scope:'arisen',
                     table:'rammarket'
                 }).then(res => {
                     const ramInfo = res.rows[0];
@@ -144,7 +144,7 @@
 
                 this.pricePerByte = (ramInfo[0] / ramInfo[1]).toFixed(8);
 
-                PluginRepository.plugin(Blockchains.EOSIO).accountData(this.account, this.account.network()).then(data => {
+                PluginRepository.plugin(Blockchains.ARISEN).accountData(this.account, this.account.network()).then(data => {
                     this.fetchedBalance = true;
                     if(!data) {
                         this.balance = 'Error getting balance';
@@ -178,7 +178,7 @@
 
                 this.submitting = true;
 
-                PluginRepository.plugin(Blockchains.EOSIO).buyOrSellRAM(this.account, bytes, this.account.network(), this.buying).then(res => {
+                PluginRepository.plugin(Blockchains.ARISEN).buyOrSellRAM(this.account, bytes, this.account.network(), this.buying).then(res => {
                     if(!res || !res.hasOwnProperty('transaction_id')) {
                         this.submitting = false;
                         return false;

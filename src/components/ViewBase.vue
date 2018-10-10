@@ -43,13 +43,13 @@
         }},
         computed:{
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'unlocked',
             ]),
             onboarding(){
-                return this.unlocked && !this.scatter.meta.acceptedTerms;
+                return this.unlocked && !this.arkid.meta.acceptedTerms;
             }
         },
         methods:{

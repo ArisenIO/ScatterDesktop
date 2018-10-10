@@ -23,7 +23,7 @@
                 this.$emit('new');
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         },
         props:['tooltip']

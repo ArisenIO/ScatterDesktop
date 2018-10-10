@@ -29,7 +29,7 @@
                     <figure class="name">Select a Keypair</figure>
                     <section class="description">
                         Keypairs can be daunting anyway for most users, but when you have to keep track of random names or characters it becomes even harder.
-                        Scatter allows you to assign names to your keypairs so that you can organize and keep track of them easily. The name has no affect on it's use what-so-ever.
+                        ArisenID allows you to assign names to your keypairs so that you can organize and keep track of them easily. The name has no affect on it's use what-so-ever.
                     </section>
                     <br>
                     <sel :placeholder="'Keypair'"
@@ -43,7 +43,7 @@
                     <figure class="name">Some blockchains need you to Fetch the available accounts.</figure>
                     <section class="description">
                         The {{keypair.blockchain.toUpperCase()}} blockchain requires that keypairs have accounts on top of them.
-                        Accounts can't currently be created from within Scatter, so you'll have to create them outside of Scatter but Scatter will be
+                        Accounts can't currently be created from within ArisenID, so you'll have to create them outside of ArisenID but ArisenID will be
                         able to fetch the accounts for you to select them once you do.
                     </section>
                     <br>
@@ -74,7 +74,7 @@
                 <section :ref="steps.LINK_ACCOUNT.ref" class="info-box">
                     <figure class="name">Link a Blockchain Account to a Network.</figure>
                     <section class="description">
-                        When applications request a blockchain account from you they will specify a network. In order for Scatter to know which accounts and keypairs belong to
+                        When applications request a blockchain account from you they will specify a network. In order for ArisenID to know which accounts and keypairs belong to
                         which network you will need to link accounts to specific networks.
                         <br><br>
                         <b class="red">You don't need to manually save after linking or unlinking accounts. The action of linking or unlinking them is instantly saved.</b>
@@ -132,7 +132,7 @@
     const WizardSteps = {
         SELECT_KEYPAIR:{ref:'selectkp', title:'Select Keypair', description:'Before you can import accounts you need to select a keypair.'},
         FETCH_ACCOUNTS:{ref:'fetch', title:'Fetching Accounts', description:'Some blockchains are different than others.'},
-        LINK_ACCOUNT:{ref:'link', title:'Link Accounts to Networks', description:'Scatter pairs accounts to networks so it knows which to ask your for.'},
+        LINK_ACCOUNT:{ref:'link', title:'Link Accounts to Networks', description:'ArisenID pairs accounts to networks so it knows which to ask your for.'},
     };
 
     export default {
@@ -149,7 +149,7 @@
         },
         computed: {
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'keypairs',
@@ -208,7 +208,7 @@
                 this.fetchedAccounts = true;
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         }
     }

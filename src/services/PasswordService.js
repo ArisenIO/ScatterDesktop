@@ -5,7 +5,7 @@ import Hasher from '../util/Hasher'
 import IdGenerator from '../util/IdGenerator'
 import StorageService from '../services/StorageService';
 import AES from 'aes-oop';
-import Scatter from '../models/Scatter';
+import ArkId from '../models/ArkId';
 import SocketService from '../services/SocketService'
 import PopupService from '../services/PopupService'
 import {Popup} from '../models/popups/Popup'
@@ -55,15 +55,15 @@ export default class PasswordService {
             if(password) await this.seedPassword(password);
 
             try {
-                let scatter = StorageService.getScatter();
-                scatter = AES.decrypt(scatter, store.state.seed);
-                if(setToState) store.commit(Actions.SET_SCATTER, scatter);
+                let arkid = StorageService.getArkId();
+                arkid = AES.decrypt(arkid, store.state.seed);
+                if(setToState) store.commit(Actions.SET_ARKID, arkid);
 
-                if(!scatter.hasOwnProperty('keychain')) throw new Error();
+                if(!arkid.hasOwnProperty('keychain')) throw new Error();
 
-                scatter = Scatter.fromJson(scatter);
-                scatter.decrypt(store.state.seed);
-                if(setToState) store.dispatch(Actions.SET_SCATTER, scatter);
+                arkid = ArkId.fromJson(arkid);
+                arkid.decrypt(store.state.seed);
+                if(setToState) store.dispatch(Actions.SET_ARKID, arkid);
                 resolve(true);
             } catch(e) {
                 resolve(false);
@@ -82,12 +82,12 @@ export default class PasswordService {
             const [newMnemonic, newSeed] = await Mnemonic.generateMnemonic(newPassword);
 
             // Re-encrypting keypairs
-            const scatter = store.state.scatter.clone();
-            scatter.keychain.keypairs.map(keypair => {
+            const arkid = store.state.arkid.clone();
+            arkid.keychain.keypairs.map(keypair => {
                 keypair.decrypt(oldSeed);
                 keypair.encrypt(newSeed);
             });
-            scatter.keychain.identities.map(id => {
+            arkid.keychain.identities.map(id => {
                 id.decrypt(oldSeed);
                 id.encrypt(newSeed);
             });
@@ -95,7 +95,7 @@ export default class PasswordService {
             //TODO: Prompt mnemonic
 
             await store.commit(Actions.SET_SEED, newSeed);
-            await store.dispatch(Actions.SET_SCATTER, scatter);
+            await store.dispatch(Actions.SET_ARKID, arkid);
             resolve(newMnemonic);
 
         })

@@ -20,20 +20,20 @@ export default class AccountService {
             networkUnique:network.unique(),
             publicKey:keypair.publicKey
         });
-        const scatter = store.state.scatter.clone();
-        scatter.keychain.addAccount(account);
-        return store.dispatch(Actions.SET_SCATTER, scatter);
+        const arkid = store.state.arkid.clone();
+        arkid.keychain.addAccount(account);
+        return store.dispatch(Actions.SET_ARKID, arkid);
     }
 
     static async addAccount(account){
-        const scatter = store.state.scatter.clone();
-        scatter.keychain.addAccount(account);
-        return store.dispatch(Actions.SET_SCATTER, scatter);
+        const arkid = store.state.arkid.clone();
+        arkid.keychain.addAccount(account);
+        return store.dispatch(Actions.SET_ARKID, arkid);
     }
 
     static async removeAccount(account){
-        const scatter = store.state.scatter.clone();
-        scatter.keychain.removeAccount(account);
-        return store.dispatch(Actions.SET_SCATTER, scatter);
+        const arkid = store.state.arkid.clone();
+        arkid.keychain.removeAccount(account);
+        return store.dispatch(Actions.SET_ARKID, arkid);
     }
 }

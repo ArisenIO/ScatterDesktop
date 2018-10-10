@@ -1,7 +1,7 @@
 <template>
     <section class="popout">
 
-        <figure class="nonce" v-if="scatter && scatter.noncePrefix">{{`${scatter.noncePrefix}:${scatter.nonce}`}}</figure>
+        <figure class="nonce" v-if="arkid && arkid.noncePrefix">{{`${arkid.noncePrefix}:${arkid.nonce}`}}</figure>
 
         <section v-if="windowMessage">
 
@@ -32,7 +32,7 @@
     import { mapActions, mapGetters, mapState } from 'vuex'
     import * as Actions from '../store/constants';
 
-    import Scatter from '../models/Scatter';
+    import ArkId from '../models/ArkId';
 
     const { remote } = window.require('electron');
     import WindowService from '../services/WindowService'
@@ -47,12 +47,12 @@
         mounted(){
             WindowService.watch(WindowMessageTypes.POPUP, windowMessage => {
                 this.windowMessage = windowMessage;
-                this[Actions.HOLD_SCATTER](Scatter.fromJson(this.windowMessage.data.scatter));
+                this[Actions.HOLD_ARKID](ArkId.fromJson(this.windowMessage.data.arkid));
             });
         },
         computed:{
             ...mapState([
-                'scatter',
+                'arkid',
             ]),
             pluginOrigin(){ return this.windowMessage.data.popup.data.props.plugin },
             payload(){ return this.windowMessage.data.popup.data.props.payload },
@@ -64,7 +64,7 @@
                 setTimeout(() => remote.getCurrentWindow().close(), 50);
             },
             ...mapActions([
-                Actions.HOLD_SCATTER
+                Actions.HOLD_ARKID
             ])
         }
     }

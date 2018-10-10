@@ -67,7 +67,7 @@
 
                                         <figure class="date" v-if="account.network()">{{account.network().name}}</figure>
 
-                                        <section v-if="account.blockchain() === blockchain.EOSIO && accountData(account)">
+                                        <section v-if="account.blockchain() === blockchain.ARISEN && accountData(account)">
                                             <p-bar color="orange" v-if="accountData(account).refund_request"
                                                    :used="+new Date() - +new Date(accountData(account).refund_request.request_time)"
                                                    :total="(86400*3*1000)"
@@ -88,17 +88,17 @@
                                             <i class="fa fa-ban"></i>
                                         </figure>
 
-                                        <figure v-if="account.blockchain() === blockchain.EOSIO" class="separator"></figure>
+                                        <figure v-if="account.blockchain() === blockchain.ARISEN" class="separator"></figure>
 
-                                        <figure v-if="account.blockchain() === blockchain.EOSIO" class="button blue" v-tooltip="'Buy/Sell Ram'" @click="moderateRAM(account)">
+                                        <figure v-if="account.blockchain() === blockchain.ARISEN" class="button blue" v-tooltip="'Buy/Sell Ram'" @click="moderateRAM(account)">
                                             <i class="fa fa-microchip"></i>
                                         </figure>
 
-                                        <figure v-if="account.blockchain() === blockchain.EOSIO" class="button blue" v-tooltip="'Stake/Unstake CPU & NET'" @click="moderateResources(account)">
+                                        <figure v-if="account.blockchain() === blockchain.ARISEN" class="button blue" v-tooltip="'Stake/Unstake CPU & NET'" @click="moderateResources(account)">
                                             <i class="fa fa-globe"></i>
                                         </figure>
 
-                                        <figure v-if="account.blockchain() === blockchain.EOSIO" class="button blue" v-tooltip="'Refresh Resources'" @click="fetchAccountData(account, true)">
+                                        <figure v-if="account.blockchain() === blockchain.ARISEN" class="button blue" v-tooltip="'Refresh Resources'" @click="fetchAccountData(account, true)">
                                             <i class="fa fa-refresh"></i>
                                         </figure>
                                     </section>
@@ -230,7 +230,7 @@
         }},
         computed: {
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'keypairs',
@@ -311,14 +311,14 @@
                 }));
             },
             fetchAccountDatum(){
-                if(this.keypair.blockchain === Blockchains.EOSIO) {
+                if(this.keypair.blockchain === Blockchains.ARISEN) {
                     this.linkedAccounts.map(account => {
                         this.fetchAccountData(account);
                     });
                 }
             },
             fetchAccountData(account, snack = false){
-                const plugin = PluginRepository.plugin(Blockchains.EOSIO);
+                const plugin = PluginRepository.plugin(Blockchains.ARISEN);
                 plugin.accountData(account, account.network()).then(data => {
                     if (!data) return;
                     const found = this.accountDatum.find(x => x.name === account.name);
@@ -511,7 +511,7 @@
                 });
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         },
         watch:{

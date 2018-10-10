@@ -9,11 +9,11 @@
                     </figure>
                 </section>
                 <section class="no-third">
-                    <figure class="title">Register Identity with RIDL</figure>
+                    <figure class="title">Register Identity with ArisenID+</figure>
                     <figure class="description">
-                        RIDL is Scatter's Reputation and Identity Layer. It is a <b>premium</b> paid add-on which allows your Identities to become unique across all applications and get reputation.
+                        ArisenID+ is Arisen's Reputation and Identity Layer. It is a <b>premium</b> paid add-on which allows your Identities to become unique across all applications and get reputation.
                         <br><br>
-                        For more information about RIDL check out <u @click="openLinkToRIDL">https://ridl.get-scatter.com</u>.
+                        For more information about ArisenID+ check out <u @click="openLinkToRIDL">https://plus.arkid.io</u>.
                     </figure>
                 </section>
             </section>
@@ -27,7 +27,7 @@
 
             <section class="list" v-else>
                 <section class="item" style="text-align:center;">
-                    <figure>You don't have any Blockchain Accounts on the RIDL network.</figure>
+                    <figure>You don't have any Blockchain Accounts on the ArisenID+ network.</figure>
                 </section>
             </section>
 
@@ -76,7 +76,7 @@
                 return account.formatted();
             },
             openLinkToRIDL(){
-                ElectronHelpers.openLinkInBrowser('https://ridl.get-scatter.com')
+                ElectronHelpers.openLinkInBrowser('https://plus.arkid.io')
             },
             ...mapActions([
                 Actions.RELEASE_POPUP

@@ -29,17 +29,17 @@
             <section class="selected-item">
                 <figure class="name">Need some help?</figure>
                 <section class="description">
-                    <u>Click an item from the sidebar to get a short wizard that will help you set up Scatter.</u>
+                    <u>Click an item from the sidebar to get a short wizard that will help you set up ArisenID.</u>
 
                     <br><br>
                     <h2>Wizards</h2>
-                    The wizards are learning experiences you can take that will fully explain various things about Scatter such as setting up and using Identities,
+                    The wizards are learning experiences you can take that will fully explain various things about ArisenID such as setting up and using Identities,
                     or importing and linking blockchain accounts.
 
                     <br><br>
 
                     <h2>Learn</h2>
-                    This section doesn't only include wizards to set up Scatter but also
+                    This section doesn't only include wizards to set up ArisenID but also
                     has some basic information about blockchains in general. It's aim is to help inform and educate users on how to make sure they
                     are as safe as possible. Knowledge of the blockchain means the ability to protect yourself. Consider your research a form of self-defense.
                 </section>
@@ -70,7 +70,7 @@
         LINK_ACCOUNT:{title:'Link Blockchain Account', description:'Link a blockchain account to a specific network.', type:SubMenuTypes.WIZARDS},
         NETWORK:{title:'Add Blockchain Network', description:'Networks allow you to connect to various blockchains.', type:SubMenuTypes.WIZARDS},
 //        WEB_EXTENSION:{title:'Web Extension', description:'Get the web extension for various browsers.', type:SubMenuTypes.WIZARDS},
-//        APPLICATIONS:{title:'Add Application Link', description:'Application links allow other apps to talk to Scatter.', type:SubMenuTypes.WIZARDS},
+//        APPLICATIONS:{title:'Add Application Link', description:'Application links allow other apps to talk to ArisenID.', type:SubMenuTypes.WIZARDS},
 
         // LEARN
         KEYPAIRS:{title:'What are Keypairs?', description:'Let\'s learn a little about asymmetric encryption!', type:SubMenuTypes.LEARN},
@@ -87,7 +87,7 @@
         }},
         computed: {
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'linkedApps'

@@ -4,10 +4,10 @@ import {Blockchains} from '../../models/Blockchains'
 import Network from '../../models/Network'
 import Account from '../../models/Account'
 import KeyPairService from '../../services/KeyPairService'
-import Eos from 'eosjs'
-let {ecc, Fcbuffer} = Eos.modules;
+import Rsn from 'arisenjs'
+let {ecc, Fcbuffer} = Rsn.modules;
 import ObjectHelpers from '../../util/ObjectHelpers'
-import * as ricardianParser from 'eos-rc-parser';
+import * as ricardianParser from 'arisen-rc-parser';
 import {Popup} from '../../models/popups/Popup'
 import PopupService from '../../services/PopupService'
 import StorageService from '../../services/StorageService'
@@ -20,9 +20,9 @@ let cachedInstances = {};
 const getCachedInstance = network => {
     if(cachedInstances.hasOwnProperty(network.unique())) return cachedInstances[network.unique()];
     else {
-        const eos = Eos({httpEndpoint:`${network.fullhost()}`, chainId:network.chainId});
-        cachedInstances[network.unique()] = eos;
-        return eos;
+        const rsn = Rsn({httpEndpoint:`${network.fullhost()}`, chainId:network.chainId});
+        cachedInstances[network.unique()] = rsn;
+        return rsn;
     }
 }
 
@@ -31,11 +31,11 @@ const getAccountsFromPublicKey = (publicKey, network) => {
     return Promise.race([
         new Promise(resolve => setTimeout(() => resolve([]), 10000)),
         new Promise((resolve, reject) => {
-            const eos = getCachedInstance(network);
-            eos.getKeyAccounts(publicKey).then(res => {
+            const rsn = getCachedInstance(network);
+            rsn.getKeyAccounts(publicKey).then(res => {
                 if(!res || !res.hasOwnProperty('account_names')){ resolve([]); return false; }
 
-                Promise.all(res.account_names.map(name => eos.getAccount(name).catch(e => resolve([])))).then(multires => {
+                Promise.all(res.account_names.map(name => rsn.getAccount(name).catch(e => resolve([])))).then(multires => {
                     let accounts = [];
                     multires.map(account => {
                         account.permissions.map(perm => {
@@ -52,28 +52,28 @@ const getAccountsFromPublicKey = (publicKey, network) => {
 
 const EXPLORERS = [
     {
-        name:'Bloks',
-        account:account => `https://bloks.io/account/${account.name}`,
-        transaction:id => `https://bloks.io/transaction/${id}`,
-        block:id => `https://bloks.io/block/${id}`
+        name:'ArisenExplorer.com',
+        account:account => `https://arisenexplorer.com/account/${account.name}`,
+        transaction:id => `https://arisenexplorer.com/transaction/${id}`,
+        block:id => `https://arisenexplorer.com/block/${id}`
     },
     {
-        name:'EOSFlare',
-        account:account => `https://eosflare.io/account/${account.name}`,
-        transaction:id => `https://eosflare.io/tx/${id}`,
-        block:id => `https://eosflare.io/block/${id}`
+        name:'Arisen.Network',
+        account:account => `https://explore.arisen.network/account/${account.name}`,
+        transaction:id => `https://explpre.arisen.network/tx/${id}`,
+        block:id => `https://explore.arisen.network/block/${id}`
     }
 ];
 
 
 
 
-export default class EOS extends Plugin {
+export default class RSN extends Plugin {
 
-    constructor(){ super(Blockchains.EOSIO, PluginTypes.BLOCKCHAIN_SUPPORT) }
+    constructor(){ super(Blockchains.ARISEN, PluginTypes.BLOCKCHAIN_SUPPORT) }
     explorers(){ return EXPLORERS; }
     accountFormatter(account){ return `${account.name}@${account.authority}` }
-    returnableAccount(account){ return { name:account.name, authority:account.authority, publicKey:account.publicKey, blockchain:Blockchains.EOSIO }}
+    returnableAccount(account){ return { name:account.name, authority:account.authority, publicKey:account.publicKey, blockchain:Blockchains.ARISEN }}
 
     forkSupport(){
         return true;
@@ -82,10 +82,10 @@ export default class EOS extends Plugin {
     async getEndorsedNetwork(){
         return new Promise((resolve, reject) => {
             resolve(new Network(
-                'EOS Mainnet', 'https',
-                'nodes.get-scatter.com',
+                'Arisen Mainnet', 'https',
+                'greatchain.arisennodes.io',
                 443,
-                Blockchains.EOSIO,
+                Blockchains.ARISEN,
                 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
             ));
         });
@@ -97,8 +97,8 @@ export default class EOS extends Plugin {
     }
 
     async getChainId(network){
-        const eos = Eos({httpEndpoint:`${network.protocol}://${network.hostport()}`});
-        return eos.getInfo({}).then(x => x.chain_id || '').catch(() => '');
+        const rsn = Rsn({httpEndpoint:`${network.protocol}://${network.hostport()}`});
+        return rsn.getInfo({}).then(x => x.chain_id || '').catch(() => '');
     }
 
     accountsAreImported(){ return true; }
@@ -116,9 +116,9 @@ export default class EOS extends Plugin {
         })
     }
 
-    privateToPublic(privateKey, prefix = null){ return ecc.PrivateKey(privateKey).toPublic().toString(prefix ? prefix : Blockchains.EOSIO.toUpperCase()); }
+    privateToPublic(privateKey, prefix = null){ return ecc.PrivateKey(privateKey).toPublic().toString(prefix ? prefix : Blockchains.ARISEN.toUpperCase()); }
     validPrivateKey(privateKey){ return ecc.isValidPrivate(privateKey); }
-    validPublicKey(publicKey, prefix = null){ return ecc.PublicKey.fromStringOrThrow(publicKey, prefix ? prefix : Blockchains.EOSIO.toUpperCase()); }
+    validPublicKey(publicKey, prefix = null){ return ecc.PublicKey.fromStringOrThrow(publicKey, prefix ? prefix : Blockchains.ARISEN.toUpperCase()); }
     randomPrivateKey(){ return ecc.randomKey(); }
     conformPrivateKey(privateKey){ return privateKey.trim(); }
     convertsTo(){ return []; }
@@ -135,17 +135,17 @@ export default class EOS extends Plugin {
     }
 
     async accountData(account, network){
-        const eos = getCachedInstance(network);
+        const rsn = getCachedInstance(network);
         return Promise.race([
             new Promise(resolve => setTimeout(() => resolve(null), 2000)),
-            eos.getAccount(account.name)
+            rsn.getAccount(account.name)
         ])
     }
 
     async balanceFor(account, network, tokenAccount, symbol){
-        const eos = getCachedInstance(network);
+        const rsn = getCachedInstance(network);
 
-        const balances = await eos.getTableRows({
+        const balances = await rsn.getTableRows({
             json:true,
             code:tokenAccount,
             scope:account.name,
@@ -158,11 +158,11 @@ export default class EOS extends Plugin {
     }
 
     async historyFor(account, network){
-        const eos = getCachedInstance(network);
-        return await eos.getActions(account.name).then(histories => {
+        const rsn = getCachedInstance(network);
+        return await rsn.getActions(account.name).then(histories => {
             return histories.actions.map(x => {
                 return {
-                    blockchain:Blockchains.EOSIO,
+                    blockchain:Blockchains.ARISEN,
                     account:account.unique(),
                     timestamp:+new Date(x.block_time),
                     trx:x.action_trace.trx_id,
@@ -177,9 +177,9 @@ export default class EOS extends Plugin {
     }
 
     async fetchTokens(tokens){
-        tokens.push({symbol:'EOS', account:'eosio.token', name:'EOS'});
-        const eosTokens = await fetch("https://raw.githubusercontent.com/eoscafe/eos-airdrops/master/tokens.json").then(res => res.json()).catch(() => []);
-        eosTokens.map(token => {
+        tokens.push({symbol:'RSN', account:'arisen.token', name:'RSN'});
+        const rsnTokens = await fetch("https://raw.githubusercontent.com/arisenio/arisen-airdrops/master/tokens.json").then(res => res.json()).catch(() => []);
+        rsnTokens.map(token => {
             if(!tokens.find(x => `${x.symbol}:${x.account}` === `${token.symbol}:${token.account}`)) tokens.push(token);
         });
     }
@@ -189,11 +189,11 @@ export default class EOS extends Plugin {
     async passThroughProvider(payload, account, network, rejector){
         return new Promise(async resolve => {
             payload.messages = await this.requestParser(payload, Network.fromJson(network));
-            payload.identityKey = store.state.scatter.keychain.identities[0].publicKey;
+            payload.identityKey = store.state.arkid.keychain.identities[0].publicKey;
             const request = {
                 payload,
-                origin:'Internal Scatter Transfer',
-                blockchain:'eos',
+                origin:'Internal ArisenID Transfer',
+                blockchain:'rsn',
                 requiredFields:{},
                 type:Actions.REQUEST_SIGNATURE,
                 id:1,
@@ -220,12 +220,12 @@ export default class EOS extends Plugin {
         return new Promise(async (resolve, reject) => {
             const signProvider = payload => this.passThroughProvider(payload, account, network, reject);
 
-            const eos = Eos({httpEndpoint:network.fullhost(), chainId:network.chainId, signProvider});
-            if(staking) resolve(eos.delegatebw(account.name, account.name, net, cpu, 0, { authorization:[account.formatted()] })
+            const rsn = Rsn({httpEndpoint:network.fullhost(), chainId:network.chainId, signProvider});
+            if(staking) resolve(rsn.delegatebw(account.name, account.name, net, cpu, 0, { authorization:[account.formatted()] })
                 .catch(error => ({error:JSON.parse(error).error.details[0].message.replace('assertion failure with message:', '').trim()}))
                 .then(res => res));
 
-            else resolve(eos.undelegatebw(account.name, account.name, net, cpu, { authorization:[account.formatted()] })
+            else resolve(rsn.undelegatebw(account.name, account.name, net, cpu, { authorization:[account.formatted()] })
                 .catch(error => ({error:JSON.parse(error).error.details[0].message.replace('assertion failure with message:', '').trim()}))
                 .then(res => res));
         })
@@ -235,12 +235,12 @@ export default class EOS extends Plugin {
         return new Promise(async (resolve, reject) => {
             const signProvider = payload => this.passThroughProvider(payload, account, network, reject);
 
-            const eos = Eos({httpEndpoint:network.fullhost(), chainId:network.chainId, signProvider});
-            if(buying) resolve(eos.buyrambytes(account.name, account.name, bytes, { authorization:[account.formatted()] })
+            const rsn = Rsn({httpEndpoint:network.fullhost(), chainId:network.chainId, signProvider});
+            if(buying) resolve(rsn.buyrambytes(account.name, account.name, bytes, { authorization:[account.formatted()] })
                 .catch(error => ({error:JSON.parse(error).error.details[0].message.replace('assertion failure with message:', '').trim()}))
                 .then(res => res));
 
-            else resolve(eos.sellram(account.name, bytes, { authorization:[account.formatted()] })
+            else resolve(rsn.sellram(account.name, bytes, { authorization:[account.formatted()] })
                 .catch(error => ({error:JSON.parse(error).error.details[0].message.replace('assertion failure with message:', '').trim()}))
                 .then(res => res));
         })
@@ -252,8 +252,8 @@ export default class EOS extends Plugin {
                 ? payload => this.passThroughProvider(payload, account, network, reject)
                 : payload => this.signer(payload, account.publicKey);
 
-            const eos = Eos({httpEndpoint:network.fullhost(), chainId:network.chainId, signProvider});
-            const contract = await eos.contract(tokenAccount);
+            const rsn = Rsn({httpEndpoint:network.fullhost(), chainId:network.chainId, signProvider});
+            const contract = await rsn.contract(tokenAccount);
             const amountWithSymbol = amount.indexOf(symbol) > -1 ? amount : `${amount} ${symbol}`;
             resolve(await contract.transfer(account.name, to, amountWithSymbol, memo, { authorization:[account.formatted()] })
                 .catch(error => {
@@ -273,7 +273,7 @@ export default class EOS extends Plugin {
     }
 
     async requestParser(signargs, network){
-        const eos = getCachedInstance(network);
+        const rsn = getCachedInstance(network);
 
         const contracts = signargs.transaction.actions.map(action => action.account)
             .reduce((acc, contract) => {
@@ -287,11 +287,11 @@ export default class EOS extends Plugin {
         await Promise.all(contracts.map(async contractAccount => {
             const cachedABI = await StorageService.getCachedABI(contractAccount, network.chainId);
 
-            if(cachedABI === 'object' && cachedABI.timestamp > +new Date((await eos.getAccount(contractAccount)).last_code_update))
-                abis[contractAccount] = eos.fc.abiCache.abi(contractAccount, cachedABI.abi);
+            if(cachedABI === 'object' && cachedABI.timestamp > +new Date((await rsn.getAccount(contractAccount)).last_code_update))
+                abis[contractAccount] = rsn.fc.abiCache.abi(contractAccount, cachedABI.abi);
 
             else {
-                abis[contractAccount] = (await eos.contract(contractAccount)).fc;
+                abis[contractAccount] = (await rsn.contract(contractAccount)).fc;
                 const savableAbi = JSON.parse(JSON.stringify(abis[contractAccount]));
                 delete savableAbi.schema;
                 delete savableAbi.structs;
@@ -348,9 +348,9 @@ export default class EOS extends Plugin {
         };
 
         const contractNames = actions.map(x => x.contract);
-        const eos = Eos(options);
+        const rsn = Rsn(options);
 
-        await eos.transaction(contractNames, contracts => {
+        await rsn.transaction(contractNames, contracts => {
             actions.map(action => {
                 try {
                     contracts[formatContract(action.contract)][action.action](...action.params, actionOptions);

@@ -7,7 +7,7 @@ export default class Keypair {
 
     constructor(){
         this.id = IdGenerator.text(24);
-        this.blockchain = Blockchains.EOSIO;
+        this.blockchain = Blockchains.ARISEN;
         this.name = '';
         this.privateKey = '';
         this.publicKey = '';
@@ -27,7 +27,7 @@ export default class Keypair {
     clone(){ return Keypair.fromJson(JSON.parse(JSON.stringify(this))) }
 
     static blockchain(publicKey){
-        if(publicKey.indexOf('EOS') !== -1) return Blockchains.EOSIO;
+        if(publicKey.indexOf('RSN') !== -1) return Blockchains.ARISEN;
         if(publicKey.indexOf('0x') !== -1 && publicKey.length === 42) return Blockchains.ETH;
         return null;
     }
@@ -37,8 +37,8 @@ export default class Keypair {
      * @returns {boolean}
      */
     isEncrypted(){ switch(this.blockchain) {
-        // EOS private keys are 51 chars long
-        case Blockchains.EOSIO: return this.privateKey.length > 51;
+        // RSN private keys are 51 chars long
+        case Blockchains.ARISEN: return this.privateKey.length > 51;
         // ETH private keys are 64 chars long
         case Blockchains.ETH: return this.privateKey.length > 64;
     }}

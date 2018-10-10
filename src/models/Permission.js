@@ -55,11 +55,11 @@ export default class Permission {
     }
 
     getIdentity(){
-        return store.state.scatter.keychain.findIdentity(this.identity);
+        return store.state.arkid.keychain.findIdentity(this.identity);
     }
 
     getAccounts(){
-        const accounts = store.state.scatter.keychain.accounts;
+        const accounts = store.state.arkid.keychain.accounts;
         return this.accounts.map(unique => accounts.find(x => x.unique() === unique));
     }
 

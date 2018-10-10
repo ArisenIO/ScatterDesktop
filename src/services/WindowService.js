@@ -60,9 +60,9 @@ export default class WindowService {
 
     static openPopOut(onReady = () => {}, onClosed = () => {}, width = 800, height = 600){
 
-        const clone = store.state.scatter.clone();
+        const clone = store.state.arkid.clone();
         clone.nonce++;
-        store.dispatch(Actions.SET_SCATTER, clone);
+        store.dispatch(Actions.SET_ARKID, clone);
 
         let win = new remote.BrowserWindow({
             width,

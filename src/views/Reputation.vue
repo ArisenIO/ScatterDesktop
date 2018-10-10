@@ -75,7 +75,7 @@
         }},
         computed: {
             ...mapState([
-                'scatter',
+                'arkid',
                 'searchTerms'
             ]),
             ...mapGetters([
@@ -98,7 +98,7 @@
         methods: {
 
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         },
         watch:{

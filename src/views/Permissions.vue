@@ -22,7 +22,7 @@
                 <origin-perms v-on:emptied="selectNextOrigin" :key="selectedOrigin" :origin="selectedOrigin" v-if="selectedOrigin"></origin-perms>
             </transition>
             <nothing-here v-if="!selectedOrigin && !origins.length" :description="`
-                As you start using Scatter to interact with applications and websites this will fill up and you will be able to manage your permissions for Identities and Contracts.
+                As you start using ArisenID to interact with applications and websites this will fill up and you will be able to manage your permissions for Identities and Contracts.
             `"></nothing-here>
         </section>
 
@@ -46,7 +46,7 @@
         }},
         computed: {
             ...mapState([
-                'scatter',
+                'arkid',
                 'searchTerms'
             ]),
             ...mapGetters([
@@ -85,16 +85,16 @@
             clearAllPermissions(){
                 PopupService.push(Popup.prompt("Removing All Permissions", "Are you sure?", "trash-o", "Yes", async accepted => {
                     if(!accepted) return;
-                    const scatter = this.scatter.clone();
-                    scatter.keychain.permissions = [];
-                    scatter.keychain.apps = [];
-                    await this[Actions.SET_SCATTER](scatter);
+                    const arkid = this.arkid.clone();
+                    arkid.keychain.permissions = [];
+                    arkid.keychain.apps = [];
+                    await this[Actions.SET_ARKID](arkid);
                     PopupService.push(Popup.snackbar("All Permissions Removed!", "check"));
                     this.selectedOrigin = null;
                 }, "Cancel"))
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         },
         watch:{

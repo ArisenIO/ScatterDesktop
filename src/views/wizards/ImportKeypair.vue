@@ -29,7 +29,7 @@
                     <figure class="name">Name your Keypair</figure>
                     <section class="description">
                         Keypairs can be daunting anyway for most users, but when you have to keep track of random names or characters it becomes even harder.
-                        Scatter allows you to assign names to your keypairs so that you can organize and keep track of them easily. The name has no affect on it's use what-so-ever.
+                        ArisenID allows you to assign names to your keypairs so that you can organize and keep track of them easily. The name has no affect on it's use what-so-ever.
                     </section>
 
                     <cin placeholder="Keypair Name ( organizational )" :text="keypair.name" v-on:changed="changed => bind(changed, 'keypair.name')"></cin>
@@ -40,7 +40,7 @@
                     <figure class="name">Selecting a Blockchain</figure>
                     <section class="description">
                         When importing or generating a keypair you will need to select a blockchain. The reason for this is that different blockchains format their public and private keys
-                        differently. Keys for EOS won't work for Ethereum, and vice versa; even though underneath it all they are the same.
+                        differently. Keys for Arisen won't work for Ethereum, and vice versa; even though underneath it all they are the same.
                     </section>
                     <br>
 
@@ -56,12 +56,12 @@
                         The first thing you learn in Blockchain is never to give away your private key. While this is somewhat true, you inevitably have to use your private key
                         at some point. What is important is that you select a place to trust to put it.
                         <br><br>
-                        Scatter is an open-source project who's code is freely available online for anyone to check; and it has been checked by many.
-                        Because Scatter also allows other applications to pass through it to provide blockchain signatures it's also the prime place to put your
+                        ArisenID is an open-source project who's code is freely available online for anyone to check; and it has been checked by many.
+                        Because ArisenID also allows other applications to pass through it to provide blockchain signatures it's also the prime place to put your
                         private keys as it allows you to interact with <b>non</b>-open-source projects securely, and safely.
                         <br><br>
-                        Enter your private key below and Scatter will automatically produce it's public key ( if it is valid ). If the keypair is for a different blockchain than the one
-                        you have selected Scatter will automatically select the blockchain for you.
+                        Enter your private key below and ArisenID will automatically produce it's public key ( if it is valid ). If the keypair is for a different blockchain than the one
+                        you have selected ArisenID will automatically select the blockchain for you.
                     </section>
 
                     <cin @changed="makePublicKey" placeholder="Private Key" type="password" :text="keypair.privateKey" v-on:changed="changed => bind(changed, 'keypair.privateKey')"></cin>
@@ -71,7 +71,7 @@
                 <section :ref="steps.GENERATE.ref" class="info-box">
                     <figure class="name">Need a new keypair?</figure>
                     <section class="description">
-                        To do anything on a blockchain you will need a Keypair. Scatter allows you to generate keypairs for multiple blockchains locally; meaning on your own machine and
+                        To do anything on a blockchain you will need a Keypair. ArisenID allows you to generate keypairs for multiple blockchains locally; meaning on your own machine and
                         without sending them to the internet.
                     </section>
 
@@ -82,7 +82,7 @@
                     <figure class="name">Copy generated Keypairs before you save!</figure>
                     <section class="description">
                         <b class="red">This is an important step!</b><br><br>
-                        Scatter doesn't allow you to export your private keys in cleartext. Though you can backup your Scatter instance including all of it's keypairs, that backup is exported
+                        ArisenID doesn't allow you to export your private keys in cleartext. Though you can backup your ArisenID instance including all of it's keypairs, that backup is exported
                         encrypted and needs to be decrypted before it can be viewed. Make sure you copy your keypair to your clipboard and paste it somewhere before clicking the save button so
                         that you have a backup.
                     </section>
@@ -94,7 +94,7 @@
                     <figure class="name">Never forget to save.</figure>
                     <section class="description">
                         Anyone who works on a computer knows the deal. Save, or it's lost. CTRL+S ( or CMD+S ) has become second nature as we constantly hit the keyboard shortcut without even noticing anymore.
-                        In most cases in Scatter things save automatically but because keypairs need to be copied before they can be saved in some cases auto-saving for keypairs isn't enabled.
+                        In most cases in ArisenID things save automatically but because keypairs need to be copied before they can be saved in some cases auto-saving for keypairs isn't enabled.
                         <br><br>
                         Remember to always save your keypair.
                     </section>
@@ -144,7 +144,7 @@
         }},
         computed: {
             ...mapState([
-                'scatter'
+                'arkid'
             ]),
             ...mapGetters([
                 'linkedApps',
@@ -155,7 +155,7 @@
         },
         mounted(){
             this.keypair = Keypair.placeholder();
-            this.keypair.blockchain = Blockchains.EOSIO;
+            this.keypair.blockchain = Blockchains.ARISEN;
         },
         methods: {
             copyKeyPair(){
@@ -214,7 +214,7 @@
                 "Go Back"));
             },
             ...mapActions([
-                Actions.SET_SCATTER
+                Actions.SET_ARKID
             ])
         }
     }
