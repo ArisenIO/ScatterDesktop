@@ -13,7 +13,7 @@ import {Popup} from '../popups/Popup';
 const fcbuffer = require('fcbuffer');
 const assert = require('assert');
 const asn1 = require('asn1-ber');
-import Rsn from 'arisenjs';
+import Rsn from 'arisenjsv1';
 
 const throwErr = () => PopupService.push(Popup.prompt(
     'No Hardware Available',

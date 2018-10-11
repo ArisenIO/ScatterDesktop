@@ -90,7 +90,7 @@
     import PopupService from '../../services/PopupService';
     import {Popup} from '../../models/popups/Popup';
 
-    import Rsn from 'arisenjs';
+    import Rsn from 'arisenjsv1';
 
     let keyTimer = null;
 
