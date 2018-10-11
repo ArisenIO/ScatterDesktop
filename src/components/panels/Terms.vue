@@ -23,7 +23,7 @@
                 <section class="split-panels">
 
                     <section class="info-box">
-                        <figure class="header">Last Updated 7-8-2018</figure>
+                        <figure class="header">Last Updated 10-11-2018</figure>
                         <figure class="terms">
                             <h1>1. Acceptance of Terms</h1>
 
