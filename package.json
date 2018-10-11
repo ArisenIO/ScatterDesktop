@@ -1,6 +1,6 @@
 {
-  "name": "arkid",
-  "version": "8.9.0",
+  "name": "arisenid",
+  "version": "1.0.0",
   "description": "Arisen Blockchain Identity For Desktop",
   "private": true,
   "main": "electron.js",
@@ -13,7 +13,7 @@
     "url": "https://github.com/arisenio/ark-desktop/issues"
   },
   "keywords": [
-    "arkid",
+    "arisenid",
     "blockchain",
     "signatures",
     "arisen",

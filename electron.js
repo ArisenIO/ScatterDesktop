@@ -24,7 +24,7 @@ const setupMenu = () => {
   const template = [{
     label: "Application",
     submenu: [
-      { label: "About Application", selector: "orderFrontStandardAboutPanel:" },
+      { label: "About ArisenID", selector: "orderFrontStandardAboutPanel:" },
       { type: "separator" },
       { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
     ]}, {
@@ -85,7 +85,7 @@ app.on('ready', function () {
         }},
         {label: 'Exit', type: 'normal', click:() => app.quit()}
     ]);
-    tray.setToolTip('ArisenID Desktop Companion');
+    tray.setToolTip('ArisenID');
     tray.setContextMenu(contextMenu);
 
     setupMenu();
