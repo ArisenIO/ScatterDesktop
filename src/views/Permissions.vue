@@ -22,7 +22,7 @@
                 <origin-perms v-on:emptied="selectNextOrigin" :key="selectedOrigin" :origin="selectedOrigin" v-if="selectedOrigin"></origin-perms>
             </transition>
             <nothing-here v-if="!selectedOrigin && !origins.length" :description="`
-                As you start using ArisenID to interact with applications and websites this will fill up and you will be able to manage your permissions for Identities and Contracts.
+                As you start using ArisenID to interact with decentralized banking and financial applications and/or websites this will fill up and you will be able to manage your permissions for Bank Accounts and Banking Contracts.
             `"></nothing-here>
         </section>
 

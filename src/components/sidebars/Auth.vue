@@ -4,7 +4,7 @@
 
             <section class="logo-container">
                 <figure class="grand-hotel logo">ArisenID</figure>
-                <figure class="tagline">Discovering infinite possibilities</figure>
+                <figure class="tagline">Take control of your money & your identity. The People's Bank has arrived.</figure>
             </section>
 
             <section class="inputs" v-if="isNewArisenID">

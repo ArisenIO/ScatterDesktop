@@ -23,14 +23,14 @@
 
                 <section class="list">
                     <section class="breadcrumbs">
-                        <figure class="breadcrumb">Account Details</figure>
+                        <figure class="breadcrumb">Bank Account Details</figure>
                     </section>
 
                     <section class="item">
                         <figure class="title">{{payload.publicKey}}</figure>
-                        <figure class="sub-title" v-if="payload.account.hasOwnProperty('name')">Name: {{payload.account.name}}</figure>
-                        <figure class="sub-title" v-if="payload.account.hasOwnProperty('authority')">Authority: {{payload.account.authority}}</figure>
-                        <figure class="sub-title">Network: {{network ? network.name : 'Will create a new network'}}</figure>
+                        <figure class="sub-title" v-if="payload.account.hasOwnProperty('name')">Bank Account Name: {{payload.account.name}}</figure>
+                        <figure class="sub-title" v-if="payload.account.hasOwnProperty('authority')">Bank Account Authority: {{payload.account.authority}}</figure>
+                        <figure class="sub-title">Network: {{network ? network.name : 'Will create a new decentralized banking network'}}</figure>
                     </section>
                 </section>
 

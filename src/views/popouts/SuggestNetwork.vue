@@ -23,16 +23,16 @@
 
                 <section class="list">
                     <section class="breadcrumbs">
-                        <figure class="breadcrumb">Network Details</figure>
+                        <figure class="breadcrumb">Decentralized Banking Network Details</figure>
                     </section>
 
                     <section class="item">
                         <figure class="title">{{payload.origin}}</figure>
-                        <figure class="sub-title">Blockchain: {{payload.network.blockchain}}</figure>
-                        <figure class="sub-title">Host: {{payload.network.host}}</figure>
+                        <figure class="sub-title">Decentralized Bank: {{payload.network.blockchain}}</figure>
+                        <figure class="sub-title">Public Bank Node: {{payload.network.host}}</figure>
                         <figure class="sub-title">Port: {{payload.network.port}}</figure>
                         <figure class="sub-title">Protocol: {{payload.network.protocol}}</figure>
-                        <figure class="sub-title">Chain Id: {{payload.network.chainId}}</figure>
+                        <figure class="sub-title">Decentralized Bank Id: {{payload.network.chainId}}</figure>
                     </section>
                 </section>
 

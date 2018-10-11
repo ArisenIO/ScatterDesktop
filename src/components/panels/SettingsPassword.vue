@@ -7,7 +7,7 @@
             </section>
 
             <section class="selected-item scrollable">
-                <figure class="name">Change your Password</figure>
+                <figure class="name">Change your Bank Account Password</figure>
                 <figure class="description">
                     Every time you change your password you will get a new Mnemonic ( Seed Phrase ).<br>
                     <b>Mnemonics are not used to generate keys on ArisenID, they simply serve as a backup for your password.</b>

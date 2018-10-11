@@ -42,27 +42,27 @@
 
     const REP_MENU = {
         ENTITY_REPUTATION:{
-            name:'Entity Reputation',
-            description:'View the reputation an Entity has right now.',
+            name:'Financial Entity Reputation',
+            description:'View the financial reputation an Entity has right now.',
         },
         REPUTE:{
-            name:'Repute Entity',
-            description:'Repute entities and help define their Reputation.',
+            name:'Repute Financial Entity',
+            description:'Repute entities and help define their Financial Reputation.',
             disabled:true,
         },
         LOAD_TOKENS:{
-            name:'Load Tokens',
-            description:'Load some AIDP tokens into an Identity from a Blockchain Account.',
+            name:'Load Currencies',
+            description:'Load AIDP currency into a Banking Identity from a Decentralized Bank Account.',
             disabled:true,
         },
         SUGGEST_TYPES:{
             name:'Suggest Types',
-            description:'Suggest a new fragment type to be added to AIDP.',
+            description:'Suggest a new fragment type to be added to AIDP's private currency.',
             disabled:true,
         },
         IDENTITY_AUCTION:{
-            name:'Identity Auction',
-            description:'View the bids on your Identities and bid on other Identities.',
+            name:'Banking Identity Auction',
+            description:'View the bids on your Banking Identities and bid on other Banking Identities.',
             disabled:true,
         }
     };

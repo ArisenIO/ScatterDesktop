@@ -42,11 +42,11 @@
 
     const SettingsOptions = {
         LANGUAGE:{ flash:false, locked:false, name:'Language', description:'Set ArisenID\s language.' },
-        EXPLORER:{ flash:false, locked:false, name:'Explorers', description:'Select Preferred Block Explorers.' },
+        EXPLORER:{ flash:false, locked:false, name:'Explorers', description:'Select Preferred Banking Explorers.' },
         NONCE:{ flash:false, locked:true, name:'Nonce', description:'Configure the popup nonce prefix.' },
-        PASSWORD:{ flash:false, locked:true, name:'Password', description:'Change your password or regenerate your Mnemonic.' },
+        PASSWORD:{ flash:false, locked:true, name:'Password', description:'Change your password or regenerate your 12 word backup phrase.' },
         BACKUP:{ flash:false, locked:true, name:'Backup', description:'Create a backup of your ArisenID.' },
-        DESTROY:{ flash:false, locked:true, name:'Destroy', description:'Destroy your instance of ArisenID.' },
+        DESTROY:{ flash:false, locked:true, name:'Destroy', description:'Destroy your ArisenID.' },
     };
 
     export default {

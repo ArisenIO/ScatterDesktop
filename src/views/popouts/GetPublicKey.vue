@@ -8,7 +8,7 @@
                 <section class="head">
                     <figure class="logo">S</figure>
                     <figure class="info">
-                        <figure>App is requesting a Public Key</figure>
+                        <figure>App is requesting your bank account's public key</figure>
                         <figure>{{pluginOrigin}} - {{payload.origin}}</figure>
                     </figure>
                     <figure class="close" @click="returnResult(null)">
@@ -48,7 +48,7 @@
                         <div style="margin:20px 0; background:rgba(0,0,0,0.1); width:100%; height:1px;"></div>
 
                         <section class="breadcrumbs">
-                            <figure class="breadcrumb">Select Existing Public Key</figure>
+                            <figure class="breadcrumb">Select Existing Bank Account's Public Key</figure>
                         </section>
 
                         <section class="item" v-for="kp in validPublicKeys" @click="returnResult({keypair:kp, isNew:false})">
@@ -68,7 +68,7 @@
                     </section>
 
                     <section style="padding:20px;">
-                        <figure class="existing-key">You should copy this account down and paste it somewhere safe.</figure>
+                        <figure class="existing-key">You should copy this bank account down and paste it somewhere safe.</figure>
                         <btn style="float:left;" full="true" large="true" v-on:clicked="copyKeyPair" :red="true" text="Copy"></btn>
                         <btn style="float:right;" full="true" v-on:clicked="returnResult({keypair, isNew:true})" text="Continue"></btn>
                     </section>
@@ -144,7 +144,7 @@
             async checkWarning(){
                 const warn = await AIDPService.shouldWarn(AIDPService.buildEntityName('application', this.payload.origin));
                 if(warn.length)
-                    PopupService.push(Popup.selector('Warning', 'This entity has a negative reputation. Be careful interacting with it.',
+                    PopupService.push(Popup.selector('Warning', 'This financial entity has a negative reputation. Be careful interacting with it.',
                         'exclamation-triangle', warn, x => `${x.type}: ${x.reputation*100}% REP ( ${x.total_reputes} users )`, () => {}, true))
             },
             returnResult(result){

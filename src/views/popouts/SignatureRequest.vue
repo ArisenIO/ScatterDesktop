@@ -67,7 +67,7 @@
                 </section>
 
                 <section class="breaker">
-                    Transaction Data Below
+                    Banking Transaction Data Below
                     <span class="red">( Do not accept this without reading the information below )</span>
                 </section>
 

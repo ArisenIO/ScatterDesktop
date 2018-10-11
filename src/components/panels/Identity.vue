@@ -168,8 +168,8 @@
             },
             async removeIdentity(){
                 PopupService.promptGuard(Popup.prompt(
-                    "Deleting Identity", "This will delete this Identity, as well as all associated permissions.",
-                    "trash-o", "Delete Identity"
+                    "Deleting Bank Account Identity", "This will delete this identity with whatever bank along with the connected bank account it's associated with, as well as all associated permissions.",
+                    "trash-o", "Delete Account ID"
                 ), async accepted => {
                     if(!accepted) return;
 
@@ -179,7 +179,7 @@
                     arkid.keychain.removeIdentity(this.identity);
                     this[Actions.SET_ARKID](arkid);
                     this.$emit('deleted');
-                    PopupService.push(Popup.snackbar("Identity Removed!", "check"));
+                    PopupService.push(Popup.snackbar("Bank Account Identity Removed!", "check"));
                 });
 
             },

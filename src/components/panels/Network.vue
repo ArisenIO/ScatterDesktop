@@ -11,18 +11,18 @@
 
                 <figure class="name" :class="{'bad-name':badNetworkName()}">{{network.name.length ? network.name : 'Network Name Required'}}</figure>
                 <section v-if="isEndorsed" class="description">
-                    <b><u>This is a ArisenID endorsed network which makes it easier to use ArisenID. It can not be modified.</u></b>
+                    <b><u>This is an Arisen Governance-endorsed network which makes it easier to use ArisenID. It can not be modified.</u></b>
                     <br><br>
                 </section>
                 <figure class="description" v-if="isNew">
-                    Networks allow you to define where your blockchain keys and accounts exist. Some websites use testing networks or non-standard networks
-                    to interact with proprietary blockchains. You do not have to fear them as ArisenID still protects you and they will never be able to
-                    get your private keys.
+                    The banking networks option, allow you to define where your bank account(s) and associated key(s) exist. Some websites use banking test networks or non-standard banking networks
+                    to interact with proprietary decentralized banking and financial networks. You do not have to fear them as ArisenID still protects you and they will never be able to
+                    get your bank account information with your current decentralized bank or your banking keys.
                 </figure>
 
                 <section class="split-panels left">
                     <section class="info-box" v-if="isNew && restorableNetworks.length">
-                        <figure class="header">Restore Endorsed Networks</figure>
+                        <figure class="header">Restore Arisen Governance-Endorsed Banking Networks</figure>
 
                         <section>
                             <sel :selected="selectedEndorsedNetwork || restorableNetworks[0]"
@@ -30,7 +30,7 @@
                                  :parser="n => n.name"
                                  v-on:changed="n => selectedEndorsedNetwork = n"></sel>
 
-                            <btn text="Restore Endorsed Network" :secondary="true" v-on:clicked="network = (selectedEndorsedNetwork || restorableNetworks[0])"></btn>
+                            <btn text="Restore Governance-Endorsed Network" :secondary="true" v-on:clicked="network = (selectedEndorsedNetwork || restorableNetworks[0])"></btn>
                         </section>
                     </section>
 
@@ -145,7 +145,7 @@
             },
             deleteNetwork(){
                 PopupService.promptGuard(Popup.prompt(
-                    "Deleting Network", "This will delete this network, as well as all associated accounts and their permissions.",
+                    "Deleting Network", "This will delete this decentralized banking network from ArisenID, as well as all associated bank accounts and their permissions.",
                     "trash-o", "Delete Network"
                 ), async accepted => {
                     if(accepted) {

@@ -26,10 +26,10 @@
             <section ref="scroller" class="selected-item scrollable">
 
                 <section :ref="steps.SELECT_KEYPAIR.ref">
-                    <figure class="name">Select a Keypair</figure>
+                    <figure class="name">Select a Banking Keypair</figure>
                     <section class="description">
-                        Keypairs can be daunting anyway for most users, but when you have to keep track of random names or characters it becomes even harder.
-                        ArisenID allows you to assign names to your keypairs so that you can organize and keep track of them easily. The name has no affect on it's use what-so-ever.
+                        Bankign Keypairs can be daunting anyway for most simple users, but when you have to keep track of random names or characters it becomes even harder.
+                        ArisenID allows you to assign names to your banking keypairs so that you can organize and keep track of them easily. The name has no affect on it's use what-so-ever.
                     </section>
                     <br>
                     <sel :placeholder="'Keypair'"
@@ -40,11 +40,11 @@
                 </section>
 
                 <section v-if="isImportable && selectedNetwork" :ref="steps.FETCH_ACCOUNTS.ref" class="info-box">
-                    <figure class="name">Some blockchains need you to Fetch the available accounts.</figure>
+                    <figure class="name">Some decentralized banking networks need you to fetch the available accounts.</figure>
                     <section class="description">
-                        The {{keypair.blockchain.toUpperCase()}} blockchain requires that keypairs have accounts on top of them.
-                        Accounts can't currently be created from within ArisenID, so you'll have to create them outside of ArisenID but ArisenID will be
-                        able to fetch the accounts for you to select them once you do.
+                        The {{keypair.blockchain.toUpperCase()}} decentralized banking network requires that banking keypairs have accounts on top of them.
+                        Decentralized Bank Accounts can't currently be created from within ArisenID, so you'll have to create them outside of ArisenID but ArisenID will be
+                        able to fetch the bank accounts for you to select them once you do.
                     </section>
                     <br>
                     <sel :selected="selectedNetwork.name"
@@ -52,17 +52,17 @@
                          :parser="network => network.name"
                          v-on:changed="changed => bind(changed, 'selectedNetwork')" :key="1"></sel>
                     <br>
-                    <btn v-on:clicked="fetchAccounts" text="Fetch Accounts"></btn>
+                    <btn v-on:clicked="fetchAccounts" text="Fetch Bank Accounts"></btn>
                     <br>
                     <br>
-                    <b v-if="fetchedAccounts">Accounts have been fetched, check below.</b>
+                    <b v-if="fetchedAccounts">Bank Accounts have been fetched, check below.</b>
                 </section>
 
                 <section v-if="!isImportable && selectedNetwork" :ref="steps.FETCH_ACCOUNTS.ref" class="info-box">
                     <figure class="name">Select the network to link your account to.</figure>
                     <section class="description">
-                        The {{keypair.blockchain.toUpperCase()}} blockchain doesn't require that you have an account on top of your Keypair.
-                        You only need to select the network you wish to link this keypair to.
+                        The {{keypair.blockchain.toUpperCase()}} decentralized banking network doesn't require that you have an account on top of your Banking Keypair.
+                        You only need to select the decentralized banking network you wish to link this banking keypair to.
                     </section>
                     <br>
                     <sel :selected="selectedNetwork.name"
@@ -74,10 +74,10 @@
                 <section :ref="steps.LINK_ACCOUNT.ref" class="info-box">
                     <figure class="name">Link a Blockchain Account to a Network.</figure>
                     <section class="description">
-                        When applications request a blockchain account from you they will specify a network. In order for ArisenID to know which accounts and keypairs belong to
-                        which network you will need to link accounts to specific networks.
+                        When applications request a decentralized bank account from you they will specify a decentralized banking network. In order for ArisenID to know which bank accounts and banking keypairs belong to
+                        which decentralized banking network you will need to link bank accounts to specific banking networks.
                         <br><br>
-                        <b class="red">You don't need to manually save after linking or unlinking accounts. The action of linking or unlinking them is instantly saved.</b>
+                        <b class="red">You don't need to manually save after linking or unlinking bank accounts. The action of linking or unlinking them is instantly saved.</b>
                     </section>
 
                     <section v-if="isImportable && fetchedAccounts">
@@ -89,19 +89,19 @@
                               :parser="item => `${item.name}@${item.authority}`"
                               v-on:clicked="linkAccount"></tags>
                         <figure v-else>
-                            Either there are no accounts connected to this network for this public key, or the network could not be reached.
+                            Either there are no bank accounts connected to this decentralized banking network for this public key, or the banking network could not be reached.
                         </figure>
                     </section>
 
                     <section v-if="!isImportable">
                         <br>
-                        <btn v-on:clicked="linkKeypairToNetwork" text="Link to Network"></btn>
+                        <btn v-on:clicked="linkKeypairToNetwork" text="Link to Decentralized Banking Network"></btn>
                     </section>
 
                     <section v-if="linkedAccounts.length">
                         <br>
                         <hr/>
-                        <figure class="header">Linked Accounts / Keypairs</figure>
+                        <figure class="header">Linked Bank Accounts / Banking Keypairs</figure>
                         <tags :items="linkedAccounts"
                               :parser="item => item.formatted()"
                               v-on:clicked="unlinkAccount"></tags>
@@ -130,9 +130,9 @@
     import {Popup} from '../../models/popups/Popup'
 
     const WizardSteps = {
-        SELECT_KEYPAIR:{ref:'selectkp', title:'Select Keypair', description:'Before you can import accounts you need to select a keypair.'},
-        FETCH_ACCOUNTS:{ref:'fetch', title:'Fetching Accounts', description:'Some blockchains are different than others.'},
-        LINK_ACCOUNT:{ref:'link', title:'Link Accounts to Networks', description:'ArisenID pairs accounts to networks so it knows which to ask your for.'},
+        SELECT_KEYPAIR:{ref:'selectkp', title:'Select Keypair', description:'Before you can import decentralized bank accounts you need to select a banking keypair.'},
+        FETCH_ACCOUNTS:{ref:'fetch', title:'Fetching Accounts', description:'Some decentralized banks are different than others.'},
+        LINK_ACCOUNT:{ref:'link', title:'Link Accounts to Networks', description:'ArisenID pairs bank accounts to decentralized banking networks so it knows which to ask your for.'},
     };
 
     export default {
@@ -177,7 +177,7 @@
                 this.keypair = this.keypairs[0];
                 this.selectedNetwork = this.availableNetworks[0];
             } else {
-                PopupService.push(Popup.prompt("You must have at least one Keypair", "You can't import blockchain accounts without first importing a keypair", "ban", "Okay"))
+                PopupService.push(Popup.prompt("You must have at least one Keypair", "You can't import decentralized bank accounts without first importing a banking keypair", "ban", "Okay"))
                 this.$router.push({name:RouteNames.HELP});
             }
         },

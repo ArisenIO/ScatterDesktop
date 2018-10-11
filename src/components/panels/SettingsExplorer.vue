@@ -7,8 +7,8 @@
             </section>
 
             <section class="selected-item scrollable" v-if="Object.keys(allExplorers).length">
-                <figure class="name">Select a Block Explorer</figure>
-                <figure class="description">Block Explorers allow you to view transactions, accounts, and other details about blockchains.</figure>
+                <figure class="name">Select a bank explorer</figure>
+                <figure class="description">Bank explorers allow you to view transactions, accounts, and other details within a decentralized bank's network. Transparency is awesome isn't it?</figure>
 
                 <figure class="line"></figure>
 

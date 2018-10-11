@@ -7,11 +7,11 @@
             </section>
 
             <section class="selected-item scrollable">
-                <figure class="name">Destroy this ArisenID Instance</figure>
+                <figure class="name">Destroy this bank account</figure>
                 <figure class="description">
-                    <b style="color:red;">MAKE SURE YOU HAVE A BACKUP BEFORE YOU DO THIS!</b><br><br>
-                    Destroying your ArisenID will remove all your data including your Identities and Keypair configurations from your local machine.
-                    It will <u>not</u> delete your blockchain accounts from the actual blockchain.
+                    <b style="color:red;">MAKE SURE YOU HAVE A BACKUP THIS BANK ACCOUNT BEFORE YOU DO THIS!</b><br><br>
+                    Destroying this bank account will remove all your data including all identity, keypair and related authentication data/configurations from your local machine.
+                    It will <u>NOT</u> delete your bank accounts from the actual Arisen network, you just won't have your credentials on your local machine anymore.
                 </figure>
 
                 <section class="info-box">

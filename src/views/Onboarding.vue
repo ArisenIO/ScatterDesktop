@@ -6,10 +6,11 @@
             <figure class="logo">ArisenID</figure>
 
             <section class="onboarder" v-if="step === steps.IDENTITY">
-                <h1>What should your name for applications be?</h1>
+                <h1>Create your decentralized banking identity.</h1>
                 <p>
-                    The name you choose will be your Identity’s name. It will function as
-                    your “username” on applications, and show people who you are.
+                    The name you choose will be your identity for all Arisen-based decentralized banking and financial applications. It will function as
+                    your “username” on all banking and financial applications associated with the people-ran Arisen decentralized banking network. This allows
+                    people to see who you are.
                 </p>
 
                 <section class="input-container">
@@ -31,12 +32,13 @@
 
 
             <section class="onboarder" v-if="step === steps.BACKUP">
-                <h1>Set your Backup Location</h1>
+                <h1>Set your Banking Key Backup Location</h1>
                 <p>
-                    <b class="red">ArisenID doesn't create keypairs using a mnemonic</b>. You should make a habit of keeping an encrypted backup of your ArisenID
-                    just in case you lose access, but we won't force you to.
+                    <b class="red">ArisenID creates what are called keys, which allow you access to a particular identity and associated banking account on an Arisen-based nework.
+                    ArisenID doesn't create keypairs using what we call a mnemonic</b>. A mnemonic is basically a 12 word, human readable phrase. In other words, you should make
+                    a habit of keeping an encrypted backup of your ArisenID just in case you lose access, but we we'll never force you to do anything.
                     <br><br>
-                    <b>You can also have ArisenID create automatic backups for you which is advised.</b>
+                    <b>You can also have ArisenID create automatic backups for your banking identities, to your exact preference:</b>
                 </p>
 
                 <section v-if="!hasBackupLocation">

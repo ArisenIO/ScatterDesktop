@@ -10,7 +10,7 @@
 
                 <cin style="margin-top:-10px;" big="true" placeholder="Enter a Name" :text="keypair.name" v-on:changed="changed => bind(changed, 'keypair.name')"></cin>
                 <section v-if="isNew">
-                    <p style="font-size:13px;">Each Keypair must have a name to uniquely identify it. This is for organizational purposes only and the actual name makes no difference.</p>
+                    <p style="font-size:13px;">Each Bank account's "Keypair" must have a username to uniquely identify it within the decentralized banking system. This is for an autonomous and decentralized banking network like Arisen and its organizational purposes ONLY and the actual name makes no difference. Just create something you can remember!</p>
                     <div style="background:rgba(0,0,0,0.1); width:100%; height:1px; margin:40px 0 30px;"></div>
                 </section>
 
@@ -45,21 +45,21 @@
                                               :parser="item => `${item.name}@${item.authority}`"
                                               v-on:clicked="linkAccount"></tags>
                                         <figure v-else>
-                                            Either there are no accounts connected to this network for this public key, or the network could not be reached.
+                                            Either there are no bank accounts connected to this decentralized banking network that is associated with this public key, or the decentralized financial network could not be reached.
                                         </figure>
                                     </section>
                                 </section>
 
                                 <section v-if="!isImportable">
                                     <br>
-                                    <btn v-on:clicked="linkKeypairToNetwork" text="Link to Network"></btn>
+                                    <btn v-on:clicked="linkKeypairToNetwork" text="Link to Arisen Network or Other Arisen-Based Banking Network"></btn>
                                 </section>
 
                                 <section v-if="linkedAccounts.length">
                                     <br>
                                     <br>
                                     <hr/>
-                                    <figure class="header">Linked Accounts / Keypairs</figure>
+                                    <figure class="header">Linked Bank Accounts / Banking Keys</figure>
 
                                     <section class="list-item" v-for="account in linkedAccounts">
                                         <figure v-if="isEndorsedNetwork(account)" class="name" @click="openAccountInExplorer(account)" style="cursor:pointer;"><u>{{account.formatted()}}</u></figure>
@@ -164,7 +164,7 @@
 
                             <section v-if="usingHardware">
                                 <br><br>
-                                <sel v-tooltip.top-start="'Select a Hardware Wallet'" :selected="keypair.external.type"
+                                <sel v-tooltip.top-start="'Select aPocket or Other Hardware Wallet'" :selected="keypair.external.type"
                                      :options="externalWalletTypes"
                                      v-on:changed="changedExternalWalletType" :key="'hardware_import'"></sel>
                                 <btn v-on:clicked="importKeyFromHardware" text="Import Hardware Key"></btn>

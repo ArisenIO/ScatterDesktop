@@ -8,7 +8,7 @@
                 <section class="head">
                     <figure class="logo">S</figure>
                     <figure class="info">
-                        <figure>Link New App</figure>
+                        <figure>Link New App To Bank Account</figure>
                     </figure>
                     <section class="buttons">
                         <btn text="Link" v-on:clicked="returnResult(true)"></btn>

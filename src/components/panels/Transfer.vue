@@ -6,7 +6,7 @@
             <section class="selected-item scrollable" style="height:100vh">
 
                 <figure class="name" style="padding-bottom:10px; border-bottom:1px solid rgba(0,0,0,0.1); margin-bottom:20px;">
-                    Transfer Tokens
+                    Transfer Private Currency
                 </figure>
 
                 <section>
@@ -21,7 +21,7 @@
                     <section class="split-panels left">
                         <section class="info-box">
 
-                            <swch first="Token Selector" second="Custom Token" :selected="customToken ? 'Token Selector' : 'Custom Token'" v-on:switched="toggleCustomToken"></swch>
+                            <swch first="Currency Selector" second="Custom Currency" :selected="customToken ? 'Currency Selector' : 'Custom Currency'" v-on:switched="toggleCustomToken"></swch>
 
                             <section v-if="!customToken">
                                 <br>
@@ -33,12 +33,12 @@
                             </section>
 
                             <section v-else>
-                                <cin placeholder="Custom Token Symbol" :text="token.symbol" v-on:changed="changed => bind(changed, 'token.symbol')"></cin>
-                                <cin placeholder="Custom Token Account" :text="token.account" v-on:changed="changed => bind(changed, 'token.account')"></cin>
+                                <cin placeholder="Custom Currency Symbol" :text="token.symbol" v-on:changed="changed => bind(changed, 'token.symbol')"></cin>
+                                <cin placeholder="Custom Currency Account" :text="token.account" v-on:changed="changed => bind(changed, 'token.account')"></cin>
                             </section>
 
                             <br>
-                            <cin disabled="true" forced="true" placeholder="Transferable Tokens" :text="`${tokenBalance} ${token.symbol}`"></cin>
+                            <cin disabled="true" forced="true" placeholder="Transferable Currencies" :text="`${tokenBalance} ${token.symbol}`"></cin>
 
                         </section>
                     </section>
@@ -48,12 +48,12 @@
 
                             <section v-if="tokenBalance > 0">
                                 <section style="overflow:hidden;">
-                                    <cin class="half-input" placeholder="Recipient Account" :text="to" v-on:changed="changed => bind(changed, 'to')"></cin>
+                                    <cin class="half-input" placeholder="Recipient Bank Account" :text="to" v-on:changed="changed => bind(changed, 'to')"></cin>
                                     <cin class="half-input" placeholder="Quantity" type="number" :text="amount" v-on:changed="changed => bind(changed, 'amount')"></cin>
                                 </section>
-                                <cin placeholder="Memo" :text="memo" v-on:changed="changed => bind(changed, 'memo')"></cin>
+                                <cin placeholder="Payment Memo" :text="memo" v-on:changed="changed => bind(changed, 'memo')"></cin>
                                 <br>
-                                <btn :disabled="sending" style="float:right;" text="Send Tokens" :red="true" large="true" v-on:clicked="send"></btn>
+                                <btn :disabled="sending" style="float:right;" text="Send Currency" :red="true" large="true" v-on:clicked="send"></btn>
                             </section>
 
                         </section>

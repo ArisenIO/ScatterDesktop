@@ -40,8 +40,8 @@
 
                     <h2>Learn</h2>
                     This section doesn't only include wizards to set up ArisenID but also
-                    has some basic information about blockchains in general. It's aim is to help inform and educate users on how to make sure they
-                    are as safe as possible. Knowledge of the blockchain means the ability to protect yourself. Consider your research a form of self-defense.
+                    has some basic information about decentralized banking networks/applications in general. It's aim is to help inform and educate users on how to make sure they
+                    are as safe as possible. Knowledge of a decentralized banking system means the ability to protect yourself. Consider your research a form of self-defense.
                 </section>
             </section>
 
@@ -65,16 +65,16 @@
     const HelpOptions = {
 
         // WIZARDS
-        IDENTITY:{title:'Setup an Identity', description:'Configure and learn about Identities.', type:SubMenuTypes.WIZARDS},
-        KEYPAIR:{title:'Import Keypair', description:'Learn how to import a keypair.', type:SubMenuTypes.WIZARDS},
-        LINK_ACCOUNT:{title:'Link Blockchain Account', description:'Link a blockchain account to a specific network.', type:SubMenuTypes.WIZARDS},
-        NETWORK:{title:'Add Blockchain Network', description:'Networks allow you to connect to various blockchains.', type:SubMenuTypes.WIZARDS},
+        IDENTITY:{title:'Setup a Bank Identity', description:'Configure and learn about Banking Identities.', type:SubMenuTypes.WIZARDS},
+        KEYPAIR:{title:'Import Banking Keypair', description:'Learn how to import a banking keypair.', type:SubMenuTypes.WIZARDS},
+        LINK_ACCOUNT:{title:'Link Bank Account', description:'Link a decentralized bank account to a specific decentralized banking network.', type:SubMenuTypes.WIZARDS},
+        NETWORK:{title:'Add Decentralized Banking Network', description:'Networks allow you to connect to various blockchains.', type:SubMenuTypes.WIZARDS},
 //        WEB_EXTENSION:{title:'Web Extension', description:'Get the web extension for various browsers.', type:SubMenuTypes.WIZARDS},
 //        APPLICATIONS:{title:'Add Application Link', description:'Application links allow other apps to talk to ArisenID.', type:SubMenuTypes.WIZARDS},
 
         // LEARN
-        KEYPAIRS:{title:'What are Keypairs?', description:'Let\'s learn a little about asymmetric encryption!', type:SubMenuTypes.LEARN},
-        PERMISSIONS:{title:'What are Permissions?', description:'Permissions help you use the blockchain without realizing you\'re on the blockchain.', type:SubMenuTypes.LEARN},
+        KEYPAIRS:{title:'What are Banking Keypairs?', description:'Let\'s learn a little about asymmetric encryption!', type:SubMenuTypes.LEARN},
+        PERMISSIONS:{title:'What are Permissions?', description:'Permissions help you use a decentralized banking network without realizing you\'re on the network.', type:SubMenuTypes.LEARN},
         SAFE:{title:'Am I Safe?', description:'Let\'s talk about how you can keep your computer safe.', type:SubMenuTypes.LEARN},
     };
 

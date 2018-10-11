@@ -9,17 +9,17 @@
 
             <section class="items-list scrollable">
                 <!--<section class="item" :class="{'active':selectedPage === pageTypes.CONFIGURE}" @click="selectedPage = pageTypes.CONFIGURE">-->
-                    <!--<figure class="title">Configure App Link</figure>-->
+                    <!--<figure class="title">Configure Bank/Financial App Link</figure>-->
                     <!--<figure class="description">Configure the way ArisenID Desktop interacts with web and desktop applications.</figure>-->
                 <!--</section>-->
 
                 <section class="item" :class="{'active':selectedPage === pageTypes.WHITELIST}" @click="selectedPage = pageTypes.WHITELIST">
-                    <figure class="title">Whitelisted Applications</figure>
+                    <figure class="title">Whitelisted Banking/Financial Applications</figure>
                     <figure class="description">View and moderate applications that are allowed to interact with your ArisenID.</figure>
                 </section>
 
                 <section class="item" :class="{'active':selectedPage === pageTypes.BLACKLIST}" @click="selectedPage = pageTypes.BLACKLIST">
-                    <figure class="title">Blacklisted Applications</figure>
+                    <figure class="title">Blacklisted Banking/Financial Applications</figure>
                     <figure class="description">View and moderate applications that are NOT allowed to interact with your ArisenID.</figure>
                 </section>
 

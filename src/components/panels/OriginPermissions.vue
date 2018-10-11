@@ -43,7 +43,7 @@
 
 
                     <section class="info-box" v-if="identityPermission || identityRequirementPermissions.length">
-                        <figure class="header">Identity / Account Permission</figure>
+                        <figure class="header">Bank Account Identity / Permission</figure>
 
                         <section class="contract-permissions" v-if="identityPermission">
                             <section class="permission" @click="removePermission(identityPermission)">
@@ -62,7 +62,7 @@
 
                         <section v-if="identityRequirementPermissions.length">
                             <br><br>
-                            <figure class="header">Identity Fields Requirement Permissions</figure>
+                            <figure class="header">Bank Account Identity Fields Requirement Permissions</figure>
 
                             <section class="contract-permissions">
                                 <section class="permission" v-for="perm in identityRequirementPermissions" @click="removePermission(perm)">
@@ -89,19 +89,19 @@
                         <section class="contract-permissions">
                             <section class="permission" v-for="perm in contractPermissions" @click="removePermission(perm)">
                                 <section class="kv">
-                                    <figure class="key">Identity</figure>
+                                    <figure class="key">Bank Account Identity</figure>
                                     <figure class="value">{{perm.getIdentity().name}}</figure>
                                 </section>
                                 <section class="kv">
-                                    <figure class="key">Accounts</figure>
+                                    <figure class="key">Bank Accounts</figure>
                                     <figure class="value">{{perm.getAccounts().map(x => x.formattedWithNetwork()).join(',')}}</figure>
                                 </section>
                                 <section class="kv">
-                                    <figure class="key">Contract</figure>
+                                    <figure class="key">Bank Contract</figure>
                                     <figure class="value">{{perm.contract}}</figure>
                                 </section>
                                 <section class="kv">
-                                    <figure class="key">Action</figure>
+                                    <figure class="key">Bank Action</figure>
                                     <figure class="value">{{perm.action}}</figure>
                                 </section>
                                 <section v-if="perm.mutableActionFields.length">

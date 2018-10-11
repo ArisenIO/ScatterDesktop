@@ -6,7 +6,7 @@
             <section class="selected-item scrollable" style="height:100vh">
 
                 <figure class="name" style="padding-bottom:10px; border-bottom:1px solid rgba(0,0,0,0.1); margin-bottom:20px;">
-                    Receive Tokens
+                    Receive Private Currency
                 </figure>
 
                 <section>
@@ -19,7 +19,7 @@
                 <section class="account-info" v-if="account">
                     <figure class="line"></figure>
 
-                    <b>You can accept tokens at this address</b>
+                    <b>You can accept private currency at this address</b>
                     <figure style="margin-top:-10px">
                         <cin :text="account.sendable()" placeholder="" disabled="true" copy="true"></cin>
                     </figure>
@@ -40,7 +40,7 @@
 
                         <section class="info-box" v-if="!qr" style="margin-top:0;">
 
-                            <swch first="Token Selector" second="Custom Token" :selected="customToken ? 'Token Selector' : 'Custom Token'" v-on:switched="toggleCustomToken"></swch>
+                            <swch first="Currency Selector" second="Custom Currency" :selected="customToken ? 'Currency Selector' : 'Custom Currency'" v-on:switched="toggleCustomToken"></swch>
 
                             <section v-if="!customToken">
                                 <br>
@@ -52,13 +52,13 @@
                             </section>
 
                             <section v-else>
-                                <cin placeholder="Custom Token Symbol" :text="token.symbol" v-on:changed="changed => bind(changed, 'token.symbol')"></cin>
-                                <cin placeholder="Custom Token Account" :text="token.account" v-on:changed="changed => bind(changed, 'token.account')"></cin>
+                                <cin placeholder="Custom Currency Symbol" :text="token.symbol" v-on:changed="changed => bind(changed, 'token.symbol')"></cin>
+                                <cin placeholder="Custom Currency Account" :text="token.account" v-on:changed="changed => bind(changed, 'token.account')"></cin>
                             </section>
 
                             <section style="overflow:hidden;">
-                                <cin class="half-input" placeholder="Quantity ( Optional )" type="number" :text="amount" v-on:changed="changed => bind(changed, 'amount')"></cin>
-                                <cin class="half-input" placeholder="Memo ( Optional )" :text="memo" v-on:changed="changed => bind(changed, 'memo')"></cin>
+                                <cin class="half-input" placeholder="Currency Quantity ( Optional )" type="number" :text="amount" v-on:changed="changed => bind(changed, 'amount')"></cin>
+                                <cin class="half-input" placeholder="Transfer Memo ( Optional )" :text="memo" v-on:changed="changed => bind(changed, 'memo')"></cin>
                             </section>
                             <br>
                             <btn style="float:right;" text="Create QR Code" large="true" v-on:clicked="generateQR"></btn>

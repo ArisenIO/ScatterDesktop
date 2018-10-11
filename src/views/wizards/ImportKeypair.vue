@@ -26,21 +26,21 @@
             <section ref="scroller" class="selected-item scrollable" v-if="keypair">
 
                 <section :ref="steps.NAME.ref">
-                    <figure class="name">Name your Keypair</figure>
+                    <figure class="name">Name your Banking Keypair</figure>
                     <section class="description">
-                        Keypairs can be daunting anyway for most users, but when you have to keep track of random names or characters it becomes even harder.
-                        ArisenID allows you to assign names to your keypairs so that you can organize and keep track of them easily. The name has no affect on it's use what-so-ever.
+                        Banking Keypairs can be daunting anyway for most simple banking users, but when you have to keep track of random names or characters it becomes even harder.
+                        ArisenID allows you to assign names to your banking keypairs so that you can organize and keep track of them easily. The name has no affect on it's use what-so-ever.
                     </section>
 
-                    <cin placeholder="Keypair Name ( organizational )" :text="keypair.name" v-on:changed="changed => bind(changed, 'keypair.name')"></cin>
+                    <cin placeholder="Banking Keypair Name ( organizational )" :text="keypair.name" v-on:changed="changed => bind(changed, 'keypair.name')"></cin>
                     <br><br>
                 </section>
 
                 <section :ref="steps.BLOCKCHAIN.ref" class="info-box">
-                    <figure class="name">Selecting a Blockchain</figure>
+                    <figure class="name">Selecting a Decentralized Banking Network</figure>
                     <section class="description">
-                        When importing or generating a keypair you will need to select a blockchain. The reason for this is that different blockchains format their public and private keys
-                        differently. Keys for Arisen won't work for Ethereum, and vice versa; even though underneath it all they are the same.
+                        When importing or generating a banking keypair you will need to select a decentralized banking network. The reason for this is that different blockchains format their public and private keys
+                        differently. Keys for Arisen won't work for Ethereum's network, and vice versa; even though underneath it all they are the same.
                     </section>
                     <br>
 
@@ -51,16 +51,16 @@
                 </section>
 
                 <section :ref="steps.PRIVATE_KEY.ref" class="info-box">
-                    <figure class="name">Importing an existing Keypair</figure>
+                    <figure class="name">Importing an existing Banking Keypair</figure>
                     <section class="description">
-                        The first thing you learn in Blockchain is never to give away your private key. While this is somewhat true, you inevitably have to use your private key
+                        The first thing you learn in working with decentralized banking networks is never to give away your private key. While this is somewhat true, you inevitably have to use your private key
                         at some point. What is important is that you select a place to trust to put it.
                         <br><br>
                         ArisenID is an open-source project who's code is freely available online for anyone to check; and it has been checked by many.
-                        Because ArisenID also allows other applications to pass through it to provide blockchain signatures it's also the prime place to put your
+                        Because ArisenID also allows other applications to pass through it to provide decentralized bank signatures it's also the prime place to put your
                         private keys as it allows you to interact with <b>non</b>-open-source projects securely, and safely.
                         <br><br>
-                        Enter your private key below and ArisenID will automatically produce it's public key ( if it is valid ). If the keypair is for a different blockchain than the one
+                        Enter your private key below and ArisenID will automatically produce it's public key ( if it is valid ). If the banking keypair is for a different decentralized banking network than the one
                         you have selected ArisenID will automatically select the blockchain for you.
                     </section>
 
@@ -71,7 +71,7 @@
                 <section :ref="steps.GENERATE.ref" class="info-box">
                     <figure class="name">Need a new keypair?</figure>
                     <section class="description">
-                        To do anything on a blockchain you will need a Keypair. ArisenID allows you to generate keypairs for multiple blockchains locally; meaning on your own machine and
+                        To do anything on a decentralized banking network, you will need a Banking Keypair. ArisenID allows you to generate banking keypairs for multiple decentralized banking networks locally; meaning on your own machine and
                         without sending them to the internet.
                     </section>
 
@@ -79,11 +79,11 @@
                 </section>
 
                 <section :ref="steps.COPY.ref" class="info-box">
-                    <figure class="name">Copy generated Keypairs before you save!</figure>
+                    <figure class="name">Copy generated Banking Keypairs before you save!</figure>
                     <section class="description">
                         <b class="red">This is an important step!</b><br><br>
-                        ArisenID doesn't allow you to export your private keys in cleartext. Though you can backup your ArisenID instance including all of it's keypairs, that backup is exported
-                        encrypted and needs to be decrypted before it can be viewed. Make sure you copy your keypair to your clipboard and paste it somewhere before clicking the save button so
+                        ArisenID doesn't allow you to export your private keys in cleartext. Though you can backup your ArisenID instance including all of it's banking keypairs, that backup is exported
+                        encrypted and needs to be decrypted before it can be viewed. Make sure you copy your banking keypair to your clipboard and paste it somewhere before clicking the save button so
                         that you have a backup.
                     </section>
 
@@ -94,12 +94,12 @@
                     <figure class="name">Never forget to save.</figure>
                     <section class="description">
                         Anyone who works on a computer knows the deal. Save, or it's lost. CTRL+S ( or CMD+S ) has become second nature as we constantly hit the keyboard shortcut without even noticing anymore.
-                        In most cases in ArisenID things save automatically but because keypairs need to be copied before they can be saved in some cases auto-saving for keypairs isn't enabled.
+                        In most cases in ArisenID things save automatically but because banking keypairs need to be copied before they can be saved in some cases auto-saving for banking keypairs isn't enabled.
                         <br><br>
-                        Remember to always save your keypair.
+                        Remember to always save your banking keypair.
                     </section>
 
-                    <btn v-on:clicked="saveKeyPair" text="Save Keypair"></btn>
+                    <btn v-on:clicked="saveKeyPair" text="Save Banking Keypair"></btn>
                 </section>
             </section>
 

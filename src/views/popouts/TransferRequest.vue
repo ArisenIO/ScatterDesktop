@@ -8,7 +8,7 @@
                 <section class="head">
                     <figure class="logo">S</figure>
                     <figure class="info">
-                        <figure>Transfer Request</figure>
+                        <figure>Bank Transfer Request</figure>
                         <figure>{{pluginOrigin}} - {{payload.origin}}</figure>
                     </figure>
                     <figure class="close" @click="returnResult(null)">
@@ -41,12 +41,12 @@
             <section class="lists">
                 <section class="list">
                     <section class="breadcrumbs" v-if="!selectedAccount">
-                        <figure class="breadcrumb">Select an Account</figure>
+                        <figure class="breadcrumb">Select a Bank Account</figure>
                     </section>
 
                     <section class="breadcrumbs" v-else>
                         <figure class="breadcrumb button" @click="selectedAccount = null">Back to Accounts</figure>
-                        <figure class="breadcrumb">Confirm Transfer</figure>
+                        <figure class="breadcrumb">Confirm Bank Transfer</figure>
                     </section>
 
                     <section v-if="!selectedAccount" class="item" :class="{'disabled':balance(account) < amount}"

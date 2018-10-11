@@ -48,8 +48,8 @@
                             <figure class="title">Do you want to log into <b>{{payload.origin}}</b> with <b>{{validIdentities[0].name}}</b></figure>
                             <section class="item" @click="selectIdentity(validIdentities[0])" style="margin:20px 0 0 0;">
                                 <figure class="title" :style="{'text-align':validAccounts.length === 1 ? 'center' : 'left'}">Login</figure>
-                                <figure class="sub-title" v-if="validAccounts.length === 1">Only one account available, it will automatically be used.</figure>
-                                <figure class="sub-title" style="text-align:left;" v-if="validAccounts.length > 1">Continue to account selection.</figure>
+                                <figure class="sub-title" v-if="validAccounts.length === 1">Only one bank account available, it will automatically be used.</figure>
+                                <figure class="sub-title" style="text-align:left;" v-if="validAccounts.length > 1">Continue to bank account selection.</figure>
                                 <figure class="chevron" v-if="validAccounts.length > 1">
                                     <i class="fa fa-chevron-right"></i>
                                 </figure>
@@ -59,7 +59,7 @@
 
                     <section v-else>
                         <section class="breadcrumbs">
-                            <figure class="breadcrumb">Select an Identity</figure>
+                            <figure class="breadcrumb">Select a Banking Identity</figure>
                         </section>
 
                         <section class="item" v-for="identity in validIdentities" @click="selectIdentity(identity)">
@@ -77,7 +77,7 @@
                 <section class="list" v-if="selectedIdentity && accountRequirements.length">
                     <section class="breadcrumbs">
                         <figure class="breadcrumb button" @click="backToIdentities">Back</figure>
-                        <figure class="breadcrumb">Select an Account</figure>
+                        <figure class="breadcrumb">Select a Bank Account</figure>
                     </section>
 
                     <section class="item" v-for="account in validAccounts" @click="selectAccount(account)">
@@ -162,7 +162,7 @@
             async checkWarning(){
                 const warn = await AIDPService.shouldWarn(AIDPService.buildEntityName('application', this.payload.origin));
                 if(warn.length)
-                    PopupService.push(Popup.selector('Warning', 'This entity has a negative reputation. Be careful interacting with it.',
+                    PopupService.push(Popup.selector('Warning', 'This entity has a negative financial reputation. Be careful interacting with it.',
                         'exclamation-triangle', warn, x => `${x.type}: ${x.reputation*100}% REP ( ${x.total_reputes} users )`, () => {}, true))
             },
             returnResult(result){

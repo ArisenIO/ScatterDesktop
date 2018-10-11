@@ -26,13 +26,13 @@
             <section ref="scroller" class="selected-item scrollable" v-if="identity">
 
                 <section :ref="steps.WHAT.ref">
-                    <figure class="name">What is a ArisenID Identity?</figure>
+                    <figure class="name">What is a ArisenID Banking Identity?</figure>
                     <section class="description">
-                        ArisenID makes applications <u>Request an Identity</u> before they can retrieve any information from you. This sets up a sort of permission for them
-                        to interact with you and blacklists all non-permissioned applications from interacting with your ArisenID.
+                        ArisenID forces decentralized banking/financial applications <u>Request a Banking Identity</u> before they can retrieve any information from you. This sets up a sort of permission for them
+                        to interact with you and blacklists all non-permissioned banking/financial applications from interacting with your ArisenID.
                         <br><br>
-                        In comparison, MetaMask ( for instance ) gives away your public Ethereum key to every website you visit; whether they are on the blockchain on or not, and allows them to
-                        aggregate data about your funds and activity on the blockchain.
+                        In comparison, MetaMask ( for instance ) gives away your public Ethereum key to every website you visit; whether they are on the Ethereum network or not, and allows them to
+                        aggregate data about your funds and activity on the network.
                     </section>
                     <br><br>
                 </section>
@@ -41,17 +41,17 @@
                     <figure class="name">Identity Name</figure>
                     <section class="description">
                         <b class="red"><u>Mandatory!</u></b><br><br>
-                        Identity names are your <b>Username</b> for application. Think of it like the player name for a game, or your name on a forum.
+                        Banking Identity names are your <b>Username</b> for banking/financial application. Think of it like the player name for a game, or your name on a forum.
                     </section>
 
-                    <cin v-on:blur="checkName" placeholder="Identity Name" :text="identity.name" v-on:changed="changed => bind(changed, 'identity.name')"></cin>
+                    <cin v-on:blur="checkName" placeholder="Banking Identity Name" :text="identity.name" v-on:changed="changed => bind(changed, 'identity.name')"></cin>
                 </section>
 
                 <section :ref="steps.PERSONAL.ref" class="info-box">
                     <figure class="name">Personal Information</figure>
                     <section class="description">
                         <b class="red">Personal information is <u>NOT</u> mandatory!</b><br><br>
-                        Some applications need personal information from you to complete certain transactions, such as a shopping website that needs your full name to send you
+                        Some applications that may connect to ArisenID for payment information, may need personal information from you to complete certain transactions, such as a shopping website that needs your full name to send you
                         physical goods. They can get this information directly from ArisenID without you having to type it in to forms on their website.
                     </section>
 
@@ -65,7 +65,7 @@
                     <figure class="name">Location Information</figure>
                     <section class="description">
                         <b class="red">Location information is <u>NOT</u> mandatory!</b><br><br>
-                        Some applications need personal information from you to complete certain transactions, such as a shopping website that needs your full name to send you
+                        Some applications that may connect to ArisenID for payment information, may need personal information from you to complete certain transactions, such as a shopping website that needs your full name to send you
                         physical goods. They can get this information directly from ArisenID without you having to type it in to forms on their website.
                     </section>
 
@@ -86,12 +86,12 @@
                 </section>
 
                 <section :ref="steps.SAVE.ref" class="info-box">
-                    <figure class="name">Saving your Identity</figure>
+                    <figure class="name">Saving your Banking Identity</figure>
                     <section class="description">
-                        Identities usually <b>auto-save</b> but for the purposes of this tutorial only you will have to manually save it.
+                        Banking Identities usually <b>auto-save</b> but for the purposes of this tutorial only you will have to manually save it.
                     </section>
 
-                    <btn :disabled="!isValidName" v-on:clicked="save" text="Save New Identity"></btn>
+                    <btn :disabled="!isValidName" v-on:clicked="save" text="Save New Banking Identity"></btn>
                 </section>
             </section>
 
