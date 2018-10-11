@@ -50,7 +50,7 @@
     import { mapActions, mapGetters, mapState } from 'vuex'
     import * as Actions from '../../store/constants';
     import {RouteNames} from '../../vue/Routing'
-    import ArisenID from '../../models/ArisenID'
+    import ArisenID from '../../models/ArkId
 
     import WindowService from '../../services/WindowService'
     import AIDPService from '../../services/AIDPService'
