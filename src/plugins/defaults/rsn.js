@@ -4,7 +4,7 @@ import {Blockchains} from '../../models/Blockchains'
 import Network from '../../models/Network'
 import Account from '../../models/Account'
 import KeyPairService from '../../services/KeyPairService'
-import Rsn from 'arisenjs'
+import Rsn from 'arisenjsv1'
 let {ecc, Fcbuffer} = Rsn.modules;
 import ObjectHelpers from '../../util/ObjectHelpers'
 import * as ricardianParser from 'arisen-rc-parser';
