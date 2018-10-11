@@ -29,7 +29,7 @@
                                 <cin v-if="!selectingIdentity" big="true" placeholder="Enter an Identity Name" :text="identityName" v-on:changed="x => identityName = x"></cin>
 
                                 <section v-if="selectingIdentity && ridlIdentities.length">
-                                    <sel :selected="selectedIdentity" v-tooltip="'To RIDL Identity'"
+                                    <sel :selected="selectedIdentity" v-tooltip="'To AIDP Identity'"
                                          :options="ridlIdentities"
                                          :parser="n => n.name"
                                          v-on:changed="switchedSelectedIdentity"></sel>
@@ -40,9 +40,9 @@
                         <div style="clear:both"></div>
 
                         <section class="slider-container expand" style="position:relative;">
-                            <label class="available-ridl">{{parseFloat(parseFloat(availableRIDL).toFixed(4) - parseFloat(quantity).toFixed(4)).toFixed(4)}} RIDL</label>
-                            <cin placeholder="RIDL To Send" :text="quantity" type="number" v-on:changed="x => quantity = parseFloat(x).toFixed(4)"></cin>
-                            <slider :min="0" :max="availableRIDL" step="0.0001"
+                            <label class="available-ridl">{{parseFloat(parseFloat(availableAIDP).toFixed(4) - parseFloat(quantity).toFixed(4)).toFixed(4)}} AIDP</label>
+                            <cin placeholder="AIDP To Send" :text="quantity" type="number" v-on:changed="x => quantity = parseFloat(x).toFixed(4)"></cin>
+                            <slider :min="0" :max="availableAIDP" step="0.0001"
                                     :value="quantity" v-on:changed="x => quantity = parseFloat(x).toFixed(4)"></slider>
                         </section>
                         <br><br>
@@ -68,7 +68,7 @@
     import {Blockchains} from '../../../models/Blockchains'
     import {Popup} from '../../../models/popups/Popup'
     import PopupService from '../../../services/PopupService';
-    import RIDLService from '../../../services/RIDLService';
+    import AIDPService from '../../../services/AIDPService';
     import PluginRepository from '../../../plugins/PluginRepository';
 
 
@@ -80,7 +80,7 @@
             selectingIdentity:true,
             ridlIdentity:null,
             quantity:0,
-            availableRIDL:0,
+            availableAIDP:0,
         }},
         computed:{
             ...mapState([
@@ -95,14 +95,14 @@
                 const used = this.fragments.map(x => x.type);
                 return this.fragTypes.filter(x => !used.includes(x));
             },
-            remainingRIDL(){
-                return parseFloat(this.availableRIDL - this.quantity).toFixed(4);
+            remainingAIDP(){
+                return parseFloat(this.availableAIDP - this.quantity).toFixed(4);
             },
             ridlIdentities(){
                 return this.identities.filter(x => x.ridl > -1);
             },
             ridlNetwork(){
-                return RIDLService.getNetwork();
+                return AIDPService.getNetwork();
             },
             ridlAccounts(){
                 return this.accounts.filter(x => x.networkUnique === this.ridlNetwork.unique());
@@ -118,8 +118,8 @@
         },
         methods: {
             async getBalance(){
-                const balance = await PluginRepository.plugin(Blockchains.ARISEN).balanceFor(this.selectedAccount, this.ridlNetwork, 'ridlridlcoin', 'RIDL');
-                this.availableRIDL = balance ? balance : 0;
+                const balance = await PluginRepository.plugin(Blockchains.ARISEN).balanceFor(this.selectedAccount, this.ridlNetwork, 'ridlridlcoin', 'AIDP');
+                this.availableAIDP = balance ? balance : 0;
             },
             toggleSelectingIdentity(){
                 this.selectingIdentity = !this.selectingIdentity;
@@ -133,11 +133,11 @@
             async loadTokens(){
                 const quantity = parseFloat(this.quantity).toFixed(4);
 
-                if(quantity <= 0) return PopupService.push(Popup.prompt(`Can't send 0 RIDL`, 'You can not send 0 RIDL to Identities.', 'exclamation-triangle', 'Okay'));
-                if(!RIDLService.validName(this.identityName)) return PopupService.push(Popup.prompt(`Bad Identity Name`, 'The Identity name you are trying to load tokens into is invalid.', 'exclamation-triangle', 'Okay'));
+                if(quantity <= 0) return PopupService.push(Popup.prompt(`Can't send 0 AIDP`, 'You can not send 0 AIDP to Identities.', 'exclamation-triangle', 'Okay'));
+                if(!AIDPService.validName(this.identityName)) return PopupService.push(Popup.prompt(`Bad Identity Name`, 'The Identity name you are trying to load tokens into is invalid.', 'exclamation-triangle', 'Okay'));
 
-                const sent = await RIDLService.loadTokens(this.selectedAccount, this.identityName, quantity);
-                if(!sent) return PopupService.push(Popup.prompt('Error!', 'Could not sent RIDL to the given Identity', 'exclamation-triangle', 'Okay'));
+                const sent = await AIDPService.loadTokens(this.selectedAccount, this.identityName, quantity);
+                if(!sent) return PopupService.push(Popup.prompt('Error!', 'Could not sent AIDP to the given Identity', 'exclamation-triangle', 'Okay'));
                 else PopupService.push(Popup.transactionSuccess(Blockchains.ARISEN, sent));
 
                 this.getBalance();

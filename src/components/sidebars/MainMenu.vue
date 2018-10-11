@@ -53,7 +53,7 @@
     import ArisenID from '../../models/ArisenID'
 
     import WindowService from '../../services/WindowService'
-    import RIDLService from '../../services/RIDLService'
+    import AIDPService from '../../services/AIDPService'
 
     const { remote } = window.require('electron');
 
@@ -114,7 +114,7 @@
                     loaded = true;
 
 
-                    RIDLService.canConnect().then(bool => {
+                    AIDPService.canConnect().then(bool => {
                         console.log('bool', bool);
                         if(bool) {
                             this.links.splice(3, 0, {

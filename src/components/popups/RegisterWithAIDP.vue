@@ -13,7 +13,7 @@
                     <figure class="description">
                         ArisenID+ is Arisen's Reputation and Identity Layer. It is a <b>premium</b> paid add-on which allows your Identities to become unique across all applications and get reputation.
                         <br><br>
-                        For more information about ArisenID+ check out <u @click="openLinkToRIDL">https://plus.arkid.io</u>.
+                        For more information about ArisenID+ check out <u @click="openLinkToAIDP">https://plus.arkid.io</u>.
                     </figure>
                 </section>
             </section>
@@ -42,7 +42,7 @@
     import * as Actions from '../../store/constants';
     import {PopupDisplayTypes} from '../../models/popups/Popup'
     import ElectronHelpers from '../../util/ElectronHelpers'
-    import RIDLService from '../../services/RIDLService'
+    import AIDPService from '../../services/AIDPService'
 
     export default {
         data(){ return {
@@ -58,7 +58,7 @@
                 'networks',
             ]),
             ridlNetwork(){
-                return RIDLService.getNetwork();
+                return AIDPService.getNetwork();
             },
             ridlAccounts(){
                 return this.accounts.filter(x => x.networkUnique === this.ridlNetwork.unique())
@@ -75,7 +75,7 @@
             parse(account){
                 return account.formatted();
             },
-            openLinkToRIDL(){
+            openLinkToAIDP(){
                 ElectronHelpers.openLinkInBrowser('https://plus.arkid.io')
             },
             ...mapActions([

@@ -75,7 +75,7 @@
     import {Blockchains} from '../../../models/Blockchains'
     import {Popup} from '../../../models/popups/Popup'
     import PopupService from '../../../services/PopupService';
-    import RIDLService from '../../../services/RIDLService';
+    import AIDPService from '../../../services/AIDPService';
 
     const ENTITY_TYPES = [
         "application", "contract", "identity"
@@ -111,14 +111,14 @@
                     case 'application': return 'Enter an Application Name ( example: Overwatch or arkid.io )'
                 }
             },
-            totalRIDLUsed(){
+            totalAIDPUsed(){
                 return parseFloat(this.fragments.reduce((acc,x) => {
                     acc += parseFloat(Math.abs(x.quantity));
                     return acc;
                 }, 0)).toFixed(4)
             },
-            remainingRIDL(){
-                return parseFloat(this.availableRIDL - this.totalRIDLUsed).toFixed(4);
+            remainingAIDP(){
+                return parseFloat(this.availableAIDP - this.totalAIDPUsed).toFixed(4);
             },
             ridlIdentities(){
                 return this.identities.filter(x => x.ridl > -1);
@@ -135,12 +135,12 @@
                 this.appUsername = '';
             },
             async getEntityReputation(){
-                const entity = RIDLService.buildEntityName(this.entityType, this.entityName, this.appUsername);
-                const reputable = await RIDLService.getReputableEntity(entity);
+                const entity = AIDPService.buildEntityName(this.entityType, this.entityName, this.appUsername);
+                const reputable = await AIDPService.getReputableEntity(entity);
 
                 if(reputable) {
                     this.reputable = reputable;
-                    this.reputation = await RIDLService.getReputation(entity);
+                    this.reputation = await AIDPService.getReputation(entity);
                 } else {
                     this.reputable = null;
                     this.reputation = null;

@@ -159,7 +159,7 @@
     import {Popup} from '../../models/popups/Popup'
     import {Blockchains} from '../../models/Blockchains'
     import PermissionService from '../../services/PermissionService'
-    import RIDLService from '../../services/RIDLService'
+    import AIDPService from '../../services/AIDPService'
     import WindowService from '../../services/WindowService'
     import PluginRepository from '../../plugins/PluginRepository'
     import Hasher from '../../util/Hasher'
@@ -295,7 +295,7 @@
                     return acc;
                 }, []);
 
-                const warnings = (await Promise.all(contracts.map(contract => RIDLService.shouldWarn(RIDLService.buildEntityName('contract', contract)).then(x => {
+                const warnings = (await Promise.all(contracts.map(contract => AIDPService.shouldWarn(AIDPService.buildEntityName('contract', contract)).then(x => {
                     if(x && x.length) return x.map(y => {
                         y.contract = contract;
                         return y;
@@ -309,7 +309,7 @@
 
                 if(warnings.length)
                     PopupService.push(Popup.selector('Warning',
-                        `The contract you are interacting with has been given a bad reputation by the users of RIDL.
+                        `The contract you are interacting with has been given a bad reputation by the users of AIDP.
                         If you decide to interact with this contract make sure you read the parameters and fully understand your liability.`,
                         'exclamation-triangle', warnings, x => `${x.contract} -> ${x.type}: ${x.reputation*100}% REP ( ${x.total_reputes} users )`, () => {}, true))
             },

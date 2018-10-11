@@ -86,7 +86,7 @@
     import Network from '../../models/Network'
     import {IdentityRequiredFields} from '../../models/Identity'
 
-    import RIDLService from '../../services/RIDLService';
+    import AIDPService from '../../services/AIDPService';
     import WindowService from '../../services/WindowService';
     import PopupService from '../../services/PopupService';
     import {Popup} from '../../models/popups/Popup';
@@ -135,7 +135,7 @@
         },
         methods: {
             async checkWarning(){
-//                const warn = await RIDLService.shouldWarn(RIDLService.buildEntityName('application', this.payload.origin));
+//                const warn = await AIDPService.shouldWarn(AIDPService.buildEntityName('application', this.payload.origin));
 //                if(warn.length)
 //                    PopupService.push(Popup.selector('Warning', 'This entity has a negative reputation. Be careful interacting with it.',
 //                        'exclamation-triangle', warn, x => `${x.type}: ${x.reputation*100}% REP ( ${x.total_reputes} users )`, () => {}, true))

@@ -99,14 +99,14 @@
             isNew(){
                 return !this.networks.map(x => x.unique()).includes(this.network.unique());
             },
-            isRIDLNetwork(){
-                return this.network.name === 'RIDL'
+            isAIDPNetwork(){
+                return this.network.name === 'AIDP'
             }
         },
         mounted(){
             this.network = this.net.clone();
 
-            if(this.network.name === 'RIDL') this.isEndorsed = true;
+            if(this.network.name === 'AIDP') this.isEndorsed = true;
             else PluginRepository.plugin(this.network.blockchain).isEndorsedNetwork(this.network).then(x => this.isEndorsed = x);
 
             BlockchainsArray.map(async blockchain => {

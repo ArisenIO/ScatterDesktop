@@ -44,7 +44,7 @@ import Snackbar from './components/popups/Snackbar.vue'
 import TextPrompt from './components/popups/TextPrompt.vue'
 import DelegateResources from './components/popups/DelegateResources.vue'
 import BuySellRAM from './components/popups/BuySellRAM.vue'
-import RegisterWithRIDL from './components/popups/RegisterWithRIDL.vue'
+import RegisterWithAIDP from './components/popups/RegisterWithAIDP.vue'
 import PopInHead from './components/popups/fragments/PopInHead.vue'
 
 // POP OUTS
@@ -123,7 +123,7 @@ class Main {
             {tag:'tx-success', vue:TransactionSuccess},
             {tag:'buy-sell-ram', vue:BuySellRAM},
             {tag:'delegate-resources', vue:DelegateResources},
-            {tag:'ridl-register', vue:RegisterWithRIDL},
+            {tag:'ridl-register', vue:RegisterWithAIDP},
             {tag:'pop-in-head', vue:PopInHead},
 
             // POP OUTS

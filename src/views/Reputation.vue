@@ -52,12 +52,12 @@
         },
         LOAD_TOKENS:{
             name:'Load Tokens',
-            description:'Load some RIDL tokens into an Identity from a Blockchain Account.',
+            description:'Load some AIDP tokens into an Identity from a Blockchain Account.',
             disabled:true,
         },
         SUGGEST_TYPES:{
             name:'Suggest Types',
-            description:'Suggest a new fragment type to be added to RIDL.',
+            description:'Suggest a new fragment type to be added to AIDP.',
             disabled:true,
         },
         IDENTITY_AUCTION:{

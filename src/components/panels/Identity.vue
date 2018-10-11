@@ -12,8 +12,8 @@
                     <section class="info-box top" style="margin-bottom:10px;">
                         <cin :disabled="identity.ridl > 0" big="true" placeholder="Identity Name ( Username )" :text="identity.name" v-on:changed="changed => bind(changed, 'identity.name')"></cin>
 
-                        <btn v-if="ridlActive && identity.ridl > 0" red="true" v-on:clicked="releaseRIDLIdentity" text="Release RIDL Identity"></btn>
-                        <btn v-if="ridlActive && !isNew && identity.ridl <= 0" secondary="true" v-on:clicked="registerWithRIDL" text="Register / Claim RIDL Identity"></btn>
+                        <btn v-if="ridlActive && identity.ridl > 0" red="true" v-on:clicked="releaseAIDPIdentity" text="Release AIDP Identity"></btn>
+                        <btn v-if="ridlActive && !isNew && identity.ridl <= 0" secondary="true" v-on:clicked="registerWithAIDP" text="Register / Claim AIDP Identity"></btn>
                     </section>
 
                     <section class="shifter-options">
@@ -91,7 +91,7 @@
 
     import {Popup} from '../../models/popups/Popup'
     import PopupService from '../../services/PopupService';
-    import RIDLService from '../../services/RIDLService';
+    import AIDPService from '../../services/AIDPService';
     import QRService from '../../services/QRService';
 
     let saveTimeout = null;
@@ -137,10 +137,10 @@
             this.identity = this.id.clone();
             this.selectedLocation = this.identity.locations[0];
 
-            RIDLService.canConnect().then(bool => {
+            AIDPService.canConnect().then(bool => {
                 if(bool) {
                     this.ridlActive = true;
-                    if(this.identity.ridl > 0) RIDLService.getIdentity(this.identity).then(id => {
+                    if(this.identity.ridl > 0) AIDPService.getIdentity(this.identity).then(id => {
                         if(id && id.key === this.identity.publicKey) this.ridlIdentity = id;
                     })
                 }
@@ -151,11 +151,11 @@
             async generateQr(){
                 this.qr = await QRService.createQR(this.identity.privateKey)
             },
-            async registerWithRIDL(){
-                RIDLService.identify(this.identity);
+            async registerWithAIDP(){
+                AIDPService.identify(this.identity);
             },
-            async releaseRIDLIdentity(){
-                RIDLService.release(this.identity);
+            async releaseAIDPIdentity(){
+                AIDPService.release(this.identity);
             },
             addLocation(){
                 const location = LocationInformation.placeholder();

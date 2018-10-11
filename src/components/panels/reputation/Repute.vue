@@ -63,8 +63,8 @@
                                 </figure>
                             </section>
 
-                            <section class="totals" :class="{'red':remainingRIDL < 0}">
-                                {{remainingRIDL}} RIDL
+                            <section class="totals" :class="{'red':remainingAIDP < 0}">
+                                {{remainingAIDP}} AIDP
                             </section>
                         </section>
 
@@ -81,8 +81,8 @@
 
                                 <section class="slider-container" :class="{'expand':fragments.length == 1}">
                                     <label :class="frag.quantity < 0 ? 'minus' : 'plus'"><i class="fa" :class="frag.quantity < 0 ? 'fa-minus' : 'fa-plus'"></i>REP</label>
-                                    <cin placeholder="RIDL Used" :text="frag.quantity" type="number" v-on:changed="x => frag.quantity = parseFloat(x).toFixed(4)"></cin>
-                                    <slider :red="frag.quantity < 0" :min="-availableRIDL" :max="availableRIDL" step="0.0001"
+                                    <cin placeholder="AIDP Used" :text="frag.quantity" type="number" v-on:changed="x => frag.quantity = parseFloat(x).toFixed(4)"></cin>
+                                    <slider :red="frag.quantity < 0" :min="-availableAIDP" :max="availableAIDP" step="0.0001"
                                             :value="frag.quantity" v-on:changed="x => frag.quantity = parseFloat(x).toFixed(4)"></slider>
                                 </section>
 
@@ -109,7 +109,7 @@
     import {Blockchains} from '../../../models/Blockchains'
     import {Popup} from '../../../models/popups/Popup'
     import PopupService from '../../../services/PopupService';
-    import RIDLService from '../../../services/RIDLService';
+    import AIDPService from '../../../services/AIDPService';
 
     const ENTITY_TYPES = [
         "application", "contract", "identity"
@@ -131,7 +131,7 @@
             entityTypes:ENTITY_TYPES,
             fragTypes:[],
             fragments:[],
-            availableRIDL:0,
+            availableAIDP:0,
             appUser:false,
             appUsername:'',
         }},
@@ -154,14 +154,14 @@
                     case 'application': return 'Enter an Application Name ( example: Overwatch or arkid.io )'
                 }
             },
-            totalRIDLUsed(){
+            totalAIDPUsed(){
                 return parseFloat(this.fragments.reduce((acc,x) => {
                     acc += parseFloat(Math.abs(x.quantity));
                     return acc;
                 }, 0)).toFixed(4)
             },
-            remainingRIDL(){
-                return parseFloat(this.availableRIDL - this.totalRIDLUsed).toFixed(4);
+            remainingAIDP(){
+                return parseFloat(this.availableAIDP - this.totalAIDPUsed).toFixed(4);
             },
             ridlIdentities(){
                 return this.identities.filter(x => x.ridl > -1);
@@ -171,21 +171,21 @@
             this.selectedIdentity = this.ridlIdentities[0];
             this.fetchRidlIdData();
 
-            RIDLService.getFragmentTypes().then(res => {
+            AIDPService.getFragmentTypes().then(res => {
                 this.fragTypes = res.rows.map(x => x.type);
                 this.addFragment();
             })
         },
         methods: {
             fetchRidlIdData(){
-                RIDLService.getIdentity(this.selectedIdentity).then(id => {
+                AIDPService.getIdentity(this.selectedIdentity).then(id => {
                     if(!id) {
                         console.error('could not find ID')
                         return;
                     }
 
                     this.ridlIdentity = id;
-                    this.availableRIDL = parseFloat(id.tokens.split(' ')[0]).toFixed(4);
+                    this.availableAIDP = parseFloat(id.tokens.split(' ')[0]).toFixed(4);
                 })
             },
             switchedSelectedIdentity(identity){
@@ -219,14 +219,14 @@
 
                 const usedFragments = this.fragments.filter(x => x.quantity !== 0);
                 if(!usedFragments.length){
-                    PopupService.push(Popup.prompt('No RIDL Spent', `You must put some RIDL into reputation fragments to repute.`, 'exclamation-triangle', 'Okay'))
+                    PopupService.push(Popup.prompt('No AIDP Spent', `You must put some AIDP into reputation fragments to repute.`, 'exclamation-triangle', 'Okay'))
                     return false;
                 }
                 this.fragments = usedFragments;
 
 
-                const entity = RIDLService.buildEntityName(this.entityType, this.entityName, this.appUsername);
-                const reputed = await RIDLService.repute(this.selectedIdentity, entity, this.fragments);
+                const entity = AIDPService.buildEntityName(this.entityType, this.entityName, this.appUsername);
+                const reputed = await AIDPService.repute(this.selectedIdentity, entity, this.fragments);
                 if(!!reputed) {
                     PopupService.push(Popup.transactionSuccess(Blockchains.ARISEN, reputed));
                     this.fetchRidlIdData();
