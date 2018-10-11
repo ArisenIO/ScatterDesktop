@@ -57,7 +57,7 @@
         },
         SUGGEST_TYPES:{
             name:'Suggest Types',
-            description:'Suggest a new fragment type to be added to AIDP's private currency.',
+            description:'Suggest a new fragment type to be added to the AIDP private currency.',
             disabled:true,
         },
         IDENTITY_AUCTION:{
