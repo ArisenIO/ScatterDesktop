@@ -6,7 +6,7 @@
             <section class="top-section">
                 <!-- HEADER -->
                 <section class="head">
-                    <figure class="logo">S</figure>
+                    <figure class="logo"><img src="../../assets/icon-64.png" /></figure>
                     <figure class="info">
                         <figure>Add new Network</figure>
                         <figure>{{pluginOrigin}}</figure>

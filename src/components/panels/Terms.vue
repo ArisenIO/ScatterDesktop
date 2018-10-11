@@ -3,7 +3,7 @@
 
         <section class="panel">
             <section class="head">
-                <figure class="logo">S</figure>
+                <figure class="logo"><img src="../../assets/icon-64.png" /></figure>
                 <figure class="info">
                     <figure>Welcome to ArisenID</figure>
                     <figure>Let's get started setting up your ArisenID.</figure>
@@ -27,11 +27,11 @@
                         <figure class="terms">
                             <h1>1. Acceptance of Terms</h1>
 
-                            ArisenID Desktop (the "Service") provides single application for managing multiple blockchain accounts, identities, and reputations; allowing other applications to
-                            interact with ArisenID to provide Identity authentication and reputation as well as digital signatures for use on various blockchains or other proofs. Any accompanying materials
+                            ArisenID Desktop (the "Service") provides single application for managing multiple decentralized bank accounts, identities, and reputations; allowing other applications to
+                            interact with ArisenID to provide Identity authentication and reputation as well as digital signatures for use on various decentralized banking networks or other proofs. Any accompanying materials
                             such as tutorials, code, written documentation and other content issued by ArisenID (the "Content") also falls under this agreement.
                             <br><br>
-                            Users are always in control of their own digital assets (keypairs and tokens as an example) through popups which allow users to Accept or Deny transactions, information
+                            Users are always in control of their own digital assets (banking keypairs and tokens as an example) through popups which allow users to Accept or Deny transactions, information
                             requests, and addition requests.
                             <br><br>
                             By using ArisenID you are accepting the Terms (the "Terms" or "Terms of Use"), please read them thoroughly before using the Service.
@@ -72,7 +72,7 @@
                             <br><br>
                             <h1>4. Account Password and Security</h1>
 
-                            When setting up ArisenID, you will be responsible for keeping your own account secrets, which may be a twelve-word seed phrase, a backup file, passwords, keypairs, or
+                            When setting up ArisenID, you will be responsible for keeping your own account secrets, which may be a twelve-word seed phrase, a backup file, passwords, banking keypairs, or
                             other locally stored secret information. ArisenID encrypts this information locally with a strong seed derived from the password you provide, that we never send to our servers.
                             You agree to (a) never use the same password for ArisenID that you have ever used outside of this service; (b) keep your secret information and password confidential and do not share them with anyone else.
                             ArisenID cannot and will not be liable for any loss or damage arising from your failure to comply with this section.

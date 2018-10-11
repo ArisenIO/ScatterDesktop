@@ -99,7 +99,7 @@
     const PANELS = {
         PERSONAL:'Personal',
         LOCATION:'Locations',
-        PROOFS:'Proofs'
+        PROOFS:'Bank Proofs'
     }
 
     export default {

@@ -3,7 +3,7 @@
 
         <section>
 
-            <figure class="logo">ArisenID</figure>
+            <img src="../assets/icon.png"/>
 
             <section class="onboarder" v-if="step === steps.IDENTITY">
                 <h1>Create your decentralized banking identity.</h1>

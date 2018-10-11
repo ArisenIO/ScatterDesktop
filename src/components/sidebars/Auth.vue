@@ -3,8 +3,8 @@
         <section class="panel">
 
             <section class="logo-container">
-                <figure class="grand-hotel logo">ArisenID</figure>
-                <figure class="tagline">Take control of your money & your identity. The People's Bank has arrived.</figure>
+                <img width="330" src="../../assets/icon.png" />
+
             </section>
 
             <section class="inputs" v-if="isNewArisenID">
@@ -119,7 +119,7 @@
             }
 
             .tagline {
-                font-size:13px;
+                font-size:14px;
                 color:$mid-dark-grey;
             }
         }

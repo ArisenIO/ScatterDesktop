@@ -205,8 +205,8 @@
     let saveTimeout = null;
 
     const PANELS = {
-        ACCOUNTS:'Accounts',
-        PROOFS:'Proofs'
+        ACCOUNTS:'Bank Accounts',
+        PROOFS:'Bank Proofs'
     }
 
     export default {

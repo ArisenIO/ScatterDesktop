@@ -47,7 +47,7 @@
                         <section class="list-header"></section>
                         <section class="list-items">
                             <figure class="list-item" v-for="history in filterWithTerms(histories)">
-                                <figure class="button blue" v-tooltip.left="'Open Transaction with '+explorerName(history.blockchain)" @click="openTransaction(history.blockchain, history.trx)">
+                                <figure class="button blue" v-tooltip.left="'Open Bank Transaction with '+explorerName(history.blockchain)" @click="openTransaction(history.blockchain, history.trx)">
                                     <i class="fa fa-link"></i>
                                 </figure>
                                 <figure class="name">
@@ -66,7 +66,7 @@
                         <section class="list-header"></section>
                         <section class="list-items">
                             <figure class="list-item" v-for="(bals, accountUnique) in balances">
-                                <figure class="button blue" v-tooltip.left="'Open Account with '+explorerName(getAccount(accountUnique).blockchain())"
+                                <figure class="button blue" v-tooltip.left="'Open Bank Account with '+explorerName(getAccount(accountUnique).blockchain())"
                                         @click="openAccount(getAccount(accountUnique))">
                                     <i class="fa fa-link"></i>
                                 </figure>
@@ -112,8 +112,8 @@
     import PriceService from '../services/PriceService'
 
     const PANELS = {
-        RECENT:'Recent Activity',
-        TOKENS:'Token Breakdown'
+        RECENT:'Recent Banking Activity',
+        TOKENS:'Private Currency Breakdown'
     };
 
     const TRANSFER_TYPES = {

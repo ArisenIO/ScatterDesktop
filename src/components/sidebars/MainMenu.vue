@@ -4,7 +4,7 @@
 
             <section class="head">
                 <section class="logo">
-                    <figure class="grand-hotel">{{collapsed ? 'S' : 'ArisenID'}}</figure>
+                    <figure class="logo"><img src="../../assets/icon-menu.png" /></figure>
                     <figure class="version" v-if="!collapsed && arkid && arkid.hasOwnProperty('meta') && typeof arkid.meta.getVersion !== 'undefined'">
                         {{arkid.meta.getVersion()}}
                     </figure>
@@ -66,8 +66,8 @@
             lines:[1,5],
             links:[
                 {route:RouteNames.DASHBOARD, name:'Dashboard', icon:'fa fa-bar-chart-o', onlyIfHasAccounts:true},
-                {route:RouteNames.IDENTITIES, name:'Bank Accounts', icon:'fa fa-address-book'},
-                {route:RouteNames.BLOCKCHAINS, name:'Banks', icon:'fa fa-key'},
+                {route:RouteNames.IDENTITIES, name:'Bank IDs', icon:'fa fa-address-book'},
+                {route:RouteNames.BLOCKCHAINS, name:'Banks & Accounts', icon:'fa fa-key'},
                 {route:RouteNames.PERMISSIONS, name:'Permissions', icon:'fa fa-shield'},
                 {route:RouteNames.HELP, name:'Help', icon:'fa fa-question-circle', small:true, firstSmall:true},
                 {route:RouteNames.SETTINGS, name:'Settings', icon:'fa fa-gear', small:true},

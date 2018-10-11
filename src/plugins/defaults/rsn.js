@@ -52,17 +52,17 @@ const getAccountsFromPublicKey = (publicKey, network) => {
 
 const EXPLORERS = [
     {
-        name:'ArisenExplorer.com',
-        account:account => `https://arisenexplorer.com/account/${account.name}`,
-        transaction:id => `https://arisenexplorer.com/transaction/${id}`,
-        block:id => `https://arisenexplorer.com/block/${id}`
+        name:'dBankX',
+        account:account => `https://dbankx.io/account/${account.name}`,
+        transaction:id => `https://dbankx.io/transaction/${id}`,
+        block:id => `https://dbankx.io/block/${id}`
     },
     {
-        name:'Arisen.Network',
-        account:account => `https://explore.arisen.network/account/${account.name}`,
-        transaction:id => `https://explpre.arisen.network/tx/${id}`,
-        block:id => `https://explore.arisen.network/block/${id}`
-    }
+        name:'Arisen Explorer',
+        account:account => `https://arisenexplorer.com/accounts/${account.name}`,
+        transaction:id => `https://arisenexplorer.com/transaction/${id}`,
+        block:id => `https://arisenexplorer.com/blocks/${id}`
+    }    
 ];
 
 

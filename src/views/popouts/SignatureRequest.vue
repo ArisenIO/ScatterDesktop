@@ -5,7 +5,7 @@
             <section class="top-section" ref="heads">
                 <!-- HEADER -->
                 <section class="head">
-                    <figure class="logo">S</figure>
+                    <figure class="logo"><img src="../../assets/icon-64.png" /></figure>
                     <figure class="info">
                         <figure>Sign {{isArbitrarySignature ? 'an Arbitrary' : 'a' }} Transaction</figure>
                         <figure>{{pluginOrigin}} : {{payload.origin}} {{isArbitrarySignature ? '' : `on ${network.unique().substr(0,15)}...`}}</figure>

@@ -39,7 +39,7 @@
         .bg {
             position:absolute;
             top:0; bottom:0; left:0; right:0;
-            background:url(https://images.unsplash.com/photo-1464660756002-dd9f9a92b01b?ixlib=rb-0.3.5&s=841ae36458658792bfa2af8af7f7f537&auto=format&fit=crop&w=3434&q=80);
+            background:url(https://github.com/ArisenIO/arisen-media/raw/master/bkgd.jpeg);
             background-size:cover;
         }
     }

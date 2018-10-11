@@ -195,8 +195,8 @@
             async unlinkAccount(account){
 
                 PopupService.promptGuard(Popup.prompt(
-                    "Removing Account Link", "This will remove this account link from the keypair and all associated permissions.",
-                    "trash-o", "Unlink Account"
+                    "Removing Bank Account Link", "This will remove this bank account link from the banking keypair and all associated permissions.",
+                    "trash-o", "Unlink Bank Account"
                 ), async accepted => {
                     if(accepted) await AccountService.removeAccount(account);
                 });
